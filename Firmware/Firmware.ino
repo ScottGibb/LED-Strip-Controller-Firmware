@@ -3,71 +3,54 @@
 **/
 
 #include "Main.h"
-//Test Headers
-void testLoop();
-const uint32_t COLOUR_SWAP_TIME = 5000;
-uint32_t lastcolourSwapTime = 0;
-uint8_t colourNumber = 0;
 
-const uint32_t MODE_SWAP_TIME = COLOUR_SWAP_TIME * NUM_COLOURS;
-uint32_t lastModeSwapTime = 0;
-uint8_t modeNumber = 0;
+//Method Prototypes
+void setupDrivers(void);
 
-
-
+//Global Variables
 ColourDriver *stripOneDriver;
 FadeDriver *stripOneFadeDriver;
-
 ColourDriver *stripTwoDriver;
+FadeDriver *stripTwoFadeDriver;
 ColourDriver *stripThreeDriver;
+FadeDriver *stripThreeFadeDriver;
 
 
-void setup() {
+
+void setup(void) {
   setupStatusIndicator();
-  LEDDriver *ledOne;
-  ledOne = new LEDDriver(CONN_1_R_PIN, CONN_1_G_PIN, CONN_1_B_PIN);
-  stripOneDriver = new ColourDriver(ledOne);
-  stripOneFadeDriver = new FadeDriver(stripOneDriver);
-
-  LEDDriver ledTwo(CONN_2_R_PIN, CONN_2_G_PIN, CONN_2_B_PIN);
-  stripTwoDriver = new ColourDriver(&ledTwo);
-
-  LEDDriver ledThree(CONN_3_R_PIN, CONN_3_G_PIN, CONN_3_B_PIN);
-  stripThreeDriver = new ColourDriver(&ledThree);
-
-
-
+  setupComms();
+  setupDrivers();
+  
   //Test Functions
+  
 }
 
-void loop() {
+void loop(void) {
   // put your main code here, to run repeatedly
   statusIndicatorLoop();
   stripOneFadeDriver->fadeLoop();
-  testLoop();
+  stripTwoFadeDriver->fadeLoop();
+  stripThreeFadeDriver->fadeLoop();
+  commsLoop();
 
     
-  Serial.print("Mode: "); Serial.println(modeNumber);
-  Serial.print("Colour: "); Serial.println(colourNumber);
 }
 
-void testLoop() {
-  if (millis() - lastModeSwapTime > MODE_SWAP_TIME) {
+void setupDrivers(void){
+  LEDDriver *ledOne;
+  ledOne = new LEDDriver(CHANNEL_1_R_PIN, CHANNEL_1_G_PIN, CHANNEL_1_B_PIN);
+  stripOneDriver = new ColourDriver(ledOne);
+  stripOneFadeDriver = new FadeDriver(stripOneDriver);
 
-    modeNumber++;
-    if (modeNumber == NUM_MODES) {
-      modeNumber = 0;
-    }
-    stripOneFadeDriver->startFade(FADE_TYPE(modeNumber),1000,100);
-    lastModeSwapTime = millis();
-  }
+  LEDDriver *ledTwo;
+  ledTwo = new LEDDriver(CHANNEL_2_R_PIN, CHANNEL_2_G_PIN, CHANNEL_2_B_PIN);
+  stripTwoDriver = new ColourDriver(ledTwo);
+  stripTwoFadeDriver = new FadeDriver(stripTwoDriver);
 
-  if (millis() - lastcolourSwapTime > COLOUR_SWAP_TIME) {
-    colourNumber++;
-    if (colourNumber == NUM_COLOURS) {
-      colourNumber = 0;
-    }
-       stripOneDriver->setColour(COLOUR(colourNumber));
-    lastcolourSwapTime = millis();
-  }
+  LEDDriver *ledThree;
+  ledThree = new LEDDriver(CHANNEL_3_R_PIN, CHANNEL_3_G_PIN, CHANNEL_3_B_PIN);
+  stripThreeDriver = new ColourDriver(ledThree);
+  stripThreeFadeDriver = new FadeDriver(stripThreeDriver);
 }
+

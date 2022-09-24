@@ -4,7 +4,7 @@
 //Library Includes
 #include <stdint.h>
 //Project Includes
-#include "Pins.h"
+#include "Channels.h"
 
 const uint32_t REFRESH_PERIOD = 200;
 
