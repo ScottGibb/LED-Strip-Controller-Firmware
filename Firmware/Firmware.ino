@@ -55,7 +55,7 @@ void testLoop() {
   if (millis() - lastModeSwapTime > MODE_SWAP_TIME) {
 
     modeNumber++;
-    if (modeNumber = NUM_MODES) {
+    if (modeNumber == NUM_MODES) {
       modeNumber = 0;
     }
     stripOneFadeDriver->startFade(FADE_TYPE(modeNumber),1000,100);
@@ -64,7 +64,7 @@ void testLoop() {
 
   if (millis() - lastcolourSwapTime > COLOUR_SWAP_TIME) {
     colourNumber++;
-    if (colourNumber = NUM_COLOURS) {
+    if (colourNumber == NUM_COLOURS) {
       colourNumber = 0;
     }
        stripOneDriver->setColour(COLOUR(colourNumber));
