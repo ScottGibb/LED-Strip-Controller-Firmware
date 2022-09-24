@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include "LEDDriver.h"
-enum Colour {
+enum COLOUR {
   RED = 0,
   GREEN = 1,
   BLUE = 2,
@@ -28,7 +28,7 @@ typedef struct ColourRGBState {
   uint8_t greenPWM = 0;
   uint8_t bluePWM = 0;
   uint8_t brightness = 0;
-  enum Colour colour = WHITE;
+  enum COLOUR colour = WHITE;
 };
 
 
@@ -36,9 +36,9 @@ class ColourDriver {
 public:
   ColourDriver(LEDDriver *driver);
   ~ColourDriver();
-  void setColour(enum Colour colour, float brightness);
-  void setColour(enum Colour colour);
-  enum Colour getColour();
+  void setColour(enum COLOUR colour, float brightness);
+  void setColour(enum COLOUR colour);
+  enum COLOUR getColour();
   void setBrightness(uint8_t brightness);
   uint8_t getBrightness();
 private:

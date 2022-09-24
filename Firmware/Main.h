@@ -8,4 +8,5 @@
 #include "StatusIndicator.h"
 #include "LEDDriver.h"
 #include "ColourDriver.h"
+#include "FadeDriver.h"
 #endif __MAIN_H__

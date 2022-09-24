@@ -12,10 +12,10 @@ ColourDriver::ColourDriver(LEDDriver *driver) {
 ColourDriver::~ColourDriver() {
 }
 
-void ColourDriver::setColour(enum Colour colour) {
+void ColourDriver::setColour(enum COLOUR colour) {
   setColour(colour, colourState.brightness);
 }
-void ColourDriver::setColour(enum Colour colour, float brightness) {
+void ColourDriver::setColour(enum COLOUR colour, float brightness) {
   uint8_t colourPWMS[NUM_LEDS] = { 0 };
   switch (colour) {
 
@@ -73,7 +73,7 @@ void ColourDriver::setColour(enum Colour colour, float brightness) {
   colourState.colour = colour;
   setPWMSignals(colourPWMS, brightness);
 }
-enum Colour ColourDriver::getColour() {
+enum COLOUR ColourDriver::getColour() {
   return colourState.colour;
 }
 
@@ -92,4 +92,5 @@ void ColourDriver::setBrightness(uint8_t brightness) {
   setColour(colourState.colour, brightness);
 }
 uint8_t ColourDriver::getBrightness() {
+  return colourState.brightness;
 }

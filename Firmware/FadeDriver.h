@@ -15,10 +15,13 @@ enum FADE_TYPE {
   NONE =4,
 
 };
+const uint32_t NUM_MODES = 5;
 
 typedef struct FadeState{
       enum FADE_TYPE fade= SINE;
       uint32_t period=0;
+      uint32_t halfPeriod=0;
+      uint8_t maxBrightness =0;
 };
 
 
@@ -27,7 +30,7 @@ class FadeDriver {
 
 public:
   FadeDriver(ColourDriver *driver);
-  void startFade(enum FADE_TYPE fade, uint32_t period);
+  void startFade(enum FADE_TYPE fade, uint32_t period, uint8_t maxBrightness);
   void startFade(struct FadeState fadeState);
   FadeState getFade(void);
   void fadeLoop(void);
@@ -39,6 +42,10 @@ public:
   uint32_t lastFadeUpdateTime;
   uint32_t currentStep;
   void squareWave(void);
+  void sawToothWave(void);
+  void triangleWave(void);
+  void sineWave(void);
+
 };
 
 
