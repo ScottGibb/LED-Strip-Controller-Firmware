@@ -15,11 +15,11 @@ extern void commsLoop(void);
 const uint8_t commsPacketLength = 72 ;
 
 typedef struct CommsProtocol_t{
-    enum CHANNEL channel; //8
-    enum FADE_TYPE mode;   //16
-    enum COLOUR colour;  //32
-    uint8_t brightness; //40
-    uint32_t period; //72 Bytes
+    enum CHANNEL channel:8; //8 Byte 1
+    enum FADE_TYPE mode:8;   //16 Byte 2
+    enum COLOUR colour:16;  //32 Byte 3-4
+    uint8_t brightness; //40 Byte 5
+    uint32_t period; //72 Bytes Byte 6-9
 };
 
 union CommsMessage_t{

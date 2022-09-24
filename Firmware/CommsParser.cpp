@@ -15,12 +15,15 @@ FadeDriver *fadeDriver;
 
 void setupComms(void){
   Serial.begin(SERIAL_BAUDRATE);
+  
 }
 /**
 | Channel | Mode | Colour | Brightness | PERIOD | 
 **/
 void commsLoop(void){
-  if(Serial.available()>0){
+  
+  if(Serial.available()>0){ //Never runs!!!
+
       Serial.readBytes((char *)rxBuff,RX_LEN);
       union CommsMessage_t message;
      for(uint8_t index = 0; index < RX_LEN; index++){
@@ -39,9 +42,11 @@ void commsLoop(void){
         Serial.print("Mode: "); Serial.println(messagePacket.mode);
         Serial.print("Colour: "); Serial.println(messagePacket.colour);
         Serial.print("Brightness: "); Serial.println(messagePacket.brightness);
+        Serial.print("Period: "); Serial.println(messagePacket.period);
+
 
   }
-
+  // Serial.println("Here");
   
 }
 
