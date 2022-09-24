@@ -8,10 +8,20 @@ enum Colour {
   GREEN = 1,
   BLUE = 2,
   WHITE = 3,
-  PURPLE = 4
+  ROSE = 4, 
+  MAGENTA = 5,
+  VIOLET = 6,
+  AZURE = 7,
+  CYAN = 8,
+  AQUAMARINE = 9,
+  CHARTREUSE =10,
+  YELLOW = 11,
+  ORANGE = 12
+  
+ 
 };
 
-const uint8_t NUM_COLOURS = 5;
+const uint8_t NUM_COLOURS = 13;
 
 typedef struct ColourRGBState {
   uint8_t redPWM = 0;

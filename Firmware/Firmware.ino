@@ -3,9 +3,10 @@
 **/
 
 #include "Main.h"
+//Test Headers
+void colourSwitchingLoop();
 
 ColourDriver *stripOneDriver;
-
 ColourDriver *stripTwoDriver;
 ColourDriver *stripThreeDriver;
 
@@ -26,12 +27,16 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly
   statusIndicatorLoop();
+  colourSwitchingLoop();
+}
+
+void colourSwitchingLoop(){
   for (uint8_t i1 = 0; i1 < NUM_COLOURS; i1++) {
+    delay(2000);
     stripOneDriver->setColour(Colour(i1), 0);
-    delay(500);
     for (uint8_t i = 0; i < 100; i++) {
       stripOneDriver->setBrightness(i);
       delay(25);
     }
-  }
+  }  
 }
