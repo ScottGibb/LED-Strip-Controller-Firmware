@@ -4,6 +4,7 @@ import serial
 
 from Types import FADE_TYPE, CHANNEL, COLOUR
 
+RX_MSG_CNT = 5
 COM_PORT = 'COM4'
 ser = serial.Serial(COM_PORT)
 ser.parity = serial.PARITY_EVEN
@@ -20,14 +21,10 @@ while True:
         period = int(input("You have selected fading, please select the period of fading in ms"))
 
     # Construct Message
-    tx_msg = bytearray([channel, mode,colour,brightness]) +period.to_bytes(4,"big")
+    tx_msg = bytearray([channel, mode, colour, brightness]) + period.to_bytes(4, "big")
     ser.write(tx_msg)
     print("Sent Message")
     print(tx_msg)
     print("Return Message:")
-    print(ser.readline())
-    print(ser.readline())
-    print(ser.readline())
-    print(ser.readline())
-    print(ser.readline())
-
+    for i in range(0, RX_MSG_CNT):
+        print(ser.readline())

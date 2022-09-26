@@ -10,31 +10,29 @@ void toggleButtonLogic(uint8_t *brightness, FadeState *state, ColourDriver *colD
 
 
 //Buttons
+
 uint8_t NUM_BUTTONS = 4;
 uint32_t buttonPins[4] = { BUTTON_1_PIN, BUTTON_2_PIN, BUTTON_3_PIN, BUTTON_4_PIN };
 func_type functions[4] = { buttonOneFunction, buttonTwoFunction, buttonThreeFunction, buttonFourFunction };
 
-
+const uint8_t NUM_CHANNELS =3;
+uint8_t prevBrightness[NUM_CHANNELS];
+FadeState prevStates[NUM_CHANNELS];
 
 void buttonOneFunction(void) {
-  static uint8_t prevBrightness;
-  static FadeState prevFadeState;
-  toggleButtonLogic(&prevBrightness, &prevFadeState,stripOneDriver, stripOneFadeDriver);
-
+  toggleButtonLogic(&prevBrightness[0], &prevStates[0],stripOneDriver, stripOneFadeDriver);
 }
 
 
 void buttonTwoFunction(void) {
-  static uint8_t prevBrightness;
-  static FadeState prevFadeState;
-  toggleButtonLogic(&prevBrightness, &prevFadeState,stripTwoDriver, stripTwoFadeDriver);
+
+  toggleButtonLogic(&prevBrightness[1], &prevStates[1],stripTwoDriver, stripTwoFadeDriver);
 
 }
 
 void buttonThreeFunction(void) {
- static uint8_t prevBrightness;
-  static FadeState prevFadeState;
-  toggleButtonLogic(&prevBrightness, &prevFadeState,stripThreeDriver, stripThreeFadeDriver);
+
+  toggleButtonLogic(&prevBrightness[2], &prevStates[2],stripThreeDriver, stripThreeFadeDriver);
 }
 
 void buttonFourFunction(void) {
