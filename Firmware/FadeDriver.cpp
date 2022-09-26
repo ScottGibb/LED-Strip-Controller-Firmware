@@ -61,6 +61,7 @@ void FadeDriver::stopFade(void) {
   currentState.period = 0;
 }
 
+
 FadeState FadeDriver::getFade(void) {
   return currentState;
 }

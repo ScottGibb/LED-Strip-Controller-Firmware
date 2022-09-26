@@ -23,18 +23,17 @@ FadeDriver *stripThreeFadeDriver;
 
 //Buttons
 uint8_t NUM_BUTTONS = 4;
-uint32_t buttonPins[4] = {BUTTON_1_PIN, BUTTON_2_PIN, BUTTON_3_PIN, BUTTON_4_PIN};
-func_type functions[4]={buttonOneFunction,buttonTwoFunction, buttonThreeFunction, buttonFourFunction};
-ButtonsDriver * buttonsDriver;
+uint32_t buttonPins[4] = { BUTTON_1_PIN, BUTTON_2_PIN, BUTTON_3_PIN, BUTTON_4_PIN };
+func_type functions[4] = { buttonOneFunction, buttonTwoFunction, buttonThreeFunction, buttonFourFunction };
+ButtonsDriver *buttonsDriver;
 
 
 void setup(void) {
   setupStatusIndicator();
   setupComms();
   setupLEDDrivers();
-  
+
   //Test Functions
-  
 }
 
 void loop(void) {
@@ -45,11 +44,9 @@ void loop(void) {
   stripThreeFadeDriver->fadeLoop();
   commsLoop();
   buttonsDriver->loop();
-
-    
 }
 
-void setupLEDDrivers(void){
+void setupLEDDrivers(void) {
   LEDDriver *ledOne;
   ledOne = new LEDDriver(CHANNEL_1_R_PIN, CHANNEL_1_G_PIN, CHANNEL_1_B_PIN);
   stripOneDriver = new ColourDriver(ledOne);
@@ -65,27 +62,40 @@ void setupLEDDrivers(void){
   stripThreeDriver = new ColourDriver(ledThree);
   stripThreeFadeDriver = new FadeDriver(stripThreeDriver);
 
-  buttonsDriver = new ButtonsDriver(buttonPins,NUM_BUTTONS,functions);
+  buttonsDriver = new ButtonsDriver(buttonPins, NUM_BUTTONS, functions);
 }
 
-void buttonOneFunction(void){ 
-    
-stripOneDriver->setBrightness(0);
-stripOneFadeDriver->stopFade();
+void buttonOneFunction(void) {
+  static uint8_t prevBrightness;
+  static FadeState prevFadeState;
+
+  if(stripOneDriver->getBrightness()!=0&& stripOneFadeDriver->getFade().fade!= NONE){
+    Serial.println("Option One Pressed!");
+    prevBrightness =stripOneDriver->getBrightness();
+    stripOneDriver->setBrightness(0);
+    prevFadeState = stripOneFadeDriver->getFade();
+    stripOneFadeDriver->stopFade();
+  }else{//TODO: Fix Bug around fade states doesnt always rememebr the corredt state 
+    Serial.println("Option Two Pressed!");
+    stripOneDriver->setBrightness(prevBrightness);
+    prevBrightness =stripOneDriver->getBrightness();
+    stripOneFadeDriver->startFade(prevFadeState);
+    prevFadeState = stripOneFadeDriver->getFade();
+
+  }
 }
 
 
-void buttonTwoFunction(void){
-stripTwoDriver->setBrightness(0);
-stripTwoFadeDriver->stopFade();
+void buttonTwoFunction(void) {
+  stripTwoDriver->setBrightness(0);
+  stripTwoFadeDriver->stopFade();
 }
 
-void buttonThreeFunction(void){
-stripThreeDriver->setBrightness(0);
-stripThreeFadeDriver->stopFade();
+void buttonThreeFunction(void) {
+  stripThreeDriver->setBrightness(0);
+  stripThreeFadeDriver->stopFade();
 }
 
-void buttonFourFunction(void){
-
+void buttonFourFunction(void) {
 }
 
