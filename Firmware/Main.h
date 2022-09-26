@@ -13,6 +13,7 @@
 #include "FadeDriver.h"
 #include "CommsParser.h"
 #include "ButtonsDriver.h"
+#include "ButtonHandler.h"
 
 //External Method Headers
 extern void setup(void);
@@ -25,4 +26,5 @@ extern ColourDriver *stripTwoDriver;
 extern FadeDriver *stripTwoFadeDriver;
 extern ColourDriver *stripThreeDriver;
 extern FadeDriver *stripThreeFadeDriver;
+extern ButtonsDriver *buttonsDriver;
 #endif __MAIN_H__
