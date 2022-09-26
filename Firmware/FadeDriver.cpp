@@ -7,7 +7,8 @@ FadeDriver::FadeDriver(ColourDriver *driver) {
   lastFadeUpdateTime = millis();
   currentState.fade = NONE;
   currentState.period = 0;
-  currentState.period = 0;
+  currentState.halfPeriod = 0;
+  currentState.maxBrightness = 0;
   currentStep =0;
 
 
@@ -57,8 +58,10 @@ void FadeDriver::fadeLoop(void) {
 }
 
 void FadeDriver::stopFade(void) {
-  currentState.fade = NONE;
+    currentState.fade = NONE;
   currentState.period = 0;
+  currentState.period = 0;
+ 
 }
 
 

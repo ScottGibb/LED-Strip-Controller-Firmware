@@ -12,6 +12,7 @@ void buttonOneFunction(void);
 void buttonTwoFunction(void);
 void buttonThreeFunction(void);
 void buttonFourFunction(void);
+void toggleButtonLogic(uint8_t *brightness, FadeState *state, ColourDriver *colDriver, FadeDriver *fadeDriver);
 
 //Global Variables
 ColourDriver *stripOneDriver;
@@ -69,13 +70,13 @@ void buttonOneFunction(void) {
   static uint8_t prevBrightness;
   static FadeState prevFadeState;
 
-  if(stripOneDriver->getBrightness()!=0&& stripOneFadeDriver->getFade().fade!= NONE){
+  if(stripOneDriver->getBrightness()!=0){
     Serial.println("Option One Pressed!");
     prevBrightness =stripOneDriver->getBrightness();
     stripOneDriver->setBrightness(0);
     prevFadeState = stripOneFadeDriver->getFade();
     stripOneFadeDriver->stopFade();
-  }else{//TODO: Fix Bug around fade states doesnt always rememebr the corredt state 
+  }else{
     Serial.println("Option Two Pressed!");
     stripOneDriver->setBrightness(prevBrightness);
     prevBrightness =stripOneDriver->getBrightness();
@@ -87,15 +88,36 @@ void buttonOneFunction(void) {
 
 
 void buttonTwoFunction(void) {
-  stripTwoDriver->setBrightness(0);
-  stripTwoFadeDriver->stopFade();
+  static uint8_t prevBrightness;
+  static FadeState prevFadeState;
+  toggleButtonLogic(&prevBrightness, &prevFadeState,stripTwoDriver, stripTwoFadeDriver);
+
 }
 
 void buttonThreeFunction(void) {
-  stripThreeDriver->setBrightness(0);
-  stripThreeFadeDriver->stopFade();
+ static uint8_t prevBrightness;
+  static FadeState prevFadeState;
+  toggleButtonLogic(&prevBrightness, &prevFadeState,stripThreeDriver, stripThreeFadeDriver);
 }
 
 void buttonFourFunction(void) {
 }
 
+void toggleButtonLogic(uint8_t *brightness, FadeState *state, ColourDriver *colDriver, FadeDriver *fadeDriver){
+  
+  if(colDriver->getBrightness()!=0){
+    Serial.println("Option One Pressed!");
+    *brightness =colDriver->getBrightness();
+    colDriver->setBrightness(0);
+    *state = fadeDriver->getFade();
+    fadeDriver->stopFade();
+  }else{
+    Serial.println("Option Two Pressed!");
+    colDriver->setBrightness(*brightness);
+    *brightness =colDriver->getBrightness();
+    fadeDriver->startFade(*state);
+    *state = fadeDriver->getFade();
+
+  }  
+
+}

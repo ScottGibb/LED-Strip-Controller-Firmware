@@ -9,6 +9,7 @@
 #include "FadeDriver.h"
 #include "Channels.h"
 #include "Main.h"
+
 extern void setupComms(void);
 extern void commsLoop(void);
 
