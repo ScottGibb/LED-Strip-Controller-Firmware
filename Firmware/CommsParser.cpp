@@ -22,22 +22,25 @@ void setupComms(void){
 **/
 void commsLoop(void){
   
-  if(Serial.available()>0){ //Never runs!!!
+  if(Serial.available()>0){ 
 
       Serial.readBytes((char *)rxBuff,RX_LEN);
-      union CommsMessage_t message;
-     for(uint8_t index = 0; index < RX_LEN; index++){
-       message.commsBytes[index] = rxBuff[index];
-     }
-      
-      struct CommsProtocol_t messagePacket = message.commsPacket;
+     //Fill C Message
+      struct CommsProtocol_t messagePacket;
+      messagePacket.channel = CHANNEL(rxBuff[0]);
+      messagePacket.mode = FADE_TYPE(rxBuff[1]);
+      messagePacket.colour = COLOUR(rxBuff[2]);
+      messagePacket.brightness = rxBuff[3];
+      messagePacket.period = (uint32_t)rxBuff[4]<<24 | (uint32_t)rxBuff[5]<<16 | (uint32_t)rxBuff[6]<<8 | (uint32_t)rxBuff[7];
+
+
       selectDrivers(messagePacket.channel);
       fadeDriver->startFade(messagePacket.mode,messagePacket.period,messagePacket.brightness);
       colourDriver->setColour(messagePacket.colour);
-      if(messagePacket.mode != NONE){
+      if(messagePacket.mode == NONE){
         colourDriver->setBrightness(messagePacket.brightness);
       }
-        //System Feedback message
+      
         Serial.print("Channel: "); Serial.println(messagePacket.channel);
         Serial.print("Mode: "); Serial.println(messagePacket.mode);
         Serial.print("Colour: "); Serial.println(messagePacket.colour);
@@ -46,7 +49,8 @@ void commsLoop(void){
 
 
   }
-  // Serial.println("Here");
+
+
   
 }
 

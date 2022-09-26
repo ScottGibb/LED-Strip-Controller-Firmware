@@ -45,6 +45,8 @@ public:
   void sawToothWave(void);
   void triangleWave(void);
   void sineWave(void);
+  bool getOverride(void);
+  void setOverride(bool override);
 
 };
 

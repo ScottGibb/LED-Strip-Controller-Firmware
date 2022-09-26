@@ -24,7 +24,7 @@ void FadeDriver::startFade(struct FadeState fadeState) {
   currentState = fadeState;
 }
 void FadeDriver::fadeLoop(void) {
-  if (millis() - lastFadeUpdateTime > STEP_SIZE) {
+  if ((millis() - lastFadeUpdateTime > STEP_SIZE)) {
     switch (currentState.fade) {
       case SINE:
           sineWave();

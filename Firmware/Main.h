@@ -6,12 +6,13 @@
 
 //System Includes
 #include "Channels.h"
+#include "Buttons.h"
 #include "StatusIndicator.h"
 #include "LEDDriver.h"
 #include "ColourDriver.h"
 #include "FadeDriver.h"
 #include "CommsParser.h"
-
+#include "ButtonsDriver.h"
 
 //External Method Headers
 extern void setup(void);
