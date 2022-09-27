@@ -7,5 +7,5 @@ module.exports = function(RED) {
             node.send(msg);
         });
     }
-    RED.nodes.registerType("LED-Strip Controller",Controller);
+    RED.nodes.registerType("Controller",Controller);
 }
