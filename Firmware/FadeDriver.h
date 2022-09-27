@@ -8,11 +8,12 @@
 #include "ColourDriver.h"
 
 enum FADE_TYPE {
-  SINE = 0,
-  SQUARE = 1,
-  TRIANGLE = 2,
-  SAWTOOTH = 3,
-  NONE =4,
+  NONE = 0,
+  SINE = 1,
+  SQUARE = 2,
+  TRIANGLE = 3,
+  SAWTOOTH = 4,
+  COLOUR_CHANGE =5,
 
 };
 const uint32_t NUM_MODES = 5;

@@ -18,11 +18,12 @@ class COLOUR(Enum):
 
 
 class FADE_TYPE(Enum):
-    SINE = 0
-    SQUARE = 1
-    TRIANGLE = 2
-    SAWTOOTH = 3
-    NONE = 4
+    NONE = 0
+    SINE = 1
+    SQUARE = 2
+    TRIANGLE = 3
+    SAWTOOTH = 4
+    COLOUR_CHANGE = 5
 
 
 class CHANNEL(Enum):
