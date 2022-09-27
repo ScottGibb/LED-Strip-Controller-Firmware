@@ -1,6 +1,6 @@
 <script type="text/javascript">
-    RED.nodes.registerType('lower-case',{
-        category: 'function',
+    RED.nodes.registerType('Controller',{
+        category: 'LED Strip Controller',
         color: '#a6bbcf',
         defaults: {
             name: {value:""}
@@ -14,7 +14,7 @@
     });
 </script>
 
-<script type="text/html" data-template-name="lower-case">
+<script type="text/html" data-template-name="LED Strip Controller">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -22,5 +22,5 @@
 </script>
 
 <script type="text/html" data-help-name="lower-case">
-    <p>A simple node that converts the message payloads into all lower-case characters</p>
+    <p>A Node that takes in a message and applies it to the correct LED Strip</p>
 </script>
