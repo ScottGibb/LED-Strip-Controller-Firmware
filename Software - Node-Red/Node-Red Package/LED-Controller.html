@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    RED.nodes.registerType('lower-case',{
+    RED.nodes.registerType('led-controller',{
         category: 'function',
         color: '#a6bbcf',
         defaults: {
@@ -9,18 +9,18 @@
         outputs:1,
         icon: "file.png",
         label: function() {
-            return this.name||"lower-case";
+            return this.name||"led-controller";
         }
     });
 </script>
 
-<script type="text/html" data-template-name="lower-case">
+<script type="text/html" data-template-name="led-controller">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
 </script>
 
-<script type="text/html" data-help-name="lower-case">
+<script type="text/html" data-help-name="led-controller">
     <p>A simple node that converts the message payloads into all lower-case characters</p>
 </script>
