@@ -1,4 +1,8 @@
 module.exports = function(RED) {
+
+
+
+
     function ledControllerNode(config) {
         RED.nodes.createNode(this,config);
         //Node Specific Code goes here

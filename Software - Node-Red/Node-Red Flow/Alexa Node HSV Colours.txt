@@ -1,0 +1,14 @@
+RED  		0,1,1
+GREEN 		120,1,1
+BLUE 		240,1,1
+WHITE 		0,0,1
+ROSE --------------------
+MAGENTA 	300,1,1
+VIOLET 		300, 0.4515, 0.924
+AZURE -------------------
+CYAN 		180,1,1
+AQUAMARINE 	159, 0.502
+CARTREUSE-----------------
+YELLOW 		60,1,1
+ORANGE 		39,1,1
+
