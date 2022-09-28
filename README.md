@@ -17,6 +17,10 @@ For Specific Details regarding the individual sections, please see the folders f
 
 # Results
 
+The LED Strip Controller was designed for the purpose of providing lights to my printer and CNC enclosure. The results of which are shown below:
+
+![Printer Enclosure]()
+
 ## Veroboard Version
 Before moving on to a PCB design, the hardware was first created using Veroboard and an STM32 BluePill. The resulting Hardware along with the [3D printable case]() is shown below:
 
@@ -31,9 +35,9 @@ After the Veroboard version was finalised, the resulting Hardware was designed a
 
 # Required Software
  In order to Modify this project, the following software is recommended:
--[Kicad]()
--[Fusion 360]()
--[Arduino IDE]()
+- [Kicad]()
+- [Fusion 360]()
+- [Arduino IDE]()
 
 
 # Useful Links
@@ -43,3 +47,7 @@ The following lists are useful websites that contain various information regardi
 - [STM32duino]()
 - [Node-Red]()
 - [Raspberry Pi 4]()
+- [Disco Mode LED Shelves Video]()
+- [Veroboard 3D Printable Case]()
+- [PCB 3D Printable Case]()
+- [LED Strips]()
