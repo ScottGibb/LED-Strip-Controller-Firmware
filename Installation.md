@@ -6,8 +6,7 @@ The LED Strip Controller Software installation comes in two sections, the Arduin
 
 Assuming you bough the hardware designed in the repository and it is manufactured. To install the firware you will also need an STM32 Debugger and the Arduino IDE installed. Once those are installed/bought, install the STM32duino boards package to arduino ide and then use the following settings to program the STM32 on the board. Once done the status LED on the board should start flashing.
 
-- [STM32 Debugger]()
-- [STM32duino]
+![Programmer Settings]()
 
 # Node Red Install
 
