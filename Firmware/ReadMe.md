@@ -4,11 +4,10 @@ The LED Strip firmware is written using the Arduino framework. This allowed for 
 
 ![Firmware Layers]()
 
-
 # Class Diagram
 As for the classes used in the design, the class diagram for the system is shown below:
 
-![]()
+![Class Diagram]()
 
 # Control Loop Logic
 
@@ -17,3 +16,5 @@ As for the classes used in the design, the class diagram for the system is shown
 # Improvements
 
 # Useful Links
+
+- [STM32duino](https://github.com/stm32duino)
