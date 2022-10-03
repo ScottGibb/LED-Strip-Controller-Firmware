@@ -1,11 +1,17 @@
 #ifndef __BUTTONS_DRIVER_H__
 #define __BUTTONS_DRIVER_H__
 
+//Library Includes
 #include <stdint.h>
 #include <Arduino.h>
 
+//Function Pointer
 typedef void (*func_type)(void);
 
+/**
+ * @brief Buttons Driver Class
+ * Class Declaration of Buttons Driver
+ */
 class ButtonsDriver{
 
   private:

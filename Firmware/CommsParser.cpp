@@ -1,8 +1,16 @@
+/**
+ * @file CommsParser.cpp
+ * @author Scott Gibb (smgibb@yahoo.com)
+ * @brief Communication Parser Implementation source code.
+ * @version 0.1
+ * @date 2022-10-03
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include "CommsParser.h"
 
-
-void selectDrivers(enum CHANNEL channel);
-
+// Internal Constants
 const uint32_t SERIAL_BAUDRATE = 115200;
 const uint8_t RX_LEN = commsPacketLength;
 
@@ -13,13 +21,20 @@ uint8_t rxBuff[RX_LEN]={0};
 ColourDriver *colourDriver;
 FadeDriver *fadeDriver;
 
+/**
+ * @brief Sets up the Communication channel
+ * 
+ */
 void setupComms(void){
   Serial.begin(SERIAL_BAUDRATE);
   
 }
 /**
-| Channel | Mode | Colour | Brightness | PERIOD | 
-**/
+ * @brief Communication loop responsible for polling the UART USB Bus and deconstructing the received message and calling the apropriate drivers for fading and colour changes
+ * 
+ * | Channel | Mode | Colour | Brightness | PERIOD | 
+ * @return |* 
+ */
 void commsLoop(void){
   
   if(Serial.available()>0){ 

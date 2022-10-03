@@ -1,8 +1,28 @@
+/**
+ * @file ColourDriver.h
+ * @author Scott Gibb (smgibb@yahoo.com)
+ * @brief Colour Driver Header file
+ * @version 0.1
+ * @date 2022-10-03
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef __COLOUR_DRIVER__H__
 #define __COLOUR_DRIVER__H__
 
+//Library Includes
 #include <stdint.h>
+//Project Includes
 #include "LEDDriver.h"
+
+//External Constants
+const uint8_t NUM_COLOURS = 13;
+
+/**
+ * @brief 
+ * 
+ */
 enum COLOUR {
   RED = 0,
   GREEN = 1,
@@ -21,8 +41,10 @@ enum COLOUR {
  
 };
 
-const uint8_t NUM_COLOURS = 13;
-
+/**
+ * @brief 
+ * 
+ */
 typedef struct ColourRGBState {
   uint8_t redPWM = 0;
   uint8_t greenPWM = 0;
@@ -32,6 +54,10 @@ typedef struct ColourRGBState {
 };
 
 
+/**
+ * @brief Colour Driver Class Interface
+ * Responsible for controlling the RGB LED Driver, producing the colours in the enum COLOUR
+ */
 class ColourDriver {
 public:
   ColourDriver(LEDDriver *driver);
@@ -46,8 +72,7 @@ private:
   LEDDriver *driver;
   void setPWMSignals(uint8_t *colourPWMS, float brightness);
 
-}
-;
+};
 
 
 

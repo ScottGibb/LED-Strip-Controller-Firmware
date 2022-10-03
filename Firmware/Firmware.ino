@@ -1,13 +1,17 @@
 /**
-
-**/
-
+ * @file Firmware.ino
+ * @author Scott Gibb (smgibb@yahoo.com)
+ * @brief LED Light Strip Controller firmware based on the STM32F103C8T6 microcontroller utilising the Arduino framework. The
+ * @version 0.1
+ * @date 2022-10-03
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include "Main.h"
 
 //Method Prototypes
 void setupDrivers(void);
-
-
 
 //Global Variables
 ColourDriver *stripOneDriver;
@@ -19,17 +23,22 @@ FadeDriver *stripThreeFadeDriver;
 ButtonsDriver *buttonsDriver;
 
 
-
+/**
+ * @brief setup function for firmware intialisation
+ * 
+ */
 void setup(void) {
   setupStatusIndicator();
   setupComms();
   setupDrivers();
 
-  //Test Functions
 }
-
+/**
+ * @brief Main Arduino Loop
+ * Consiting of soft timer application loops for LED Strip Drivers, comms and buttons
+ * 
+ */
 void loop(void) {
-  // put your main code here, to run repeatedly
   statusIndicatorLoop();
   stripOneFadeDriver->fadeLoop();
   stripTwoFadeDriver->fadeLoop();
@@ -38,6 +47,10 @@ void loop(void) {
   buttonsDriver->loop();
 }
 
+/**
+ * @brief Main Setup function for fimrware, calling all driver initialisation functions and creating all objects
+ * 
+ */
 void setupDrivers(void) {
   LEDDriver *ledOne;
   ledOne = new LEDDriver(CHANNEL_1_R_PIN, CHANNEL_1_G_PIN, CHANNEL_1_B_PIN);

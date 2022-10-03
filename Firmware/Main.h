@@ -1,4 +1,14 @@
-#ifndef __MAIN_H__
+
+/**
+ * @file Main.h
+ * @author Scott Gibb (smgibb@yahoo.com)
+ * @brief Main Header file
+ * @version 0.1
+ * @date 2022-10-03
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #define __MAIN_H__
 
 //Library Includes
@@ -15,7 +25,7 @@
 #include "ButtonsDriver.h"
 #include "ButtonHandler.h"
 
-//External Method Headers
+//External Function Prototypes
 extern void setup(void);
 extern void loop(void);
 
