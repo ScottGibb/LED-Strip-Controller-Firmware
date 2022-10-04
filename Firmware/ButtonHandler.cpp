@@ -14,6 +14,9 @@
 uint8_t NUM_BUTTONS = 4;
 uint32_t buttonPins[4] = { BUTTON_1_PIN, BUTTON_2_PIN, BUTTON_3_PIN, BUTTON_4_PIN };
 func_type functions[4] = { buttonOneFunction, buttonTwoFunction, buttonThreeFunction, buttonFourFunction };
+uint8_t prevBrightness[4];
+FadeState prevStates[4];
+//todo: tidy this up
 
 //Internal Button Functions
 void buttonOneFunction(void);

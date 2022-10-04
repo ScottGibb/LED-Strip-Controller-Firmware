@@ -21,6 +21,9 @@ uint8_t rxBuff[RX_LEN]={0};
 ColourDriver *colourDriver;
 FadeDriver *fadeDriver;
 
+// Internal Function Prototypes
+void selectDrivers(enum CHANNEL channel);
+
 /**
  * @brief Sets up the Communication channel
  * 

@@ -10,9 +10,6 @@
  */
 #include "LEDDriver.h"
 
-//LED PWM Constants
-const uint8_t MAX_PWM =255;
-const uint8_t MIN_PWM =0;
 
 
 /**

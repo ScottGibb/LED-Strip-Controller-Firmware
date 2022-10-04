@@ -9,6 +9,7 @@
  * @copyright Copyright (c) 2022
  * 
  */
+#ifndef __MAIN_H__
 #define __MAIN_H__
 
 //Library Includes
@@ -37,4 +38,4 @@ extern FadeDriver *stripTwoFadeDriver;
 extern ColourDriver *stripThreeDriver;
 extern FadeDriver *stripThreeFadeDriver;
 extern ButtonsDriver *buttonsDriver;
-#endif __MAIN_H__
+#endif //__MAIN_H__
