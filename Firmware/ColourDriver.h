@@ -45,7 +45,7 @@ enum COLOUR {
  * @brief 
  * 
  */
-typedef struct ColourRGBState {
+typedef struct ColourRGBState_t {
   uint8_t redPWM = 0;
   uint8_t greenPWM = 0;
   uint8_t bluePWM = 0;
@@ -68,7 +68,7 @@ public:
   void setBrightness(uint8_t brightness);
   uint8_t getBrightness();
 private:
-  struct ColourRGBState colourState;
+  struct ColourRGBState_t colourState;
   LEDDriver *driver;
   void setPWMSignals(uint8_t *colourPWMS, float brightness);
 
