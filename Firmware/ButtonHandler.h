@@ -13,7 +13,9 @@
 
 //Project Includes
 #include "ButtonsDriver.h"
-#include "Main.h"
+
+//System Includes
+#include <stdint.h>
 
 //External Variables
 extern uint8_t NUM_BUTTONS;
@@ -25,6 +27,5 @@ extern void buttonOneFunction(void);
 extern void buttonTwoFunction(void);
 extern void buttonThreeFunction(void);
 extern void buttonFourFunction(void);
-extern void toggleButtonLogic(uint8_t *brightness, FadeState *state, ColourDriver *colDriver, FadeDriver *fadeDriver);
 
 #endif

@@ -13,8 +13,6 @@
 
 //Library Includes
 #include <stdint.h>
-#include <arduino.h>
-#include <math.h>
 
 //Project Includes
 #include "ColourDriver.h"
@@ -38,12 +36,12 @@ enum FADE_TYPE {
 /**
  * @brief Struct for using the FadeDriver object, outlining key paramaters to run the fading software timer based logic
  */
-typedef struct FadeState{
+typedef struct {
       enum FADE_TYPE fade= SINE;    /**< Type of Fade to be applied*/
       uint32_t period=0;            /**< Period of the fade wave*/
       uint32_t halfPeriod=0;        /**< Half ot the period*/
       uint8_t maxBrightness =0;     /**< Maximum brightness of the fade cycle*/
-};
+}FadeState_t;
 
 
 /**
@@ -55,14 +53,14 @@ class FadeDriver {
 public:
   FadeDriver(ColourDriver *driver);
   void startFade(enum FADE_TYPE fade, uint32_t period, uint8_t maxBrightness);
-  void startFade(struct FadeState fadeState);
-  FadeState getFade(void);
+  void startFade(FadeState_t fadeState);
+  FadeState_t getFade(void);
   void fadeLoop(void);
   void stopFade(void);
   
   private:
   ColourDriver *driver;
-  struct FadeState currentState;
+  FadeState_t currentState;
   uint32_t lastFadeUpdateTime;
   uint32_t currentStep;
   void squareWave(void);

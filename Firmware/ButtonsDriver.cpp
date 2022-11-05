@@ -10,6 +10,10 @@
  */
 #include "ButtonsDriver.h"
 
+//Library Includes
+#include <Arduino.h>
+#include <stdint.h>
+
 /**
  * @brief Construct a new Buttons Driver:: Buttons Driver object
  * Buttons Driver Constructor. Each Array should be ordered such that when buttonPins[i] is pressed funcs[i] is called

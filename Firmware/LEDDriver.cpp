@@ -10,7 +10,9 @@
  */
 #include "LEDDriver.h"
 
-
+//Library Includes
+#include <Arduino.h>
+#include <stdint.h>
 
 /**
  * @brief Construct a new LEDDriver::LEDDriver object

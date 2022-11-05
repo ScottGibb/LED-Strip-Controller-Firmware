@@ -3,7 +3,7 @@
 
 //Library Includes
 #include <stdint.h>
-#include <Arduino.h>
+
 
 //Function Pointer
 typedef void (*func_type)(void);

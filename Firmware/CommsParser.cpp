@@ -10,12 +10,22 @@
  */
 #include "CommsParser.h"
 
+//Library Includes
+#include <Arduino.h>
+#include <stdint.h>
+//Project Includes
+#include "Main.h"
+#include "ColourDriver.h"
+#include "FadeDriver.h"
+#include "Channels.h"
+
 // Internal Constants
-const uint32_t SERIAL_BAUDRATE = 115200;
-const uint8_t RX_LEN = commsPacketLength;
+static const uint32_t SERIAL_BAUDRATE = 115200;
+static const uint8_t RX_LEN = commsPacketLength;
 
 //Serial Comms Buffers
-uint8_t rxBuff[RX_LEN]={0};
+static uint8_t rxBuff[RX_LEN]={0};
+
 
 //Drivers
 ColourDriver *colourDriver;
@@ -44,7 +54,7 @@ void commsLoop(void){
 
       Serial.readBytes((char *)rxBuff,RX_LEN);
      //Fill C Message
-      struct CommsProtocol_t messagePacket;
+      CommsProtocol_t messagePacket;
       messagePacket.channel = CHANNEL(rxBuff[0]);
       messagePacket.mode = FADE_TYPE(rxBuff[1]);
       messagePacket.colour = COLOUR(rxBuff[2]);

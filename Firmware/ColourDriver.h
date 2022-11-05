@@ -15,7 +15,6 @@
 #include <stdint.h>
 //Project Includes
 #include "LEDDriver.h"
-
 //External Constants
 const uint8_t NUM_COLOURS = 13;
 
@@ -45,13 +44,13 @@ enum COLOUR {
  * @brief 
  * 
  */
-typedef struct ColourRGBState_t {
+typedef struct{
   uint8_t redPWM = 0;
   uint8_t greenPWM = 0;
   uint8_t bluePWM = 0;
   uint8_t brightness = 0;
   enum COLOUR colour = WHITE;
-};
+}ColourRGBState_t;
 
 
 /**
@@ -68,7 +67,7 @@ public:
   void setBrightness(uint8_t brightness);
   uint8_t getBrightness();
 private:
-  struct ColourRGBState_t colourState;
+  ColourRGBState_t colourState;
   LEDDriver *driver;
   void setPWMSignals(uint8_t *colourPWMS, float brightness);
 

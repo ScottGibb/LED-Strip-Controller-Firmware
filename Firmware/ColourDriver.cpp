@@ -10,6 +10,11 @@
  */
 #include "ColourDriver.h"
 
+//Library Includes
+#include <stdint.h>
+//Project Includes
+#include "LEDDriver.h"
+
 /**
  * @brief Construct a new Colour Driver:: Colour Driver object
  * Initialisation of the Colour Driver Object

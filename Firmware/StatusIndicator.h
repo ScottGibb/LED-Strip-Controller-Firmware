@@ -11,11 +11,7 @@
 #ifndef __STATUS_INDICATOR_H__
 #define __STATUS_INDICATOR_H__
 
-//Library Includes
-#include <stdint.h>
-#include <Arduino.h>
-//Project Includes
-#include "Channels.h"
+
 
 //External Function Prototypes
 extern void setupStatusIndicator(void);

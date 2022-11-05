@@ -14,17 +14,12 @@
 
 // Library Includes
 #include <stdint.h>
-#include <Arduino.h>
 
 //LED PWM Constants
 const uint8_t MAX_PWM =255;
 const uint8_t MIN_PWM =0;
-
-
 //Constants
 const uint8_t NUM_LEDS =3;
-const uint8_t LED_COLOUR_ENUM_LEN =NUM_LEDS;
-
 /**
  * @brief LED Colour ENUM used to define the hardware RGB LED
  * 
@@ -34,6 +29,7 @@ enum LED_COLOUR{
   GREEN_ =1,
   BLUE_ = 2
 };
+const uint8_t LED_COLOUR_ENUM_LEN =NUM_LEDS;
 
 
 /**

@@ -10,12 +10,18 @@
  */
 #include "StatusIndicator.h"
 
+//Library Includes
+#include <stdint.h>
+#include <Arduino.h>
+//Project Includes
+#include "Channels.h"
+
 //Constants
-const uint32_t REFRESH_PERIOD = 200;
+static const uint32_t REFRESH_PERIOD = 200;
 
 //Local Variables
-uint32_t lastUpdateTime ={0};
-bool pinState = {false};
+static uint32_t lastUpdateTime ={0};
+static bool pinState = {false};
 
 /**
  * @brief Sets up Status Indicator LED Pin

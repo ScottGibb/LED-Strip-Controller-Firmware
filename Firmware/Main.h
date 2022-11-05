@@ -12,9 +12,6 @@
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
-//Library Includes
-#include <Arduino.h>
-
 //System Includes
 #include "Channels.h"
 #include "Buttons.h"

@@ -10,8 +10,14 @@
  */
 #include "FadeDriver.h"
 
+//Library Includes
+#include <arduino.h>
+#include <math.h>
+//Library Includes
+#include "ColourDriver.h"
+
 //Constansts
-const uint32_t STEP_SIZE = 1;//ms
+static const uint32_t STEP_SIZE = 1;//ms
 
 /**
  * @brief Construct a new Fade Driver:: Fade Driver object
@@ -46,7 +52,7 @@ void FadeDriver::startFade(enum FADE_TYPE fade, uint32_t period, uint8_t maxBrig
  * 
  * @param[in] fadeState the fade to be changed to
  */
-void FadeDriver::startFade(struct FadeState fadeState) {
+void FadeDriver::startFade(FadeState_t fadeState) {
   currentState = fadeState;
 }
 
@@ -111,7 +117,7 @@ void FadeDriver::stopFade(void) {
  * @brief Gets the current fade state
  * @return FadeState the current fade and its settings
  */
-FadeState FadeDriver::getFade(void) {
+FadeState_t FadeDriver::getFade(void) {
   return currentState;
 }
 
