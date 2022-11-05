@@ -25,23 +25,23 @@ const uint32_t NUM_MODES = 6;
  * 
  */
 enum FADE_TYPE {
-  NONE = 0,           /**< No Fade Effect*/
-  SINE = 1,           /**< Sinusoidal Effect*/
-  SQUARE = 2,         /**< Pulsing Effect*/
-  TRIANGLE = 3,       /**< Triangular Effect*/
-  SAWTOOTH = 4,       /**< Sinusoidal Effect*/
-  COLOUR_CHANGE =5,   /**< Colour Changing Effect*/
+  NONE = 0,          /**< No Fade Effect*/
+  SINE = 1,          /**< Sinusoidal Effect*/
+  SQUARE = 2,        /**< Pulsing Effect*/
+  TRIANGLE = 3,      /**< Triangular Effect*/
+  SAWTOOTH = 4,      /**< Sinusoidal Effect*/
+  COLOUR_CHANGE = 5, /**< Colour Changing Effect*/
 };
 
 /**
  * @brief Struct for using the FadeDriver object, outlining key paramaters to run the fading software timer based logic
  */
 typedef struct {
-      enum FADE_TYPE fade= SINE;    /**< Type of Fade to be applied*/
-      uint32_t period=0;            /**< Period of the fade wave*/
-      uint32_t halfPeriod=0;        /**< Half ot the period*/
-      uint8_t maxBrightness =0;     /**< Maximum brightness of the fade cycle*/
-}FadeState_t;
+  enum FADE_TYPE fade = SINE; /**< Type of Fade to be applied*/
+  uint32_t period = 0;        /**< Period of the fade wave*/
+  uint32_t halfPeriod = 0;    /**< Half ot the period*/
+  uint8_t maxBrightness = 0;  /**< Maximum brightness of the fade cycle*/
+} FadeState_t;
 
 
 /**
@@ -57,8 +57,8 @@ public:
   FadeState_t getFade(void);
   void fadeLoop(void);
   void stopFade(void);
-  
-  private:
+
+private:
   ColourDriver *driver;
   FadeState_t currentState;
   uint32_t lastFadeUpdateTime;
@@ -69,7 +69,6 @@ public:
   void sineWave(void);
   bool getOverride(void);
   void setOverride(bool override);
-
 };
 
 

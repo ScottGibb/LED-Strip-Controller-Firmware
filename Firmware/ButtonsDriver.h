@@ -12,9 +12,9 @@ typedef void (*func_type)(void);
  * @brief Buttons Driver Class
  * Class Declaration of Buttons Driver
  */
-class ButtonsDriver{
+class ButtonsDriver {
 
-  private:
+private:
   uint32_t *buttonPins;
   uint8_t numButtons;
   uint32_t *lastDebounceTimes;
@@ -24,7 +24,7 @@ class ButtonsDriver{
   func_type *functions;
 
 public:
-  ButtonsDriver( uint32_t *buttonPins,  uint8_t numButtons, func_type *funcs);
+  ButtonsDriver(uint32_t *buttonPins, uint8_t numButtons, func_type *funcs);
   ~ButtonsDriver();
   void loop(void);
 };

@@ -30,21 +30,21 @@ extern void commsLoop(void);
  * @brief Commmunication Protocol Struct used to outline the Comms Packet being sent to the MCU for control of the system.
  * 
  */
-typedef struct{
-    enum CHANNEL channel:8; //8 Bits Byte 0
-    enum FADE_TYPE mode:8;   //16 Bits Byte 1
-    enum COLOUR colour:8;  //32 Bits Byte 2-3
-    uint8_t brightness; //40 Bits Byte 4
-    uint32_t period; //72 Bits Byte 5-7
-}CommsProtocol_t;
+typedef struct {
+  enum CHANNEL channel : 8;  //8 Bits Byte 0
+  enum FADE_TYPE mode : 8;   //16 Bits Byte 1
+  enum COLOUR colour : 8;    //32 Bits Byte 2-3
+  uint8_t brightness;        //40 Bits Byte 4
+  uint32_t period;           //72 Bits Byte 5-7
+} CommsProtocol_t;
 
 /**
  * @brief Comms Message Union used to represent the byte array as a struct
  * 
  */
-union CommsMessage_t{ //This doesnt gaurantee alignmnet within program memory
+union CommsMessage_t {  //This doesnt gaurantee alignmnet within program memory
   CommsProtocol_t commsPacket;
-  uint8_t commsBytes[commsPacketLength];     
+  uint8_t commsBytes[commsPacketLength];
 };
 
 

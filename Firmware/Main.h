@@ -1,4 +1,3 @@
-
 /**
  * @file Main.h
  * @author Scott Gibb (smgibb@yahoo.com)
@@ -35,4 +34,4 @@ extern FadeDriver *stripTwoFadeDriver;
 extern ColourDriver *stripThreeDriver;
 extern FadeDriver *stripThreeFadeDriver;
 extern ButtonsDriver *buttonsDriver;
-#endif //__MAIN_H__
+#endif  //__MAIN_H__

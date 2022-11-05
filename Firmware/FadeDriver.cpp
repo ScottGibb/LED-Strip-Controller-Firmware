@@ -17,7 +17,7 @@
 #include "ColourDriver.h"
 
 //Constansts
-static const uint32_t STEP_SIZE = 1;//ms
+static const uint32_t STEP_SIZE = 1;  //ms
 
 /**
  * @brief Construct a new Fade Driver:: Fade Driver object
@@ -80,7 +80,7 @@ void FadeDriver::fadeLoop(void) {
         break;
 
       case COLOUR_CHANGE:
-        sineWave(); //TODO: Add Future Capability to swap out which waveform its colour changing
+        sineWave();  //TODO: Add Future Capability to swap out which waveform its colour changing
         break;
 
       case NONE:

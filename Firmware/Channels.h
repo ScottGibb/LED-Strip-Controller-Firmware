@@ -18,7 +18,7 @@
  * @brief Channel Selection Enum
  * 
  */
-enum CHANNEL{
+enum CHANNEL {
   CHANNEL_NS = 0,
   CHANNEL_1 = 1,
   CHANNEL_2 = 2,

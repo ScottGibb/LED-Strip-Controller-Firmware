@@ -20,27 +20,27 @@
 static const uint32_t REFRESH_PERIOD = 200;
 
 //Local Variables
-static uint32_t lastUpdateTime ={0};
-static bool pinState = {false};
+static uint32_t lastUpdateTime = { 0 };
+static bool pinState = { false };
 
 /**
  * @brief Sets up Status Indicator LED Pin
  * 
  */
-void setupStatusIndicator(void){
+void setupStatusIndicator(void) {
   pinMode(STATUS_LED_PIN, OUTPUT);
-  digitalWrite(STATUS_LED_PIN,pinState);
+  digitalWrite(STATUS_LED_PIN, pinState);
 }
 
 /**
  * @brief Status Indicator loop responsible for calling the software timer to update the status indicator
  * 
  */
-void statusIndicatorLoop(void){
+void statusIndicatorLoop(void) {
 
-if(millis() - lastUpdateTime >REFRESH_PERIOD){
-  digitalWrite(STATUS_LED_PIN,!pinState);
-  pinState = !pinState;
-  lastUpdateTime = millis();
-}
+  if (millis() - lastUpdateTime > REFRESH_PERIOD) {
+    digitalWrite(STATUS_LED_PIN, !pinState);
+    pinState = !pinState;
+    lastUpdateTime = millis();
+  }
 }

@@ -36,7 +36,6 @@ void setup(void) {
   setupStatusIndicator();
   setupComms();
   setupDrivers();
-
 }
 /**
  * @brief Main Arduino Loop
@@ -74,5 +73,3 @@ void setupDrivers(void) {
 
   buttonsDriver = new ButtonsDriver(buttonPins, NUM_BUTTONS, functions);
 }
-
-
