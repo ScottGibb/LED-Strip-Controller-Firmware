@@ -20,7 +20,7 @@
  * Initialisation of the Colour Driver Object
  * @param driver 
  */
-ColourDriver::ColourDriver(LEDDriver *driver) {
+RGBColourDriver::RGBColourDriver(LEDDriver *driver) {
   this->driver = driver;
   uint8_t zeroPWM[NUM_LEDS] = { 0 };
   this->driver->setPWMS(zeroPWM);
@@ -34,7 +34,7 @@ ColourDriver::ColourDriver(LEDDriver *driver) {
  * @brief Destroy the Colour Driver:: Colour Driver object
  * 
  */
-ColourDriver::~ColourDriver() {
+RGBColourDriver::~RGBColourDriver() {
 }
 
 /**
@@ -42,7 +42,7 @@ ColourDriver::~ColourDriver() {
  * 
  * @param[in] colour the colour to be set
  */
-void ColourDriver::setColour(enum COLOUR colour) {
+void RGBColourDriver::setColour(enum COLOUR colour) {
   setColour(colour, colourState.brightness);
 }
 
@@ -52,7 +52,7 @@ void ColourDriver::setColour(enum COLOUR colour) {
  * @param[in] colour the new colour
  * @param[in] brightness the new brightness
  */
-void ColourDriver::setColour(enum COLOUR colour, float brightness) {
+void RGBColourDriver::setColour(enum COLOUR colour, float brightness) {
   uint8_t colourPWMS[NUM_LEDS] = { 0 };
   switch (colour) {
 
@@ -115,7 +115,7 @@ void ColourDriver::setColour(enum COLOUR colour, float brightness) {
  * 
  * @return enum COLOUR 
  */
-enum COLOUR ColourDriver::getColour() {
+enum COLOUR RGBColourDriver::getColour() {
   return colourState.colour;
 }
 
@@ -125,7 +125,7 @@ enum COLOUR ColourDriver::getColour() {
  * @param colourPWMS the PWM signals to be applied
  * @param brightness the brightness to be applied
  */
-void ColourDriver::setPWMSignals(uint8_t *colourPWMS, float brightness) {
+void RGBColourDriver::setPWMSignals(uint8_t *colourPWMS, float brightness) {
   colourState.redPWM = colourPWMS[0];
   colourState.greenPWM = colourPWMS[1];
   colourState.bluePWM = colourPWMS[2];
@@ -137,7 +137,7 @@ void ColourDriver::setPWMSignals(uint8_t *colourPWMS, float brightness) {
  * @brief Sets the brighness of the RGB light
  * @param brightness the new brightness
  */
-void ColourDriver::setBrightness(uint8_t brightness) {
+void RGBColourDriver::setBrightness(uint8_t brightness) {
   setColour(colourState.colour, brightness);
 }
 
@@ -146,6 +146,6 @@ void ColourDriver::setBrightness(uint8_t brightness) {
  * 
  * @return uint8_t colourState.brightness
  */
-uint8_t ColourDriver::getBrightness() {
+uint8_t RGBColourDriver::getBrightness() {
   return colourState.brightness;
 }

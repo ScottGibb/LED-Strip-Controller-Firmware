@@ -26,7 +26,7 @@ uint32_t buttonPins[4] = { BUTTON_1_PIN, BUTTON_2_PIN, BUTTON_3_PIN, BUTTON_4_PI
 func_type functions[4] = { buttonOneFunction, buttonTwoFunction, buttonThreeFunction, buttonFourFunction };
 
 //Internal Function Prototypes
-static void toggleButtonLogic(uint8_t *brightness, FadeState_t *state, ColourDriver *colDriver, FadeDriver *fadeDriver);
+static void toggleButtonLogic(uint8_t *brightness, FadeState_t *state, RGBColourDriver *colDriver, FadeDriver *fadeDriver);
 
 //External Function Prototypes
 void buttonOneFunction(void);
@@ -76,7 +76,7 @@ void buttonFourFunction(void) {
  * @param[out] colDriver the colourDriver associated with the state
  * @param[out] fadeDriver the fadeDriver associated with state
  */
-void toggleButtonLogic(uint8_t *brightness, FadeState_t *state, ColourDriver *colDriver, FadeDriver *fadeDriver) {
+void toggleButtonLogic(uint8_t *brightness, FadeState_t *state, RGBColourDriver *colDriver, FadeDriver *fadeDriver) {
 
   if (colDriver->getBrightness() != 0) {
     Serial.println("Option One Pressed!");

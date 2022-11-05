@@ -28,7 +28,7 @@ static uint8_t rxBuff[RX_LEN] = { 0 };
 
 
 //Drivers
-ColourDriver *colourDriver;
+RGBColourDriver *colourDriver;
 FadeDriver *fadeDriver;
 
 // Internal Function Prototypes
@@ -81,6 +81,10 @@ void commsLoop(void) {
   }
 }
 
+/**
+ * @brief Sets the colour and fade driver to the drivers associated with the channel
+ * @param channel [in] the channel to be selected
+ */
 void selectDrivers(enum CHANNEL channel) {
   switch (channel) {
     case CHANNEL_1:

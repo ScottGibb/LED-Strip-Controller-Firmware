@@ -26,12 +26,12 @@
 extern void setup(void);
 extern void loop(void);
 
-//Extyernal variables
-extern ColourDriver *stripOneDriver;
+//External variables
+extern RGBColourDriver *stripOneDriver;
 extern FadeDriver *stripOneFadeDriver;
-extern ColourDriver *stripTwoDriver;
+extern RGBColourDriver *stripTwoDriver;
 extern FadeDriver *stripTwoFadeDriver;
-extern ColourDriver *stripThreeDriver;
+extern RGBColourDriver *stripThreeDriver;
 extern FadeDriver *stripThreeFadeDriver;
 extern ButtonsDriver *buttonsDriver;
 #endif  //__MAIN_H__

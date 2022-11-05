@@ -23,7 +23,7 @@ static const uint32_t STEP_SIZE = 1;  //ms
  * @brief Construct a new Fade Driver:: Fade Driver object
  * @param[in] driver The colour Driver object used for the specific led channel
  */
-FadeDriver::FadeDriver(ColourDriver *driver) {
+FadeDriver::FadeDriver(RGBColourDriver *driver) {
   this->driver = driver;
   lastFadeUpdateTime = millis();
   currentState.fade = NONE;

@@ -41,7 +41,7 @@ ButtonsDriver::ButtonsDriver(uint32_t *buttonPins, uint8_t numButtons, func_type
 }
 
 /**
- * @brief ButtonsDriver Deconsructor
+ * @brief ButtonsDriver Deconstructor
  * 
  * @return ButtonsDriver:: 
  */

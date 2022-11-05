@@ -25,7 +25,10 @@ enum CHANNEL {
   CHANNEL_3 = 3
 
 };
-
+/**
+ * @brief Veroboard Pin Selections
+ * 
+ */
 //RGB Channel One Pins
 #define CHANNEL_1_G_PIN PB1
 #define CHANNEL_1_R_PIN PB0

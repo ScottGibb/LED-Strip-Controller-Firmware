@@ -51,7 +51,7 @@ typedef struct {
 class FadeDriver {
 
 public:
-  FadeDriver(ColourDriver *driver);
+  FadeDriver(RGBColourDriver *driver);
   void startFade(enum FADE_TYPE fade, uint32_t period, uint8_t maxBrightness);
   void startFade(FadeState_t fadeState);
   FadeState_t getFade(void);
@@ -59,7 +59,7 @@ public:
   void stopFade(void);
 
 private:
-  ColourDriver *driver;
+  RGBColourDriver *driver;
   FadeState_t currentState;
   uint32_t lastFadeUpdateTime;
   uint32_t currentStep;

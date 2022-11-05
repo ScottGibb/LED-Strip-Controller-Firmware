@@ -19,7 +19,7 @@
 const uint8_t NUM_COLOURS = 13;
 
 /**
- * @brief 
+ * @brief Colour Enum, representing all possible colours that the ColourDriver can do
  * 
  */
 enum COLOUR {
@@ -57,10 +57,10 @@ typedef struct {
  * @brief Colour Driver Class Interface
  * Responsible for controlling the RGB LED Driver, producing the colours in the enum COLOUR
  */
-class ColourDriver {
+class RGBColourDriver {
 public:
-  ColourDriver(LEDDriver *driver);
-  ~ColourDriver();
+  RGBColourDriver(LEDDriver *driver);
+  ~RGBColourDriver();
   void setColour(enum COLOUR colour, float brightness);
   void setColour(enum COLOUR colour);
   enum COLOUR getColour();
