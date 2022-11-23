@@ -66,6 +66,21 @@ void buttonThreeFunction(void) {
  */
 void buttonFourFunction(void) {
   //TODO: Add Fourth function
+  static bool onOff = false;
+
+  if (onOff) {
+    uint8_t minBrightness = 0;
+    stripOneDriver->setColour(WHITE, minBrightness);
+    stripTwoDriver->setColour(WHITE, minBrightness);
+    stripThreeDriver->setColour(WHITE, minBrightness);
+    onOff = false;
+  } else {
+    uint8_t maxBrightness = 0;
+    stripOneDriver->setColour(WHITE, maxBrightness);
+    stripTwoDriver->setColour(WHITE, maxBrightness);
+    stripThreeDriver->setColour(WHITE, maxBrightness);
+    onOff = true;
+  }
 }
 
 /**

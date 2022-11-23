@@ -5,7 +5,7 @@ import serial
 from Types import FADE_TYPE, CHANNEL, COLOUR
 
 RX_MSG_CNT = 5
-COM_PORT = 'COM4'
+COM_PORT = 'COM5'
 ser = serial.Serial(COM_PORT)
 ser.parity = serial.PARITY_EVEN
 ser.stopbits = serial.STOPBITS_ONE

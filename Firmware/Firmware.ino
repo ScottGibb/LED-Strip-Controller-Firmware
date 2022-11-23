@@ -26,7 +26,7 @@ FadeDriver *stripTwoFadeDriver;
 RGBColourDriver *stripThreeDriver;
 FadeDriver *stripThreeFadeDriver;
 ButtonsDriver *buttonsDriver;
-
+//todo: refactor into arrays
 
 /**
  * @brief setup function for firmware intialisation
