@@ -1,7 +1,7 @@
 #ifndef __HUE_DRIVER_H__
 #define __HUE_DRIVER_H__
 
-#include "ColourDriver.h"
+#include "LEDDriver.h"
 
 typedef struct HSB_t{
   float hue;
@@ -12,14 +12,17 @@ typedef struct HSB_t{
 class HueDriver{
 
   public:
-  HueDriver(RGBColourDriver* colDriver);
+  HueDriver(LEDDriver* ledDriver);
   ~HueDriver();
   void setHue(HSB_t hsb);
   HSB_t getHue(void);
 
   private:
-  RGBColourDriver *colDriver;
+  LEDDriver *ledDriver;
   HSB_t currentHSB;
+  void convertLimits(HSB_t *hsb);
+  void limiter(float *value, float minValue, float maxValue);
+
 };
 
 #endif

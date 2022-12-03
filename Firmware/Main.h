@@ -16,6 +16,7 @@
 #include "Buttons.h"
 #include "StatusIndicator.h"
 #include "LEDDriver.h"
+#include "HueDriver.h"
 #include "ColourDriver.h"
 #include "FadeDriver.h"
 #include "CommsParser.h"
@@ -27,11 +28,20 @@ extern void setup(void);
 extern void loop(void);
 
 //External variables
+extern LEDDriver *ledOne;
 extern RGBColourDriver *stripOneDriver;
+extern HueDriver *stripOneHueDriver;
 extern FadeDriver *stripOneFadeDriver;
+
+extern LEDDriver *ledTwo;
 extern RGBColourDriver *stripTwoDriver;
 extern FadeDriver *stripTwoFadeDriver;
+extern HueDriver *stripTwoHueDriver;
+
+extern LEDDriver *ledThree;
 extern RGBColourDriver *stripThreeDriver;
 extern FadeDriver *stripThreeFadeDriver;
 extern ButtonsDriver *buttonsDriver;
+extern HueDriver *stripThreeHueDriver;
+
 #endif  //__MAIN_H__

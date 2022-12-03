@@ -19,12 +19,21 @@
 void setupDrivers(void);
 
 //Global Variables
+LEDDriver *ledOne;
 RGBColourDriver *stripOneDriver;
 FadeDriver *stripOneFadeDriver;
+HueDriver *stripOneHueDriver;
+
+LEDDriver *ledTwo;
 RGBColourDriver *stripTwoDriver;
 FadeDriver *stripTwoFadeDriver;
+HueDriver *stripTwoHueDriver;
+
+LEDDriver *ledThree;
 RGBColourDriver *stripThreeDriver;
 FadeDriver *stripThreeFadeDriver;
+HueDriver *stripThreeHueDriver;
+
 ButtonsDriver *buttonsDriver;
 //todo: refactor into arrays
 
@@ -56,20 +65,20 @@ void loop(void) {
  * 
  */
 void setupDrivers(void) {
-  LEDDriver *ledOne;
   ledOne = new LEDDriver(CHANNEL_1_R_PIN, CHANNEL_1_G_PIN, CHANNEL_1_B_PIN);
   stripOneDriver = new RGBColourDriver(ledOne);
   stripOneFadeDriver = new FadeDriver(stripOneDriver);
+  stripOneHueDriver = new HueDriver(ledOne);
 
-  LEDDriver *ledTwo;
   ledTwo = new LEDDriver(CHANNEL_2_R_PIN, CHANNEL_2_G_PIN, CHANNEL_2_B_PIN);
   stripTwoDriver = new RGBColourDriver(ledTwo);
   stripTwoFadeDriver = new FadeDriver(stripTwoDriver);
+  stripTwoHueDriver = new HueDriver(ledTwo);
 
-  LEDDriver *ledThree;
   ledThree = new LEDDriver(CHANNEL_3_R_PIN, CHANNEL_3_G_PIN, CHANNEL_3_B_PIN);
   stripThreeDriver = new RGBColourDriver(ledThree);
   stripThreeFadeDriver = new FadeDriver(stripThreeDriver);
+  stripThreeHueDriver = new HueDriver(ledThree);
 
   buttonsDriver = new ButtonsDriver(buttonPins, NUM_BUTTONS, functions);
 }
