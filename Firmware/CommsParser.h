@@ -20,7 +20,7 @@
 #include "Channels.h"
 
 //External Constants
-const uint8_t commsPacketLength = 8;
+const uint8_t commsPacketLength = 20;
 
 //External Function Prototypes
 extern void setupComms(void);
@@ -36,14 +36,30 @@ typedef struct {
   enum COLOUR colour : 8;    //32 Bits Byte 2-3
   uint8_t brightness;        //40 Bits Byte 4
   uint32_t period;           //72 Bits Byte 5-7
-} CommsProtocol_t;
+} FunctionsCommsProtocol_t;
+
+typedef struct {
+  enum CHANNEL channel : 8;  //8 Bits Byte 0
+  enum FADE_TYPE mode : 8;        //16 Bits Byte 1
+  uint8_t redPWM;            //24 Bits Byte 2
+  uint8_t greenPWM;          //32 Bits Byte 3
+  uint8_t bluePWM;           //30 Bits Byte 4
+} RGBControlCommsProtocol_t;
+
+typedef struct {
+  enum CHANNEL channel : 8;  //8 Bits Byte 0
+  enum FADE_TYPE mode: 8;        //16 Bits Byte 1
+  float hue;                 //24 Bits Byte 2-5
+  float saturation;          //32 Bits Byte 6-9
+  float brightness;          //30 Bits Byte 10-13
+} HueControlCommsProtocol_t;
 
 /**
  * @brief Comms Message Union used to represent the byte array as a struct
  * 
  */
 union CommsMessage_t {  //This doesnt gaurantee alignmnet within program memory
-  CommsProtocol_t commsPacket;
+  FunctionsCommsProtocol_t commsPacket;
   uint8_t commsBytes[commsPacketLength];
 };
 

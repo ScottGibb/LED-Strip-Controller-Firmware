@@ -31,6 +31,8 @@ enum FADE_TYPE {
   TRIANGLE = 3,      /**< Triangular Effect*/
   SAWTOOTH = 4,      /**< Sinusoidal Effect*/
   COLOUR_CHANGE = 5, /**< Colour Changing Effect*/
+  RGB_CONTROL =6, /** RGB Control **/
+  HUE_CONTROL =7  /** HUE Control **/
 };
 
 /**

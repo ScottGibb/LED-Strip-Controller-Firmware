@@ -84,6 +84,8 @@ void FadeDriver::fadeLoop(void) {
         break;
 
       case NONE:
+      case RGB_CONTROL:
+      case HUE_CONTROL:
       default:
         return;
     }
