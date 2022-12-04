@@ -24,6 +24,8 @@ class FADE_TYPE(Enum):
     TRIANGLE = 3
     SAWTOOTH = 4
     COLOUR_CHANGE = 5
+    RGB_CTRL = 6
+    HUE_CTRL = 7
 
 
 class CHANNEL(Enum):
