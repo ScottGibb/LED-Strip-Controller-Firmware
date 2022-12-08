@@ -4,21 +4,18 @@
  * @brief LED Light Strip Controller firmware based on the STM32F103C8T6 microcontroller utilising the Arduino framework. The
  * @version 0.1
  * @date 2022-10-03
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 #include "Main.h"
-//Library Includes
+// Library Includes
 #include <Arduino.h>
 
-
-
-
-//Method Prototypes
+// Method Prototypes
 void setupDrivers(void);
 
-//Global Variables
+// Global Variables
 LEDDriver *ledOne;
 RGBColourDriver *stripOneDriver;
 FadeDriver *stripOneFadeDriver;
@@ -35,13 +32,14 @@ FadeDriver *stripThreeFadeDriver;
 HueDriver *stripThreeHueDriver;
 
 ButtonsDriver *buttonsDriver;
-//todo: refactor into arrays
+// todo: refactor into arrays
 
 /**
  * @brief setup function for firmware intialisation
- * 
+ *
  */
-void setup(void) {
+void setup(void)
+{
   setupStatusIndicator();
   setupComms();
   setupDrivers();
@@ -49,9 +47,10 @@ void setup(void) {
 /**
  * @brief Main Arduino Loop
  * Consiting of soft timer application loops for LED Strip Drivers, comms and buttons
- * 
+ *
  */
-void loop(void) {
+void loop(void)
+{
   statusIndicatorLoop();
   stripOneFadeDriver->fadeLoop();
   stripTwoFadeDriver->fadeLoop();
@@ -62,9 +61,10 @@ void loop(void) {
 
 /**
  * @brief Main Setup function for fimrware, calling all driver initialisation functions and creating all objects
- * 
+ *
  */
-void setupDrivers(void) {
+void setupDrivers(void)
+{
   ledOne = new LEDDriver(CHANNEL_1_R_PIN, CHANNEL_1_G_PIN, CHANNEL_1_B_PIN);
   stripOneDriver = new RGBColourDriver(ledOne);
   stripOneFadeDriver = new FadeDriver(stripOneDriver);

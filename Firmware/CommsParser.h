@@ -4,64 +4,67 @@
  * @brief CommsParser Header File for used with UART communication over USB
  * @version 0.1
  * @date 2022-10-03
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 #ifndef __COMMS_PARSER_H__
 #define __COMMS_PARSER_H__
 
-//Library Includes
+// Library Includes
 #include <stdint.h>
 
-//Project Includes
+// Project Includes
 #include "ColourDriver.h"
 #include "FadeDriver.h"
 #include "Channels.h"
 
-//External Constants
+// External Constants
 const uint8_t commsPacketLength = 20;
 
-//External Function Prototypes
+// External Function Prototypes
 extern void setupComms(void);
 extern void commsLoop(void);
 
 /**
  * @brief Commmunication Protocol Struct used to outline the Comms Packet being sent to the MCU for control of the system.
- * 
+ *
  */
-typedef struct {
-  enum CHANNEL channel : 8;  //8 Bits Byte 0
-  enum FADE_TYPE mode : 8;   //16 Bits Byte 1
-  enum COLOUR colour : 8;    //32 Bits Byte 2-3
-  uint8_t brightness;        //40 Bits Byte 4
-  uint32_t period;           //72 Bits Byte 5-7
+typedef struct
+{
+  enum CHANNEL channel : 8; // 8 Bits Byte 0
+  enum FADE_TYPE mode : 8;  // 16 Bits Byte 1
+  enum COLOUR colour : 8;   // 32 Bits Byte 2-3
+  uint8_t brightness;       // 40 Bits Byte 4
+  uint32_t period;          // 72 Bits Byte 5-7
 } FunctionsCommsProtocol_t;
 
-typedef struct {
-  enum CHANNEL channel : 8;  //8 Bits Byte 0
-  enum FADE_TYPE mode : 8;        //16 Bits Byte 1
-  uint8_t redPWM;            //24 Bits Byte 2
-  uint8_t greenPWM;          //32 Bits Byte 3
-  uint8_t bluePWM;           //30 Bits Byte 4
+typedef struct
+{
+  enum CHANNEL channel : 8; // 8 Bits Byte 0
+  enum FADE_TYPE mode : 8;  // 16 Bits Byte 1
+  uint8_t redPWM;           // 24 Bits Byte 2
+  uint8_t greenPWM;         // 32 Bits Byte 3
+  uint8_t bluePWM;          // 30 Bits Byte 4
 } RGBControlCommsProtocol_t;
 
-typedef struct {
-  enum CHANNEL channel : 8;  //8 Bits Byte 0
-  enum FADE_TYPE mode: 8;        //16 Bits Byte 1
-  float hue;                 //24 Bits Byte 2-5
-  float saturation;          //32 Bits Byte 6-9
-  float brightness;          //30 Bits Byte 10-13
+typedef struct
+{
+  enum CHANNEL channel : 8; // 8 Bits Byte 0
+  enum FADE_TYPE mode : 8;  // 16 Bits Byte 1
+  float hue;                // 24 Bits Byte 2-5
+  float saturation;         // 32 Bits Byte 6-9
+  float brightness;         // 30 Bits Byte 10-13
 } HueControlCommsProtocol_t;
 
 /**
  * @brief Comms Message Union used to represent the byte array as a struct
- * 
+ *
  */
-union CommsMessage_t {  //This doesnt gaurantee alignmnet within program memory
+union CommsMessage_t
+{ // This doesnt gaurantee alignmnet within program memory
   FunctionsCommsProtocol_t commsPacket;
   uint8_t commsBytes[commsPacketLength];
 };
-
 
 #endif

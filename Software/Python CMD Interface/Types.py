@@ -2,6 +2,11 @@ from enum import Enum
 
 
 class COLOUR(Enum):
+    """_summary_
+    Colour Enum specifying each colour the system can do
+    Args:
+        Enum (_type_): _description_
+    """
     RED = 0
     GREEN = 1
     BLUE = 2
@@ -18,6 +23,11 @@ class COLOUR(Enum):
 
 
 class FADE_TYPE(Enum):
+    """_summary_
+    Fade Type enum representing each of the modes the system can do
+    Args:
+        Enum (_type_): _description_
+    """
     NONE = 0
     SINE = 1
     SQUARE = 2
@@ -29,6 +39,11 @@ class FADE_TYPE(Enum):
 
 
 class CHANNEL(Enum):
+    """_summary_
+    Channel Enum representing each of the channels and there subsequent IDs
+    Args:
+        Enum (_type_): _description_
+    """
     CHANNEL_NS = 0
     CHANNEL_1 = 1
     CHANNEL_2 = 2

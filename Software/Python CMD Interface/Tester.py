@@ -1,15 +1,18 @@
+# Imports
 import struct
-
 import serial
 
 from Types import FADE_TYPE, CHANNEL, COLOUR
 
+# Serial Variables
 RX_MSG_CNT = 5
 COM_PORT = 'COM5'
 ser = serial.Serial(COM_PORT)
 ser.parity = serial.PARITY_EVEN
 ser.stopbits = serial.STOPBITS_ONE
 ser.bytesize = serial.EIGHTBITS
+
+## Main Loop
 while True:
     tx_msg = None
     channel = int((input("Please Enter the Channel in which you would like to Change (1-3):")))
