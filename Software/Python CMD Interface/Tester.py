@@ -6,7 +6,8 @@ from Types import FADE_TYPE, CHANNEL, COLOUR
 
 # Serial Variables
 RX_MSG_CNT = 5
-COM_PORT = 'COM5'
+COM_PORT = input("What port is the hardware connected on?")
+
 ser = serial.Serial(COM_PORT)
 ser.parity = serial.PARITY_EVEN
 ser.stopbits = serial.STOPBITS_ONE
