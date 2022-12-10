@@ -1,7 +1,7 @@
 /**
  * @file PowerMonitor.cpp
  * @author Scott Gibb (smgibb@yahoo.com)
- * @brief 
+ * @brief  This class is responsible for scanning the appropriate channel and then calculates the power
  * @version 0.1
  * @date 2022-12-10
  * 
@@ -9,20 +9,58 @@
  * 
  */
 
-typedef struct {
-    float power;
-    float current;
-    float voltage;
-}Power_t;
-class PowerMonitor{
-    public:
-        PowerMonitor();
-        ~PowerMonitor();
+#include "PowerMonitor.h"
 
-    private:
-        void loop();
-        float getCurrent();
-        float getVoltage();
-        float getPower();
-        Power_t getStats();
-};
+//Library Includes
+#include <stdint.h>
+#include <Arduino.h>
+//Project Includes
+#include "PowerSensors.h"
+
+
+PowerMonitor::PowerMonitor(uint32_t currentPin, uint32_t voltagePin, uint32_t updatePeriod){
+    powerStats.current =0;
+    powerStats.voltage =0;
+    powerStats.power =0;
+    powerStats.lastUpdated =0;
+    lastUpdateTime = 0;
+    this->updatePeriod = updatePeriod;
+    this->currentPin = currentPin;
+    this->voltagePin = voltagePin;
+    
+}
+
+PowerMonitor::~PowerMonitor(){
+
+}
+
+void PowerMonitor::loop(){
+    if(millis() - lastUpdateTime > updatePeriod){
+
+        //Scan ADC Channels
+        uint16_t voltSense = analogRead(voltagePin);
+        uint16_t currentSense = analogRead(currentPin);
+
+        //Perform Scalars and update
+
+        powerStats.lastUpdated = millis();
+        lastUpdateTime = millis();
+    }
+}
+
+float PowerMonitor:: getCurrent(){
+    return powerStats.current
+}
+
+float PowerMonitor:: getVoltage(){
+    return powerStats.voltage
+}
+
+float PowerMonitor:: getPower(){
+    return powerStats.power;
+}
+
+Power_t PowerMonitor::getStats(){
+    return powerStats;
+}
+
