@@ -1,6 +1,5 @@
 docker build . -t cmdline-controller:v1
-docker run -d \
-    -- it
+docker run -it -d \
     --name led-cmdline-controller \
-    --priveleged \
-    
+    --privileged \
+
