@@ -59,7 +59,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="hXovDVzcGwTToeBNqj5j" name="Firmware Class Diagram">
-        <mxGraphModel dx="2963" dy="2733" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="2014" dy="2038" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -557,6 +557,28 @@
                         <Array as="points">
                             <mxPoint x="810" y="420"/>
                             <mxPoint x="1020" y="420"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="gCFM7pysZQ-b71DG7Ez--1" value="PowerSensors" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+                    <mxGeometry x="1120" y="296" width="160" height="86" as="geometry"/>
+                </mxCell>
+                <mxCell id="gCFM7pysZQ-b71DG7Ez--2" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="gCFM7pysZQ-b71DG7Ez--1">
+                    <mxGeometry y="26" width="160" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="gCFM7pysZQ-b71DG7Ez--3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="gCFM7pysZQ-b71DG7Ez--1">
+                    <mxGeometry y="52" width="160" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="gCFM7pysZQ-b71DG7Ez--4" value="+ method(type): type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="gCFM7pysZQ-b71DG7Ez--1">
+                    <mxGeometry y="60" width="160" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="gCFM7pysZQ-b71DG7Ez--6" value="" style="endArrow=open;endFill=1;endSize=12;html=1;exitX=0.493;exitY=0.981;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="G4zP95aUD5GVXkQSyXDm-83" target="gCFM7pysZQ-b71DG7Ez--1">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="1260" y="250" as="sourcePoint"/>
+                        <mxPoint x="1420" y="250" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="1000" y="260"/>
+                            <mxPoint x="1200" y="260"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>

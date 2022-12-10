@@ -8,6 +8,10 @@
  * @copyright Copyright (c) 2022
  *
  */
+
+#ifndef __POWER_MONITOR_H__
+#define __POWER_MONITOR_H__
+
 #include "stdint.h"
 
 /**
@@ -45,31 +49,31 @@ public:
      * @brief Calculates the new power stats
      * 
      */
-    void loop();
+    void loop(void);
     /**
      * @brief Get the last known current value, measured in Amps
      * 
      * @return float 
      */
-    float getCurrent();
+    float getCurrent(void);
     /**
      * @brief Get the last known voltage measured 
      * 
      * @return float 
      */
-    float getVoltage();
+    float getVoltage(void);
     /**
      * @brief Get the last known power calculated
      * 
      * @return float 
      */
-    float getPower();
+    float getPower(void);
     /**
      * @brief Gets the current power stats
      * 
      * @return Power_t 
      */
-    Power_t getStats();
+    Power_t getStats(void);
 
 private:
     uint32_t updatePeriod;
@@ -78,3 +82,5 @@ private:
     uint32_t voltagePin;
     uint32_t currentPin;
 };
+
+#endif

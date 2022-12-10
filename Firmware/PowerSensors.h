@@ -8,11 +8,16 @@
  * @copyright Copyright (c) 2022
  * 
  */
+#ifndef __POWER_SENSORS_H__
+#define __POWER_SENSORS_H__
 
 #define VOLTAGE_DIVIDER_R1 100
 #define VOLTAGE_DIVIDER_R2 100
-#define VOLTAGE_SENSOR_PIN
+#define VOLTAGE_SCALAR 10
+#define VOLTAGE_SENSOR_PIN 10
 
-#define CURRENT_SENSOR_SCALAR
-#define CURRENT_SENSOR_PIN
+#define CURRENT_SENSOR_SCALAR 10
+#define CURRENT_SENSOR_PIN 10
+
+#endif
 

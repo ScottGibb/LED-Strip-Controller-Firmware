@@ -22,6 +22,8 @@
 #include "CommsParser.h"
 #include "ButtonsDriver.h"
 #include "ButtonHandler.h"
+#include "FanController.h"
+#include "PowerMonitor.h"
 
 // External Function Prototypes
 extern void setup(void);

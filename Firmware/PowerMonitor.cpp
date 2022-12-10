@@ -34,7 +34,7 @@ PowerMonitor::~PowerMonitor(){
 
 }
 
-void PowerMonitor::loop(){
+void PowerMonitor::loop(void){
     if(millis() - lastUpdateTime > updatePeriod){
 
         //Scan ADC Channels
@@ -48,19 +48,19 @@ void PowerMonitor::loop(){
     }
 }
 
-float PowerMonitor:: getCurrent(){
-    return powerStats.current
+float PowerMonitor:: getCurrent(void){
+    return powerStats.current;
 }
 
-float PowerMonitor:: getVoltage(){
-    return powerStats.voltage
+float PowerMonitor:: getVoltage(void){
+    return powerStats.voltage;
 }
 
-float PowerMonitor:: getPower(){
+float PowerMonitor:: getPower(void){
     return powerStats.power;
 }
 
-Power_t PowerMonitor::getStats(){
+Power_t PowerMonitor::getStats(void){
     return powerStats;
 }
 

@@ -1,3 +1,13 @@
+/**
+ * @file ButtonsDriver.h
+ * @author Scott Gibb (smgibb@yahoo.com)
+ * @brief 
+ * @version 0.1
+ * @date 2022-12-10
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef __BUTTONS_DRIVER_H__
 #define __BUTTONS_DRIVER_H__
 
