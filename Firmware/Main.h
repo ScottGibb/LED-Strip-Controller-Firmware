@@ -24,6 +24,7 @@
 #include "ButtonHandler.h"
 #include "FanController.h"
 #include "PowerMonitor.h"
+#include "PowerSensors.h"
 
 // External Function Prototypes
 extern void setup(void);

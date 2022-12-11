@@ -30,7 +30,7 @@ FadeDriver::FadeDriver(RGBColourDriver *driver)
   currentStep = 0;
 }
 
-void FadeDriver::~FadeDriver()
+FadeDriver::~FadeDriver()
 {
 }
 
