@@ -46,8 +46,9 @@ void setupComms(void)
 /**
  * @brief Communication loop responsible for polling the UART USB Bus and deconstructing the received message and calling the apropriate drivers for fading and colour changes
  *
- * | Channel | Mode | Colour | Brightness | PERIOD |
- * | Channel | Mode |  Red   |   Green    |  Blue  |
+ * | Channel | Mode | Colour | Brightness |   PERIOD   |
+ * | Channel | Mode |  Red   |   Green    |    Blue    |
+ * | Channel | Mode |  Hue   | Saturation | Brightness |
  * @return |*
  */
 void commsLoop(void)
