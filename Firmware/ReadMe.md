@@ -9,12 +9,29 @@ As for the classes used in the design, the class diagram for the system is shown
 
 ![Class Diagram]()
 
-# Control Loop Logic
 
-![]()
+## ButtonsDriver
+
+## Button Handler
+
+## LEDDriver
+
+## ColourDriver
+
+## FadeDriver
+
+## HueDriver
+
+## FanController
+
+## CommsParser
+
+## Power Monitor
+
+## StatusIndicator
 
 # Improvements
-Many improvements to the firmware can be made, starting with the transitiont to STM32 HAL based firmware. This would reduce the code size as well as allow more hardware features to be used such as removing the need for a polling based design and introducing a purely interrupt and timer driven architecture.
+Many improvements to the firmware can be made, starting with the transitions to STM32 HAL based firmware. This would reduce the code size as well as allow more hardware features to be used such as removing the need for a polling based design and introducing a purely interrupt and timer driven architecture.
 
 # Useful Links
 

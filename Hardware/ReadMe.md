@@ -4,12 +4,15 @@ The hardware was developed using veroboard first to prove the concept and then a
 # Design
 The design consists of two PCBs, one which is the LED controller and an optional Buttons Controller daughter board. The 3D Printed case utilises both however, if the user decided that they only wanted to use the device through USB then the board could be removed.
 
-![Hardware Architecture]()
+![Hardware Architecture](docs/Hardware Architecture.png)
 
+## LED Strip Controller
 ![LED Strip Controller]()
 
+## Buttons Controller
 ![Buttons Controller]()
 
+## 3D Printed Case Assembly
 ![3D printable Case]()
 
 # Improvements

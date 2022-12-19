@@ -11,7 +11,7 @@ Originally I wanted to develop the firmware using the STM32 HAL Drivers to allow
 
 The system developed in this repository is a true IOT Embedded System. Its purpose is to be as flexible as possible whilst maintaining an easy to Interface. This resulted in firmware and software. On The Microcontroller side, responsible for driving and controlling the LED Strips. There is a round robin firmware loop which is waiting to receive commands via UART over USB. This can be done through any means as long as its over a UART connection. In order to integrate with the rest of the Smart Home Eco System, Node-Red is used which is running in Docker on a Raspberry Pi. The Overall Architecture of the System is shown below:
 
-![System Architecture](docs/Diagrams-System%20Diagram.drawio.png)
+![System Architecture](docs/Diagrams-System%20Diagram.png)
 
 For Specific Details regarding the individual sections, please see the folders for firmware, Software and Hardware.
 
@@ -19,7 +19,7 @@ For Specific Details regarding the individual sections, please see the folders f
 
 The LED Strip Controller was designed for the purpose of providing lights to my printer and CNC enclosure. The results of which are shown below:
 
-![Printer Enclosure]()
+![Printer Enclosure](docs/Server%20Rack%20Shelves%20Lights.jpg)
 
 ## Veroboard Version
 Before moving on to a PCB design, the hardware was first created using Veroboard and an STM32 BluePill. The resulting Hardware along with the [3D printable case]() is shown below:
