@@ -45,6 +45,7 @@ public:
     uint8_t getDuty(void);
 
 private:
+    const uint8_t MAX_PWM =255;
     uint8_t duty;
     uint8_t pwm;
     uint32_t fanPin;

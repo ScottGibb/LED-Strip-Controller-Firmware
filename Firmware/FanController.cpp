@@ -27,7 +27,10 @@ FanController::~FanController(){
 }
 
 void FanController::changeDuty(uint8_t newDuty){
-
+  uint16_t newPWM = (newDuty/100.0) * MAX_PWM;
+  analogWrite(fanPin,newPWM);
+  this->pwm = newPWM;
+  this->duty = newDuty;
 }
 
 uint8_t FanController::getDuty(void){

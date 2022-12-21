@@ -76,6 +76,8 @@ public:
     Power_t getStats(void);
 
 private:
+    uint16_t ADC_RANGE = 2^12;
+    float MAX_ADC_VOLTAGE = 3.3;
     uint32_t updatePeriod;
     uint32_t lastUpdateTime;
     Power_t powerStats;

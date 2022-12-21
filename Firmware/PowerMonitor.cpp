@@ -40,8 +40,14 @@ void PowerMonitor::loop(void){
         //Scan ADC Channels
         uint16_t voltSense = analogRead(voltagePin);
         uint16_t currentSense = analogRead(currentPin);
-
         //Perform Scalars and update
+        float voltVoltage = (voltSense/ADC_RANGE) * MAX_ADC_VOLTAGE;
+        float voltCurrent = (currentSense/ADC_RANGE) * MAX_ADC_VOLTAGE;
+
+        powerStats.voltage = VOLTAGE_SCALAR* voltVoltage;
+        powerStats.current = CURRENT_SENSOR_SCALAR* voltCurrent;
+
+        powerStats.power = powerStats.current *powerStats.voltage;
 
         powerStats.lastUpdated = millis();
         lastUpdateTime = millis();
