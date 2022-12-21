@@ -215,3 +215,7 @@ fabric.properties
 .idea
 
 .vscode
+
+.bkp
+.dtmp
+.$Diagrams.drawio.dtmp
