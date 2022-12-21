@@ -34,16 +34,24 @@ At the next set of abstraction are a set of colour driving classes which do a va
 The first driver for this was the ColourDriver class which is a very simple class that allow the user to select a colour from the COLOUR enum and the driver will then set the LEDs to this colour, the user can then set the brightness of this colour and the driver will work out how to do the rest.
 
 ### FadeDriver
+As for the Fade Driver, this is a special class which uses the colourDriver currently and a predefined method to create different patterns such as square, triangle and sine waves. This is all done inside the driver class. To add more to this simply add a new private method for the pattern and call it with the loop inside the class. Again these methods are designed to be polling and non-blocking methods
 
 ### HueDriver
+Finally the last Driver to be discussed is the HueDriver, this is due to the need to have Hue control rather than RGB control. When integrating with Alexa, Node-Red uses Hue values rather than RGB. As such this functionality was built into the firmware using this converter class.
 
 ## FanController
+Due to the ongoing switching and power regulation a fan was added to the design, As for controlling this fan it was decided that PWM control of the fan would be ideal so that it wasn't constantly on.
 
 ## CommsParser
+The CommsParser file is responsible for decoding incoming messages and performing the corresponding actions. This means that this file is usually in control of the system as it responds to incoming requests from the user via a USB Serial channel. This file is not object orientated at present.
 
-## Power Monitor
+## PowerMonitor
+
+One of the additional classes added to the firmware is the PowerMonitor class which is used to read voltage and current values from the PCB that the system sits on. It does this using current and voltage scalars so is independent on exact hardware, however these values are scaled using adc channels. So analogue sensors are required.
 
 ## StatusIndicator
+
+Finally the last files to be discussed with this architecture is the StatusIndicator file. Which is a very simple file for simply flashing the on-board led, this is done to show the user that the system has not hung as the light will always flash if the main loop is running.
 
 # Improvements
 Many improvements to the firmware can be made, starting with the transitions to STM32 HAL based firmware. This would reduce the code size as well as allow more hardware features to be used such as removing the need for a polling based design and introducing a purely interrupt and timer driven architecture.
