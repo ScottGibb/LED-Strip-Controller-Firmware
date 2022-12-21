@@ -2,14 +2,14 @@
 
 The LED Strip firmware is written using the Arduino framework. This allowed for a higher abstraction level achieved as well as STM32 clones to be used. A such a C++ Object orientated design was taken. Resulting in a set of Drivers and Handlers. The Resulting Firmware layers are shown below:
 
-![Firmware Layers](docs\Diagrams-Firmware Abstraction Layers.png)
+![Firmware Layers](../docs/Diagrams-Firmware%20Abstraction%20Layers.png)
 
 As you can see in the above diagram, the system is built on a set of layers, each of which get more and more abstracted from the hardware. As you go up the stack, the concepts of pins and hardware specific functions becomes non existent.
 
 # Class Diagram
 As for the classes used in the design, the class diagram for the system is shown below:
 
-![Class Diagram](docs/Diagrams-Firmware%20Class%20Diagram.png)
+![Class Diagram](../docs/Diagrams-Firmware%20Class%20Diagram.png)
 
 There are many different types of classes in this design, which use structs as their configuration variables. Due to the complexity of the design, not all variables and methods are shown in the UML diagram.
 
