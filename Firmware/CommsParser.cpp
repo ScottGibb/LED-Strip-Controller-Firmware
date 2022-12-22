@@ -15,6 +15,8 @@
 #include <stdint.h>
 // Project Includes
 #include "Main.h"
+#include "HueDriver.h"
+#include "LEDDriver.h"
 #include "ColourDriver.h"
 #include "FadeDriver.h"
 #include "Channels.h"
