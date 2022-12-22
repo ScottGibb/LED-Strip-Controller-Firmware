@@ -7,12 +7,19 @@ The design consists of two PCBs, one which is the LED controller and an optional
 ![Hardware Architecture](../docs/Diagrams-Hardware%20Architecture.png)
 
 ## LED Strip Controller
+
+The LED Strip Controller hardware is responsible for controlling the LEDs along with maintaining the system. This hardware should be capable of driving a variety of different light strips and protecting the whole board from short circuits and over voltages. The 3D render of the PCB is shown below:
+
 ![LED Strip Controller]()
 
 ## Buttons Controller
+As for the Buttons Controller board, this is a simple PCB board with buttons, that can be added to the main board through a simple ribbon cable. This is done so that optional buttons can be added to the system. The 3D render of the PCB is shown below:
+
 ![Buttons Controller]()
 
 ## 3D Printed Case Assembly
+
+As for containing the hardware, a 3D printable case was designed and is shown below:
 ![3D printable Case]()
 
 ## Cable Wiring
