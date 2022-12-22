@@ -41,8 +41,9 @@ ButtonsDriver *buttonsDriver;
 void setup(void)
 {
   setupStatusIndicator();
-  setupComms();
   setupDrivers();
+  setupComms();
+
 }
 /**
  * @brief Main Arduino Loop
