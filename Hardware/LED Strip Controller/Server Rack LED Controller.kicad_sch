@@ -22687,7 +22687,7 @@
   (symbol (lib_id "Device:R") (at 440.69 532.13 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 3bfc8bde-ee7b-4445-92dc-541dd15c34b5)
-    (property "Reference" "R?" (id 0) (at 443.23 530.8599 0)
+    (property "Reference" "R46" (id 0) (at 443.23 530.8599 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10K" (id 1) (at 443.23 533.3999 0)
@@ -25206,7 +25206,7 @@
   (symbol (lib_id "power:GND") (at 440.69 542.29 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid d7e11fd0-e6cc-4f72-bdda-90f2b4e244bb)
-    (property "Reference" "#PWR?" (id 0) (at 440.69 548.64 0)
+    (property "Reference" "#PWR0176" (id 0) (at 440.69 548.64 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 440.69 547.37 0))
@@ -25418,7 +25418,7 @@
   (symbol (lib_id "Connector:Screw_Terminal_01x02") (at 411.48 519.43 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid e2386089-35f2-457e-86e9-aa8c315f254b)
-    (property "Reference" "J?" (id 0) (at 411.48 513.08 0))
+    (property "Reference" "J22" (id 0) (at 411.48 513.08 0))
     (property "Value" "Screw_Terminal_01x02" (id 1) (at 411.48 515.62 0))
     (property "Footprint" "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal" (id 2) (at 411.48 519.43 0)
       (effects (font (size 1.27 1.27)) hide)
@@ -25552,7 +25552,7 @@
   (symbol (lib_id "Device:Q_PMOS_GDS") (at 440.69 521.97 90) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid e84e093d-ad9a-46cb-b321-7ca6a57d8ecf)
-    (property "Reference" "Q?" (id 0) (at 440.69 511.81 90))
+    (property "Reference" "Q15" (id 0) (at 440.69 511.81 90))
     (property "Value" "Q_PMOS_SDG" (id 1) (at 440.69 514.35 90))
     (property "Footprint" "Package_TO_SOT_SMD:TO-252-3_TabPin2" (id 2) (at 438.15 516.89 0)
       (effects (font (size 1.27 1.27)) hide)
@@ -26228,7 +26228,7 @@
       (reference "#PWR0175") (unit 1) (value "GND") (footprint "")
     )
     (path "/d7e11fd0-e6cc-4f72-bdda-90f2b4e244bb"
-      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+      (reference "#PWR0176") (unit 1) (value "GND") (footprint "")
     )
     (path "/55cdbc5e-00ae-447d-bee6-68adcd964faf"
       (reference "C1") (unit 1) (value "100uF") (footprint "Capacitor_SMD:CP_Elec_10x10.5")
@@ -26528,7 +26528,7 @@
       (reference "J21") (unit 1) (value "Conn_01x02_Female") (footprint "Connector_JST:JST_EH_B2B-EH-A_1x02_P2.50mm_Vertical")
     )
     (path "/e2386089-35f2-457e-86e9-aa8c315f254b"
-      (reference "J?") (unit 1) (value "Screw_Terminal_01x02") (footprint "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal")
+      (reference "J22") (unit 1) (value "Screw_Terminal_01x02") (footprint "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal")
     )
     (path "/53df2aa7-9e62-42de-a478-40c5efc9e702"
       (reference "L1") (unit 1) (value "22u") (footprint "Inductor_SMD:L_12x12mm_H8mm")
@@ -26579,7 +26579,7 @@
       (reference "Q14") (unit 1) (value "IRF510N") (footprint "Package_TO_SOT_SMD:TO-263-2")
     )
     (path "/e84e093d-ad9a-46cb-b321-7ca6a57d8ecf"
-      (reference "Q?") (unit 1) (value "Q_PMOS_SDG") (footprint "Package_TO_SOT_SMD:TO-252-3_TabPin2")
+      (reference "Q15") (unit 1) (value "Q_PMOS_SDG") (footprint "Package_TO_SOT_SMD:TO-252-3_TabPin2")
     )
     (path "/90d43173-1036-4d37-973c-c7de805848b2"
       (reference "R1") (unit 1) (value "10k") (footprint "Resistor_SMD:R_1206_3216Metric")
@@ -26717,7 +26717,7 @@
       (reference "R45") (unit 1) (value "1M") (footprint "Resistor_SMD:R_1206_3216Metric")
     )
     (path "/3bfc8bde-ee7b-4445-92dc-541dd15c34b5"
-      (reference "R?") (unit 1) (value "10K") (footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder")
+      (reference "R46") (unit 1) (value "10K") (footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder")
     )
     (path "/f1f7d6db-21ee-4f0d-910d-6768acba8f9c"
       (reference "SW1") (unit 1) (value "SW_Push_Dual") (footprint "Button_Switch_THT:SW_PUSH_6mm")
