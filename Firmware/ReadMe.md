@@ -11,7 +11,7 @@ As for the classes used in the design, the class diagram for the system is shown
 
 ![Class Diagram](../docs/Diagrams-Firmware%20Class%20Diagram.png)
 
-There are many different types of classes in this design, which use structs as their configuration variables. Due to the complexity of the design, not all variables and methods are shown in the UML diagram.
+There are many different types of classes in this design, which use structs as their configuration variables. Due to the complexity of the design, not all variables and methods are shown in the UML diagram. As well as this due to the nature of C++ code, not every file is a class. Files with methods that are not object orientated are highlighted in this diagram using a thick border. Examples of this are Firmware and CommsParser.
 
 ## ButtonsDriver
 
@@ -43,7 +43,10 @@ Finally the last Driver to be discussed is the HueDriver, this is due to the nee
 Due to the ongoing switching and power regulation a fan was added to the design, As for controlling this fan it was decided that PWM control of the fan would be ideal so that it wasn't constantly on.
 
 ## CommsParser
-The CommsParser file is responsible for decoding incoming messages and performing the corresponding actions. This means that this file is usually in control of the system as it responds to incoming requests from the user via a USB Serial channel. This file is not object orientated at present.
+The CommsParser file is responsible for decoding incoming messages and performing the corresponding actions. This means that this file is usually in control of the system as it responds to incoming requests from the user via a USB Serial channel. This file is not object orientated at present. It also contains a StateSaver Object which is used to store the most recent commands sent to the device.
+
+## StateSaver
+The StateSaver object is used to store the most recent commands sent to to the hardware, this is done so that they can be reloaded at the next boot sequence allowing the system to store its previous state. //todo Finish implementing this code
 
 ## PowerMonitor
 

@@ -43,9 +43,9 @@ typedef struct
 {
   enum CHANNEL channel : 8; // 8 Bits Byte 0
   enum FADE_TYPE mode : 8;  // 16 Bits Byte 1
-  uint8_t redPWM;           // 24 Bits Byte 2
-  uint8_t greenPWM;         // 32 Bits Byte 3
-  uint8_t bluePWM;          // 30 Bits Byte 4
+  uint8_t redPWM;           // 24 Bits Byte 2-5
+  uint8_t greenPWM;         // 32 Bits Byte 6-9
+  uint8_t bluePWM;          // 30 Bits Byte 10-13
 } RGBControlCommsProtocol_t;
 
 typedef struct
