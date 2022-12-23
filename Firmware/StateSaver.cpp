@@ -2,32 +2,22 @@
 
 #include <EEPROM.h>
 
-StateSaver::StateSaver(){
-
+StateSaver::StateSaver()
+{
 }
 
-StateSaver::~StateSaver(){
-
+StateSaver::~StateSaver()
+{
 }
 
-bool StateSaver::loadState(uint8_t channel){
-  return false;
+void StateSaver::saveBytes(uint8_t address, uint8_t *data, uint8_t dataLen){
+    for (uint8_t i = 0; i < dataLen; i++) {
+      EEPROM.write(address + i, data[i]);
+    } 
 }
 
-bool StateSaver::loadStates(){
-  return false;
-}
-
-void StateSaver::saveState(uint8_t channel, uint8_t *message, uint8_t msgLen){
-    if(msgLen> DATA_PACKET_SIZE){
-        return; //Better Method for this?
+ void StateSaver::loadBytes(uint8_t address, uint8_t* data, uint8_t dataLen) {
+    for (uint8_t i = 0; i < dataLen; i++) {
+      data[i] = EEPROM.read(address + i);
     }
-    uint8_t addressOffset = channel * DATA_PACKET_SIZE;
-    for(uint8_t i =0; i < msgLen;i++){
-        EEPROM.update(EEPROM_START_ADDRESS+addressOffset+i, message[i]);
-    }
-    for(uint8_t i = msgLen; i < DATA_PACKET_SIZE;i++){
-        EEPROM.update(EEPROM_START_ADDRESS+addressOffset+i, 0);//pad rest of memory
-    }
-
-}
+ }

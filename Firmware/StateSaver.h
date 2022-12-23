@@ -5,14 +5,9 @@
 
 class StateSaver{
 public:
-    StateSaver();
-    ~StateSaver();
-    bool loadState(uint8_t channel);
-    bool loadStates();
-    void saveState(uint8_t chanel, uint8_t *message,uint8_t msgLen);
+    void StateSaver::saveBytes(uint8_t address, uint8_t *data, uint8_t dataLen);
+   void StateSaver::loadBytes(uint8_t address, uint8_t* data, uint8_t dataLen);
 private:
-    const uint8_t DATA_PACKET_SIZE =20;
-    const uint8_t EEPROM_START_ADDRESS = 0;
 };
 
 #endif
