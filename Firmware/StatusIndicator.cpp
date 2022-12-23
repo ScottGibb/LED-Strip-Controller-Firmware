@@ -14,32 +14,27 @@
 #include <stdint.h>
 #include <Arduino.h>
 //Project Includes
-#include "Channels.h"
 
-//Constants
-static const uint32_t REFRESH_PERIOD = 200;
 
-//Local Variables
-static uint32_t lastUpdateTime = { 0 };
-static bool pinState = { false };
 
 /**
  * @brief Sets up Status Indicator LED Pin
  * 
  */
-void setupStatusIndicator(void) {
-  pinMode(STATUS_LED_PIN, OUTPUT);
-  digitalWrite(STATUS_LED_PIN, pinState);
+StatusIndicator::StatusIndicator(uint32_t pin) {
+  this->pin = pin;
+  pinMode(pin, OUTPUT);
+  digitalWrite(pin, pinState);
 }
 
 /**
  * @brief Status Indicator loop responsible for calling the software timer to update the status indicator
  * 
  */
-void statusIndicatorLoop(void) {
+void StatusIndicator::loop(void) {
 
   if (millis() - lastUpdateTime > REFRESH_PERIOD) {
-    digitalWrite(STATUS_LED_PIN, !pinState);
+    digitalWrite(pin, !pinState);
     pinState = !pinState;
     lastUpdateTime = millis();
   }

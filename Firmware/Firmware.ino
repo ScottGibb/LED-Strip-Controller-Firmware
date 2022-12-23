@@ -32,6 +32,8 @@ FadeDriver *stripThreeFadeDriver;
 HueDriver *stripThreeHueDriver;
 
 ButtonsDriver *buttonsDriver;
+
+StatusIndicator *statusIndicator;
 // todo: refactor into arrays
 
 /**
@@ -40,7 +42,7 @@ ButtonsDriver *buttonsDriver;
  */
 void setup(void)
 {
-  setupStatusIndicator();
+  statusIndicator = new StatusIndicator(STATUS_LED_PIN);
   setupDrivers();
   setupComms();
 
@@ -52,7 +54,7 @@ void setup(void)
  */
 void loop(void)
 {
-  statusIndicatorLoop();
+  statusIndicator->loop();
   stripOneFadeDriver->fadeLoop();
   stripTwoFadeDriver->fadeLoop();
   stripThreeFadeDriver->fadeLoop();

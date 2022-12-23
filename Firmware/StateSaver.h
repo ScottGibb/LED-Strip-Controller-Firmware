@@ -5,8 +5,8 @@
 
 class StateSaver{
 public:
-    void StateSaver::saveBytes(uint8_t address, uint8_t *data, uint8_t dataLen);
-   void StateSaver::loadBytes(uint8_t address, uint8_t* data, uint8_t dataLen);
+    void saveBytes(uint8_t address, uint8_t *data, uint8_t dataLen);
+   void loadBytes(uint8_t address, uint8_t* data, uint8_t dataLen);
 private:
 };
 

@@ -2,13 +2,6 @@
 
 #include <EEPROM.h>
 
-StateSaver::StateSaver()
-{
-}
-
-StateSaver::~StateSaver()
-{
-}
 
 void StateSaver::saveBytes(uint8_t address, uint8_t *data, uint8_t dataLen){
     for (uint8_t i = 0; i < dataLen; i++) {
