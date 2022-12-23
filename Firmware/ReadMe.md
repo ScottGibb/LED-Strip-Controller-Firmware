@@ -54,7 +54,7 @@ One of the additional classes added to the firmware is the PowerMonitor class wh
 
 ## StatusIndicator
 
-Finally the last files to be discussed with this architecture is the StatusIndicator file. Which is a very simple file for simply flashing the on-board led, this is done to show the user that the system has not hung as the light will always flash if the main loop is running.
+Finally the last files to be discussed with this architecture is the StatusIndicator class. Which is a very simple class for simply flashing the on-board led, this is done to show the user that the system has not hung as the light will always flash if the main loop is running.
 
 # Improvements
 Many improvements to the firmware can be made, starting with the transitions to STM32 HAL based firmware. This would reduce the code size as well as allow more hardware features to be used such as removing the need for a polling based design and introducing a purely interrupt and timer driven architecture.
