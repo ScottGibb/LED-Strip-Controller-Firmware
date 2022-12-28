@@ -13,6 +13,7 @@
 // Library Includes
 #include <Arduino.h>
 #include <stdint.h>
+#include <vector>
 // Project Includes
 #include "Main.h"
 #include "HueDriver.h"
@@ -134,22 +135,12 @@ void selectDrivers(enum CHANNEL channel)
   switch (channel)
   {
   case CHANNEL_1:
-    ledDriver = ledOne;
-    hueDriver = stripOneHueDriver;
-    colourDriver = stripOneDriver;
-    fadeDriver = stripOneFadeDriver;
-    break;
   case CHANNEL_2:
-    ledDriver = ledTwo;
-    hueDriver = stripTwoHueDriver;
-    colourDriver = stripTwoDriver;
-    fadeDriver = stripTwoFadeDriver;
-    break;
   case CHANNEL_3:
-    ledDriver = ledThree;
-    hueDriver = stripThreeHueDriver;
-    colourDriver = stripThreeDriver;
-    fadeDriver = stripThreeFadeDriver;
+    ledDriver = leds.at(channel-1);
+    hueDriver = hueDrivers.at(channel-1);
+    colourDriver = stripDrivers.at(channel-1);
+    fadeDriver = fadeDrivers.at(channel-1);
     break;
   case CHANNEL_NS:
   default:

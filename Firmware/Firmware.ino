@@ -11,29 +11,25 @@
 #include "Main.h"
 // Library Includes
 #include <Arduino.h>
+#include <vector>
+
+using namespace std;
 
 // Method Prototypes
-void setupDrivers(void);
+static void setupDrivers(void);
+static void setupLED(uint32_t redPin, uint32_t greenPin, uint32_t bluePin);
 
 // Global Variables
-LEDDriver *ledOne;
-RGBColourDriver *stripOneDriver;
-FadeDriver *stripOneFadeDriver;
-HueDriver *stripOneHueDriver;
-
-LEDDriver *ledTwo;
-RGBColourDriver *stripTwoDriver;
-FadeDriver *stripTwoFadeDriver;
-HueDriver *stripTwoHueDriver;
-
-LEDDriver *ledThree;
-RGBColourDriver *stripThreeDriver;
-FadeDriver *stripThreeFadeDriver;
-HueDriver *stripThreeHueDriver;
+vector<LEDDriver*> leds = {};
+vector<RGBColourDriver*> stripDrivers = {};
+vector<FadeDriver*> fadeDrivers = {};
+vector<HueDriver*> hueDrivers = {};
 
 ButtonsDriver *buttonsDriver;
-
 StatusIndicator *statusIndicator;
+
+PowerMonitor *powerMonitor;
+
 // todo: refactor into arrays
 
 /**
@@ -43,6 +39,7 @@ StatusIndicator *statusIndicator;
 void setup(void)
 {
   statusIndicator = new StatusIndicator(STATUS_LED_PIN);
+  powerMonitor = new PowerMonitor(CURRENT_SENSOR_PIN, VOLTAGE_SENSOR_PIN,POWER_SENSOR_UPDATE_PERIOD);
   setupDrivers();
   setupComms();
 
@@ -55,11 +52,13 @@ void setup(void)
 void loop(void)
 {
   statusIndicator->loop();
-  stripOneFadeDriver->fadeLoop();
-  stripTwoFadeDriver->fadeLoop();
-  stripThreeFadeDriver->fadeLoop();
+
+  for(uint8_t i=0; i < fadeDrivers.size(); i++){
+    fadeDrivers[i]->fadeLoop();
+  }
   commsLoop();
   buttonsDriver->loop();
+  powerMonitor->loop();
 }
 
 /**
@@ -68,20 +67,24 @@ void loop(void)
  */
 void setupDrivers(void)
 {
-  ledOne = new LEDDriver(CHANNEL_1_R_PIN, CHANNEL_1_G_PIN, CHANNEL_1_B_PIN);
-  stripOneDriver = new RGBColourDriver(ledOne);
-  stripOneFadeDriver = new FadeDriver(stripOneDriver);
-  stripOneHueDriver = new HueDriver(ledOne);
+  
+  //led One
+  setupLED(CHANNEL_1_R_PIN, CHANNEL_1_G_PIN, CHANNEL_1_B_PIN);
 
-  ledTwo = new LEDDriver(CHANNEL_2_R_PIN, CHANNEL_2_G_PIN, CHANNEL_2_B_PIN);
-  stripTwoDriver = new RGBColourDriver(ledTwo);
-  stripTwoFadeDriver = new FadeDriver(stripTwoDriver);
-  stripTwoHueDriver = new HueDriver(ledTwo);
+  //Led Two
+  setupLED(CHANNEL_2_R_PIN, CHANNEL_2_G_PIN, CHANNEL_2_B_PIN);
 
-  ledThree = new LEDDriver(CHANNEL_3_R_PIN, CHANNEL_3_G_PIN, CHANNEL_3_B_PIN);
-  stripThreeDriver = new RGBColourDriver(ledThree);
-  stripThreeFadeDriver = new FadeDriver(stripThreeDriver);
-  stripThreeHueDriver = new HueDriver(ledThree);
-
+  //Led Three
+  setupLED(CHANNEL_3_R_PIN, CHANNEL_3_G_PIN, CHANNEL_3_B_PIN);
   buttonsDriver = new ButtonsDriver(buttonPins, NUM_BUTTONS, functions);
+}
+
+void setupLED(uint32_t redPin, uint32_t greenPin, uint32_t bluePin){
+  LEDDriver *led =new LEDDriver(redPin, greenPin, bluePin);
+  leds.push_back(led);
+  RGBColourDriver* colDriver =new RGBColourDriver(led);
+  stripDrivers.push_back(colDriver);
+
+  fadeDrivers.push_back(new FadeDriver(colDriver));
+  hueDrivers.push_back(new HueDriver(led));
 }

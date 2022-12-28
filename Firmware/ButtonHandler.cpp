@@ -15,6 +15,7 @@
 #include "ButtonsDriver.h"
 // System Includes
 #include <stdint.h>
+#include <vector>
 
 // Internal Variables
 static uint8_t prevBrightness[4];
@@ -40,7 +41,7 @@ void buttonFourFunction(void);
  */
 void buttonOneFunction(void)
 {
-  toggleButtonLogic(&prevBrightness[0], &prevStates[0], stripOneDriver, stripOneFadeDriver);
+  toggleButtonLogic(&prevBrightness[0], &prevStates[0], stripDrivers[0], fadeDrivers[0]);
 }
 
 /**
@@ -50,7 +51,7 @@ void buttonOneFunction(void)
 void buttonTwoFunction(void)
 {
 
-  toggleButtonLogic(&prevBrightness[1], &prevStates[1], stripTwoDriver, stripTwoFadeDriver);
+  toggleButtonLogic(&prevBrightness[1], &prevStates[1], stripDrivers[1], fadeDrivers[1]);
 }
 
 /**
@@ -60,7 +61,7 @@ void buttonTwoFunction(void)
 void buttonThreeFunction(void)
 {
 
-  toggleButtonLogic(&prevBrightness[2], &prevStates[2], stripThreeDriver, stripThreeFadeDriver);
+  toggleButtonLogic(&prevBrightness[2], &prevStates[2], stripDrivers[2], fadeDrivers[2]);
 }
 
 /**
@@ -75,17 +76,17 @@ void buttonFourFunction(void)
   if (onOff)
   {
     uint8_t minBrightness = 0;
-    stripOneDriver->setColour(WHITE, minBrightness);
-    stripTwoDriver->setColour(WHITE, minBrightness);
-    stripThreeDriver->setColour(WHITE, minBrightness);
+    for(uint8_t i =0; i < stripDrivers.size();i++){
+        stripDrivers[i]->setColour(WHITE, minBrightness);
+    }
     onOff = false;
   }
   else
   {
     uint8_t maxBrightness = 0;
-    stripOneDriver->setColour(WHITE, maxBrightness);
-    stripTwoDriver->setColour(WHITE, maxBrightness);
-    stripThreeDriver->setColour(WHITE, maxBrightness);
+    for(uint8_t i =0; i < stripDrivers.size();i++){
+        stripDrivers[i]->setColour(WHITE,maxBrightness);
+    }
     onOff = true;
   }
 }

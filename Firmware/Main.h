@@ -11,6 +11,10 @@
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
+// Library Includes
+#include <vector>
+using namespace std;
+
 // System Includes
 #include "Channels.h"
 #include "Buttons.h"
@@ -31,20 +35,8 @@ extern void setup(void);
 extern void loop(void);
 
 // External variables
-extern LEDDriver *ledOne;
-extern RGBColourDriver *stripOneDriver;
-extern HueDriver *stripOneHueDriver;
-extern FadeDriver *stripOneFadeDriver;
-
-extern LEDDriver *ledTwo;
-extern RGBColourDriver *stripTwoDriver;
-extern FadeDriver *stripTwoFadeDriver;
-extern HueDriver *stripTwoHueDriver;
-
-extern LEDDriver *ledThree;
-extern RGBColourDriver *stripThreeDriver;
-extern FadeDriver *stripThreeFadeDriver;
-extern ButtonsDriver *buttonsDriver;
-extern HueDriver *stripThreeHueDriver;
-
+extern vector<LEDDriver*> leds;
+extern vector<RGBColourDriver*> stripDrivers;
+extern vector<FadeDriver*> fadeDrivers;
+extern vector<HueDriver*> hueDrivers;
 #endif //__MAIN_H__
