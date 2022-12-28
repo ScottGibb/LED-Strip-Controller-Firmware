@@ -26,6 +26,8 @@ enum CHANNEL
   CHANNEL_3 = 3
 
 };
+#define NUM_CHANNELS 3
+
 /**
  * @brief Veroboard Pin Selections
  *

@@ -24,8 +24,10 @@
 
 // Internal Constants
 static const uint32_t SERIAL_BAUDRATE = 115200;
-static const uint8_t RX_LEN = commsPacketLength;
-static const uint8_t TX_LEN = commsPacketLength;
+static const uint8_t RX_LEN = controlCommsPacketLength;
+static const uint8_t TX_LEN = telemetryCommsPacketLength;
+
+// Update Rates
 static const uint32_t LED_TX_UPDATE_PERIOD = 100;
 static uint32_t lastLedTxUpdate=0;
 
@@ -176,12 +178,9 @@ void readAndParse(void){
 void sendLEDUpdate(void){
   if(millis() - lastLedTxUpdate>LED_TX_UPDATE_PERIOD ){
     txBuff[0] = LED_UPDATE;
-    if(TX_LEN < (leds.size()*((NUM_LEDS*4)+1)+1)){
-      while(1); // Code will crash here if the buffer is too small
-      //todo better exception handling required
-    }
+    
     for(uint8_t i =0; i < leds.size(); i++){
-      uint8_t arrayPos = (i * (3*4))+1;
+      uint8_t arrayPos = (i * NUM_LEDS)+1;
       txBuff[arrayPos] = i; 
       for(uint8_t i  =0 ; i < NUM_LEDS; i++){
         txBuff[++arrayPos] = leds[0]->getPWM(LED_COLOUR(i)) && (0xFF000000>>24);

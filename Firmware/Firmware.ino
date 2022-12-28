@@ -75,6 +75,9 @@ void setupDrivers(void)
 
   //Led Three
   setupLED(CHANNEL_3_R_PIN, CHANNEL_3_G_PIN, CHANNEL_3_B_PIN);
+
+  // Add a way to check if all LEDS have been initialised 
+  
   buttonsDriver = new ButtonsDriver(buttonPins, NUM_BUTTONS, functions);
 }
 
