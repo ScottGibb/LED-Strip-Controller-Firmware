@@ -61,10 +61,19 @@ typedef struct
  * @brief Comms Message Union used to represent the byte array as a struct
  *
  */
-union CommsMessage_t
+union RxCommsMessage_t
 { // This doesnt gaurantee alignmnet within program memory
   FunctionsCommsProtocol_t commsPacket;
   uint8_t commsBytes[commsPacketLength];
+};
+
+/**
+ * @brief TX Message IDs
+ * 
+ */
+enum TX_MSG_ID{
+  LED_UPDATE =0,
+  PWR_UPDATE =1
 };
 
 #endif

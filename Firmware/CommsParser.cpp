@@ -25,9 +25,13 @@
 // Internal Constants
 static const uint32_t SERIAL_BAUDRATE = 115200;
 static const uint8_t RX_LEN = commsPacketLength;
+static const uint8_t TX_LEN = commsPacketLength;
+static const uint32_t LED_TX_UPDATE_PERIOD = 100;
+static uint32_t lastLedTxUpdate=0;
 
 // Serial Comms Buffers
 static uint8_t rxBuff[RX_LEN] = {0};
+static uint8_t txBuff[TX_LEN] = {0};
 
 // Drivers
 static RGBColourDriver *colourDriver;
@@ -36,7 +40,9 @@ static HueDriver *hueDriver;
 static LEDDriver *ledDriver;
 
 // Internal Function Prototypes
-void selectDrivers(enum CHANNEL channel);
+static void selectDrivers(enum CHANNEL channel);
+static void readAndParse(void);
+static void sendLEDUpdate(void);
 
 /**
  * @brief Sets up the Communication channel
@@ -46,6 +52,44 @@ void setupComms(void)
 {
   Serial.begin(SERIAL_BAUDRATE);
 }
+
+/**
+ * @brief Responsible for calling send and receive functions
+ * 
+ */
+void commsLoop(void)
+{
+
+readAndParse();
+sendLEDUpdate();
+}
+
+/**
+ * @brief Sets the colour and fade driver to the drivers associated with the channel
+ * @param channel [in] the channel to be selected
+ */
+void selectDrivers(enum CHANNEL channel)
+{
+  switch (channel)
+  {
+  case CHANNEL_1:
+  case CHANNEL_2:
+  case CHANNEL_3:
+    ledDriver = leds.at(channel-1);
+    hueDriver = hueDrivers.at(channel-1);
+    colourDriver = stripDrivers.at(channel-1);
+    fadeDriver = fadeDrivers.at(channel-1);
+    break;
+  case CHANNEL_NS:
+  default:
+    ledDriver = NULL;
+    hueDriver = NULL;
+    colourDriver = NULL;
+    fadeDriver = NULL;
+    break;
+  }
+}
+
 /**
  * @brief Communication loop responsible for polling the UART USB Bus and deconstructing the received message and calling the apropriate drivers for fading and colour changes
  *
@@ -54,9 +98,7 @@ void setupComms(void)
  * | Channel | Mode |  Hue   | Saturation | Brightness |
  * @return |*
  */
-void commsLoop(void)
-{
-
+void readAndParse(void){
   if (Serial.available() > 0)
   {
 
@@ -113,41 +155,41 @@ void commsLoop(void)
       }
     }
 
-    Serial.print("Channel: ");
-    Serial.println(functionsMessagePacket.channel);
-    Serial.print("Mode: ");
-    Serial.println(functionsMessagePacket.mode);
-    Serial.print("Colour: ");
-    Serial.println(functionsMessagePacket.colour);
-    Serial.print("Brightness: ");
-    Serial.println(functionsMessagePacket.brightness);
-    Serial.print("Period: ");
-    Serial.println(functionsMessagePacket.period);
+    // Serial.print("Channel: ");
+    // Serial.println(functionsMessagePacket.channel);
+    // Serial.print("Mode: ");
+    // Serial.println(functionsMessagePacket.mode);
+    // Serial.print("Colour: ");
+    // Serial.println(functionsMessagePacket.colour);
+    // Serial.print("Brightness: ");
+    // Serial.println(functionsMessagePacket.brightness);
+    // Serial.print("Period: ");
+    // Serial.println(functionsMessagePacket.period);
   }
 }
-
 /**
- * @brief Sets the colour and fade driver to the drivers associated with the channel
- * @param channel [in] the channel to be selected
+ * @brief sends out an update regarding the system
+ * | UPDATE ID | Arguments |
+ * | UPDATE ID |  NUM LEDS | LED NUM |  RED  | GREEN | BLUE | XXXX
+ * 
  */
-void selectDrivers(enum CHANNEL channel)
-{
-  switch (channel)
-  {
-  case CHANNEL_1:
-  case CHANNEL_2:
-  case CHANNEL_3:
-    ledDriver = leds.at(channel-1);
-    hueDriver = hueDrivers.at(channel-1);
-    colourDriver = stripDrivers.at(channel-1);
-    fadeDriver = fadeDrivers.at(channel-1);
-    break;
-  case CHANNEL_NS:
-  default:
-    ledDriver = NULL;
-    hueDriver = NULL;
-    colourDriver = NULL;
-    fadeDriver = NULL;
-    break;
+void sendLEDUpdate(void){
+  if(millis() - lastLedTxUpdate>LED_TX_UPDATE_PERIOD ){
+    txBuff[0] = LED_UPDATE;
+    if(TX_LEN < (leds.size()*((NUM_LEDS*4)+1)+1)){
+      while(1); // Code will crash here if the buffer is too small
+      //todo better exception handling required
+    }
+    for(uint8_t i =0; i < leds.size(); i++){
+      uint8_t arrayPos = (i * (3*4))+1;
+      txBuff[arrayPos] = i; 
+      for(uint8_t i  =0 ; i < NUM_LEDS; i++){
+        txBuff[++arrayPos] = leds[0]->getPWM(LED_COLOUR(i)) && (0xFF000000>>24);
+        txBuff[++arrayPos] = leds[0]->getPWM(LED_COLOUR(i)) && (0x00FF0000>>16);
+        txBuff[++arrayPos] = leds[0]->getPWM(LED_COLOUR(i)) && (0x0000FF00>>8);
+        txBuff[++arrayPos] = leds[0]->getPWM(LED_COLOUR(i)) && (0x000000FF);
+      }
+
+    }
   }
 }

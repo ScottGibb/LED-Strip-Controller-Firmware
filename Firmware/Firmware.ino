@@ -52,7 +52,6 @@ void setup(void)
 void loop(void)
 {
   statusIndicator->loop();
-
   for(uint8_t i=0; i < fadeDrivers.size(); i++){
     fadeDrivers[i]->fadeLoop();
   }
