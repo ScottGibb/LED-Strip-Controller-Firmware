@@ -14,13 +14,11 @@
 // Library Includes
 #include <stdint.h>
 
-//Project Includes
+// Project Includes
 #include "CommsStructures.h"
 
 // External Function Prototypes
 extern void setupComms(void);
 extern void commsLoop(void);
-
-
 
 #endif

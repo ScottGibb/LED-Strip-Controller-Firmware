@@ -11,26 +11,25 @@
 #include "Main.h"
 // Library Includes
 #include <Arduino.h>
-#include <vector>
+#include <malloc.h>
 
 using namespace std;
 
 // Method Prototypes
 static void setupDrivers(void);
-static void setupLED(uint32_t redPin, uint32_t greenPin, uint32_t bluePin);
+static void setupLED(uint8_t index, uint32_t redPin, uint32_t greenPin, uint32_t bluePin);
 
 // Global Variables
-vector<LEDDriver*> leds = {};
-vector<RGBColourDriver*> stripDrivers = {};
-vector<FadeDriver*> fadeDrivers = {};
-vector<HueDriver*> hueDrivers = {};
+
+LEDDriver *leds;
+RGBColourDriver *stripDrivers;
+FadeDriver *fadeDrivers;
+HueDriver *hueDrivers;
 
 ButtonsDriver *buttonsDriver;
 StatusIndicator *statusIndicator;
 
 PowerMonitor *powerMonitor;
-
-// todo: refactor into arrays
 
 /**
  * @brief setup function for firmware intialisation
@@ -38,11 +37,12 @@ PowerMonitor *powerMonitor;
  */
 void setup(void)
 {
+
   statusIndicator = new StatusIndicator(STATUS_LED_PIN);
-  powerMonitor = new PowerMonitor(CURRENT_SENSOR_PIN, VOLTAGE_SENSOR_PIN,POWER_SENSOR_UPDATE_PERIOD);
+  powerMonitor = new PowerMonitor(CURRENT_SENSOR_PIN, VOLTAGE_SENSOR_PIN, POWER_SENSOR_UPDATE_PERIOD);
+  setupArrays();
   setupDrivers();
   setupComms();
-
 }
 /**
  * @brief Main Arduino Loop
@@ -52,41 +52,66 @@ void setup(void)
 void loop(void)
 {
   statusIndicator->loop();
-  for(uint8_t i=0; i < fadeDrivers.size(); i++){
-    fadeDrivers[i]->fadeLoop();
+  for (uint8_t i = 0; i < NUM_CHANNELS; i++)
+  {
+    fadeDrivers[i].fadeLoop();
   }
   commsLoop();
   buttonsDriver->loop();
   powerMonitor->loop();
 }
-
+/**
+ * @brief Sets up all the memory allocation for the arrays.
+ *
+ */
+void setupArrays(void)
+{
+  leds = (LEDDriver *)malloc(sizeof(LEDDriver) * NUM_CHANNELS);
+  stripDrivers = (RGBColourDriver *)malloc(sizeof(RGBColourDriver) * NUM_CHANNELS);
+  fadeDrivers = (FadeDriver *)malloc(sizeof(FadeDriver) * NUM_CHANNELS);
+  hueDrivers = (HueDriver *)malloc(sizeof(HueDriver) * NUM_CHANNELS);
+  if (leds == NULL || stripDrivers == NULL || fadeDrivers == NULL || hueDrivers == NULL)
+  {
+    while (1)
+      ;
+  }
+}
 /**
  * @brief Main Setup function for fimrware, calling all driver initialisation functions and creating all objects
  *
  */
 void setupDrivers(void)
 {
-  
-  //led One
-  setupLED(CHANNEL_1_R_PIN, CHANNEL_1_G_PIN, CHANNEL_1_B_PIN);
 
-  //Led Two
-  setupLED(CHANNEL_2_R_PIN, CHANNEL_2_G_PIN, CHANNEL_2_B_PIN);
+  // led One
+  setupLED(0, CHANNEL_1_R_PIN, CHANNEL_1_G_PIN, CHANNEL_1_B_PIN);
 
-  //Led Three
-  setupLED(CHANNEL_3_R_PIN, CHANNEL_3_G_PIN, CHANNEL_3_B_PIN);
+  // Led Two
+  setupLED(1, CHANNEL_2_R_PIN, CHANNEL_2_G_PIN, CHANNEL_2_B_PIN);
 
-  // Add a way to check if all LEDS have been initialised 
-  
+  // Led Three
+  setupLED(2, CHANNEL_3_R_PIN, CHANNEL_3_G_PIN, CHANNEL_3_B_PIN);
+
+  // Add a way to check if all LEDS have been initialised
+
   buttonsDriver = new ButtonsDriver(buttonPins, NUM_BUTTONS, functions);
 }
 
-void setupLED(uint32_t redPin, uint32_t greenPin, uint32_t bluePin){
-  LEDDriver *led =new LEDDriver(redPin, greenPin, bluePin);
-  leds.push_back(led);
-  RGBColourDriver* colDriver =new RGBColourDriver(led);
-  stripDrivers.push_back(colDriver);
+/**
+ * @brief Setups individual led channel drivers
+ *
+ * @param index where the led object will be stored
+ * @param redPin the pin number associated with the red part of the RGB led
+ * @param greenPin the pin number associated with the green pin of the RGB led
+ * @param bluePin the pin number associated with the blue pin of the RGB led
+ */
+void setupLED(uint8_t index, uint32_t redPin, uint32_t greenPin, uint32_t bluePin)
+{
+  LEDDriver led = LEDDriver(redPin, greenPin, bluePin);
+  leds[index] = led;
+  RGBColourDriver colDriver = RGBColourDriver(&led);
+  stripDrivers[index] = colDriver;
 
-  fadeDrivers.push_back(new FadeDriver(colDriver));
-  hueDrivers.push_back(new HueDriver(led));
+  fadeDrivers[index] = FadeDriver(&colDriver);
+  hueDrivers[index] = HueDriver(&led);
 }

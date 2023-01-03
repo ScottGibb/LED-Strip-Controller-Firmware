@@ -11,8 +11,8 @@
 
 // External Constants
 const uint8_t controlCommsPacketLength = 20;
-const uint8_t channelPacketSize = 4; // CHANNEL ID + 3 * pwm values
-const uint8_t telemetryCommsPacketLength = channelPacketSize * NUM_CHANNELS +2; //TX_MSG_ID + number of channels
+const uint8_t channelPacketSize = 4;                                             // CHANNEL ID + 3 * pwm values
+const uint8_t telemetryCommsPacketLength = channelPacketSize * NUM_CHANNELS + 2; // TX_MSG_ID + number of channels
 
 /**
  * @brief Commmunication Protocol Struct used to outline the Comms Packet being sent to the MCU for control of the system.
@@ -57,11 +57,12 @@ union RxCommsMessage_t
 
 /**
  * @brief TX Message IDs
- * 
+ *
  */
-enum TX_MSG_ID{
-  LED_UPDATE =0,
-  PWR_UPDATE =1
+enum TX_MSG_ID
+{
+  LED_UPDATE = 0,
+  PWR_UPDATE = 1
 };
 
 #endif

@@ -35,8 +35,8 @@ extern void setup(void);
 extern void loop(void);
 
 // External variables
-extern vector<LEDDriver*> leds;
-extern vector<RGBColourDriver*> stripDrivers;
-extern vector<FadeDriver*> fadeDrivers;
-extern vector<HueDriver*> hueDrivers;
+extern LEDDriver * leds;
+extern RGBColourDriver * stripDrivers;
+extern FadeDriver * fadeDrivers;
+extern HueDriver * hueDrivers;
 #endif //__MAIN_H__

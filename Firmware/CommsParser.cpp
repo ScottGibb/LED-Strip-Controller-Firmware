@@ -29,7 +29,7 @@ static const uint8_t TX_LEN = telemetryCommsPacketLength;
 
 // Update Rates
 static const uint32_t LED_TX_UPDATE_PERIOD = 100;
-static uint32_t lastLedTxUpdate=0;
+static uint32_t lastLedTxUpdate = 0;
 
 // Serial Comms Buffers
 static uint8_t rxBuff[RX_LEN] = {0};
@@ -57,13 +57,13 @@ void setupComms(void)
 
 /**
  * @brief Responsible for calling send and receive functions
- * 
+ *
  */
 void commsLoop(void)
 {
 
-readAndParse();
-sendLEDUpdate();
+  readAndParse();
+  sendLEDUpdate();
 }
 
 /**
@@ -77,10 +77,10 @@ void selectDrivers(enum CHANNEL channel)
   case CHANNEL_1:
   case CHANNEL_2:
   case CHANNEL_3:
-    ledDriver = leds.at(channel-1);
-    hueDriver = hueDrivers.at(channel-1);
-    colourDriver = stripDrivers.at(channel-1);
-    fadeDriver = fadeDrivers.at(channel-1);
+    ledDriver = &leds[channel - 1];
+    hueDriver = &hueDrivers[channel - 1];
+    colourDriver = &stripDrivers[channel - 1];
+    fadeDriver = &fadeDrivers[channel - 1];
     break;
   case CHANNEL_NS:
   default:
@@ -100,7 +100,8 @@ void selectDrivers(enum CHANNEL channel)
  * | Channel | Mode |  Hue   | Saturation | Brightness |
  * @return |*
  */
-void readAndParse(void){
+void readAndParse(void)
+{
   if (Serial.available() > 0)
   {
 
@@ -173,22 +174,25 @@ void readAndParse(void){
  * @brief sends out an update regarding the system
  * | UPDATE ID | Arguments |
  * | UPDATE ID |  NUM LEDS | LED NUM |  RED  | GREEN | BLUE | XXXX
- * 
+ *
  */
-void sendLEDUpdate(void){
-  if(millis() - lastLedTxUpdate>LED_TX_UPDATE_PERIOD ){
+void sendLEDUpdate(void)
+{
+  if (millis() - lastLedTxUpdate > LED_TX_UPDATE_PERIOD)
+  {
     txBuff[0] = LED_UPDATE;
-    
-    for(uint8_t i =0; i < leds.size(); i++){
-      uint8_t arrayPos = (i * NUM_LEDS)+1;
-      txBuff[arrayPos] = i; 
-      for(uint8_t i  =0 ; i < NUM_LEDS; i++){
-        txBuff[++arrayPos] = leds[0]->getPWM(LED_COLOUR(i)) && (0xFF000000>>24);
-        txBuff[++arrayPos] = leds[0]->getPWM(LED_COLOUR(i)) && (0x00FF0000>>16);
-        txBuff[++arrayPos] = leds[0]->getPWM(LED_COLOUR(i)) && (0x0000FF00>>8);
-        txBuff[++arrayPos] = leds[0]->getPWM(LED_COLOUR(i)) && (0x000000FF);
-      }
 
+    for (uint8_t i = 0; i < NUM_CHANNELS; i++)
+    {
+      uint8_t arrayPos = (i * NUM_LEDS) + 1;
+      txBuff[arrayPos] = i;
+      for (uint8_t i = 0; i < NUM_LEDS; i++)
+      {
+        txBuff[++arrayPos] = leds[0].getPWM(LED_COLOUR(i)) && (0xFF000000 >> 24);
+        txBuff[++arrayPos] = leds[0].getPWM(LED_COLOUR(i)) && (0x00FF0000 >> 16);
+        txBuff[++arrayPos] = leds[0].getPWM(LED_COLOUR(i)) && (0x0000FF00 >> 8);
+        txBuff[++arrayPos] = leds[0].getPWM(LED_COLOUR(i)) && (0x000000FF);
+      }
     }
   }
 }
