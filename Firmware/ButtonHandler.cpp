@@ -28,6 +28,7 @@ func_type functions[4] = {buttonOneFunction, buttonTwoFunction, buttonThreeFunct
 
 // Internal Function Prototypes
 static void toggleButtonLogic(uint8_t *brightness, FadeState_t *state, RGBColourDriver *colDriver, FadeDriver *fadeDriver);
+static bool checkState(void);
 
 // External Function Prototypes
 void buttonOneFunction(void);
@@ -70,22 +71,22 @@ void buttonThreeFunction(void)
  */
 void buttonFourFunction(void)
 {
-  // TODO: Add Fourth function
   static bool onOff = false;
-
-  if (onOff)
+   
+  if (onOff && checkState())
   {
     uint8_t minBrightness = 0;
-    for (uint8_t i = 0; i < NUM_CHANNELS; i++)
+    for (uint8_t i = 0; i < stripDrivers.size(); i++)
     {
+      fadeDrivers[i]->stopFade();
       stripDrivers[i]->setColour(WHITE, minBrightness);
     }
     onOff = false;
   }
   else
   {
-    uint8_t maxBrightness = 0;
-    for (uint8_t i = 0; i < NUM_CHANNELS; i++)
+    uint8_t maxBrightness = 100;
+    for (uint8_t i = 0; i < stripDrivers.size(); i++)
     {
       stripDrivers[i]->setColour(WHITE, maxBrightness);
     }
@@ -106,7 +107,6 @@ void toggleButtonLogic(uint8_t *brightness, FadeState_t *state, RGBColourDriver 
 
   if (colDriver->getBrightness() != 0)
   {
-    Serial.println("Option One Pressed!");
     *brightness = colDriver->getBrightness();
     colDriver->setBrightness(0);
     *state = fadeDriver->getFade();
@@ -114,10 +114,22 @@ void toggleButtonLogic(uint8_t *brightness, FadeState_t *state, RGBColourDriver 
   }
   else
   {
-    Serial.println("Option Two Pressed!");
     colDriver->setBrightness(*brightness);
     *brightness = colDriver->getBrightness();
     fadeDriver->startFade(*state);
     *state = fadeDriver->getFade();
   }
+}
+
+/**
+ * @brief checks the stripDrivers and returns true if any of them are not off
+*/
+bool checkState(void){
+  bool state = true;
+for(uint8_t i =0; i < stripDrivers.size();i++){
+  if(stripDrivers[i]->getBrightness()!=0){
+    state = state || true;  
+  }
+}
+return state;
 }

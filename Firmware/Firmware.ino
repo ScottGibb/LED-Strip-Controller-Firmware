@@ -30,6 +30,8 @@ ButtonsDriver *buttonsDriver;
 StatusIndicator *statusIndicator;
 
 PowerMonitor *powerMonitor;
+FanController *fanController;
+
 CommsParser *commsParser;
 
 /**
@@ -41,13 +43,10 @@ void setup(void)
 
   statusIndicator = new StatusIndicator(STATUS_LED_PIN);
   // powerMonitor = new PowerMonitor(CURRENT_SENSOR_PIN, VOLTAGE_SENSOR_PIN, POWER_SENSOR_UPDATE_PERIOD);
+  //fanController = new FanController();
   setupDrivers();
   commsParser = new CommsParser(115200,500);
-  // stripDrivers[1]->setColour(BLUE,100);
-  // fadeDrivers[2]->startFade(SQUARE, 1000, 100);
-  // stripDrivers[2]->setColour(RED);
-  // uint8_t values[3] = {100,100,100};
-  // leds[0]->setPWMS(values);
+
   
 }
 /**
