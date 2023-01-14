@@ -43,9 +43,12 @@ void setup(void)
   // powerMonitor = new PowerMonitor(CURRENT_SENSOR_PIN, VOLTAGE_SENSOR_PIN, POWER_SENSOR_UPDATE_PERIOD);
   setupDrivers();
   commsParser = new CommsParser(115200,500);
-  stripDrivers[1]->setColour(BLUE,100);
+  // stripDrivers[1]->setColour(BLUE,100);
+  // fadeDrivers[2]->startFade(SQUARE, 1000, 100);
+  // stripDrivers[2]->setColour(RED);
+  // uint8_t values[3] = {100,100,100};
+  // leds[0]->setPWMS(values);
   
-
 }
 /**
  * @brief Main Arduino Loop
