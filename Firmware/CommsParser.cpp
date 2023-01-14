@@ -114,6 +114,7 @@ void CommsParser::parseAndUpdate(void)
     leds[0] = rgbMessagePacket.redPWM;
     leds[1] = rgbMessagePacket.greenPWM;
     leds[2] = rgbMessagePacket.bluePWM;
+    fadeDriver->stopFade();
     ledDriver->setPWMS(leds);
     break;
   case HUE_CONTROL:
@@ -124,6 +125,7 @@ void CommsParser::parseAndUpdate(void)
     hsb.hue = hueMessagePacket.hue;
     hsb.saturation = hueMessagePacket.saturation;
     hsb.brightness = hueMessagePacket.brightness;
+    fadeDriver->stopFade();
     hueDriver->setHue(hsb);
     break;
 
@@ -153,7 +155,7 @@ void CommsParser::sendLEDUpdate(void)
   {
     txBuff[0] = LED_UPDATE;
 
-    for (uint8_t i = 0; i < NUM_CHANNELS; i++)
+    for (uint8_t i = 0; i < leds.size(); i++)
     {
       uint8_t arrayPos = (i * NUM_LEDS) + 1;
       txBuff[arrayPos] = i;
