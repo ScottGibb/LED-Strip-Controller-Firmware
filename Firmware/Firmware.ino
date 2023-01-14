@@ -11,8 +11,7 @@
 #include "Main.h"
 // Library Includes
 #include <Arduino.h>
-#include <malloc.h>
-#include <stdint.h>
+#include <vector.>
 
 using namespace std;
 
@@ -22,10 +21,10 @@ static void setupLED(uint8_t index, uint32_t redPin, uint32_t greenPin, uint32_t
 
 // Global Variables
 
-LEDDriver *leds;
-RGBColourDriver *stripDrivers;
-FadeDriver *fadeDrivers;
-HueDriver *hueDrivers;
+vector<LEDDriver*> leds;
+vector<RGBColourDriver*> stripDrivers;
+vector<FadeDriver*> fadeDrivers;
+vector<HueDriver*> hueDrivers;
 
 ButtonsDriver *buttonsDriver;
 StatusIndicator *statusIndicator;
@@ -42,9 +41,10 @@ void setup(void)
 
   statusIndicator = new StatusIndicator(STATUS_LED_PIN);
   // powerMonitor = new PowerMonitor(CURRENT_SENSOR_PIN, VOLTAGE_SENSOR_PIN, POWER_SENSOR_UPDATE_PERIOD);
-  setupArrays();
   setupDrivers();
   commsParser = new CommsParser(115200,500);
+  stripDrivers[1]->setColour(BLUE,100);
+  
 
 }
 /**
@@ -57,28 +57,13 @@ void loop(void)
   statusIndicator->loop();
   for (uint8_t i = 0; i < NUM_CHANNELS; i++)
   {
-    fadeDrivers[i].fadeLoop();
+    fadeDrivers[i]->fadeLoop();
   }
   commsParser->loop();
   buttonsDriver->loop();
   // powerMonitor->loop();
 }
-/**
- * @brief Sets up all the memory allocation for the arrays.
- *
- */
-void setupArrays(void)
-{
-  leds = (LEDDriver *)malloc(sizeof(LEDDriver) * NUM_CHANNELS);
-  stripDrivers = (RGBColourDriver *)malloc(sizeof(RGBColourDriver) * NUM_CHANNELS);
-  fadeDrivers = (FadeDriver *)malloc(sizeof(FadeDriver) * NUM_CHANNELS);
-  hueDrivers = (HueDriver *)malloc(sizeof(HueDriver) * NUM_CHANNELS);
-  if (leds == NULL || stripDrivers == NULL || fadeDrivers == NULL || hueDrivers == NULL)
-  {
-    while (1)
-      ;
-  }
-}
+
 /**
  * @brief Main Setup function for fimrware, calling all driver initialisation functions and creating all objects
  *
@@ -110,11 +95,11 @@ void setupDrivers(void)
  */
 void setupLED(uint8_t index, uint32_t redPin, uint32_t greenPin, uint32_t bluePin)
 {
-  LEDDriver led = LEDDriver(redPin, greenPin, bluePin);
-  leds[index] = led;
-  RGBColourDriver colDriver = RGBColourDriver(&led);
-  stripDrivers[index] = colDriver;
+  LEDDriver* led = new LEDDriver(redPin, greenPin, bluePin);
+  leds.push_back(led);
+  RGBColourDriver* colDriver = new RGBColourDriver(led);
+  stripDrivers.push_back(colDriver);
 
-  fadeDrivers[index] = FadeDriver(&colDriver);
-  hueDrivers[index] = HueDriver(&led);
+  fadeDrivers.push_back(new FadeDriver(colDriver));
+  hueDrivers.push_back(new HueDriver(led));
 }

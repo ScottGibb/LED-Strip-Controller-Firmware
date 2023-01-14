@@ -41,7 +41,7 @@ void buttonFourFunction(void);
  */
 void buttonOneFunction(void)
 {
-  toggleButtonLogic(&prevBrightness[0], &prevStates[0], &stripDrivers[0], &fadeDrivers[0]);
+  toggleButtonLogic(&prevBrightness[0], &prevStates[0], stripDrivers[0], fadeDrivers[0]);
 }
 
 /**
@@ -51,7 +51,7 @@ void buttonOneFunction(void)
 void buttonTwoFunction(void)
 {
 
-  toggleButtonLogic(&prevBrightness[1], &prevStates[1], &stripDrivers[1], &fadeDrivers[1]);
+  toggleButtonLogic(&prevBrightness[1], &prevStates[1], stripDrivers[1], fadeDrivers[1]);
 }
 
 /**
@@ -61,7 +61,7 @@ void buttonTwoFunction(void)
 void buttonThreeFunction(void)
 {
 
-  toggleButtonLogic(&prevBrightness[2], &prevStates[2], &stripDrivers[2], &fadeDrivers[2]);
+  toggleButtonLogic(&prevBrightness[2], &prevStates[2], stripDrivers[2], fadeDrivers[2]);
 }
 
 /**
@@ -78,7 +78,7 @@ void buttonFourFunction(void)
     uint8_t minBrightness = 0;
     for (uint8_t i = 0; i < NUM_CHANNELS; i++)
     {
-      stripDrivers[i].setColour(WHITE, minBrightness);
+      stripDrivers[i]->setColour(WHITE, minBrightness);
     }
     onOff = false;
   }
@@ -87,7 +87,7 @@ void buttonFourFunction(void)
     uint8_t maxBrightness = 0;
     for (uint8_t i = 0; i < NUM_CHANNELS; i++)
     {
-      stripDrivers[i].setColour(WHITE, maxBrightness);
+      stripDrivers[i]->setColour(WHITE, maxBrightness);
     }
     onOff = true;
   }

@@ -53,10 +53,10 @@ void CommsParser::selectDrivers(enum CHANNEL channel)
   case CHANNEL_1:
   case CHANNEL_2:
   case CHANNEL_3:
-    ledDriver = &leds[channel - 1];
-    hueDriver = &hueDrivers[channel - 1];
-    colourDriver = &stripDrivers[channel - 1];
-    fadeDriver = &fadeDrivers[channel - 1];
+    ledDriver = leds[channel - 1];
+    hueDriver = hueDrivers[channel - 1];
+    colourDriver = stripDrivers[channel - 1];
+    fadeDriver = fadeDrivers[channel - 1];
     break;
   case CHANNEL_NS:
   default:
@@ -157,16 +157,15 @@ void CommsParser::sendLEDUpdate(void)
     {
       uint8_t arrayPos = (i * NUM_LEDS) + 1;
       txBuff[arrayPos] = i;
-      for (uint8_t i = 0; i < NUM_LEDS; i++)
+      for (uint8_t j = 0; j < NUM_LEDS; j++)
       {
-        txBuff[++arrayPos] = leds[0].getPWM(LED_COLOUR(i)) && (0xFF000000 >> 24);
-        txBuff[++arrayPos] = leds[0].getPWM(LED_COLOUR(i)) && (0x00FF0000 >> 16);
-        txBuff[++arrayPos] = leds[0].getPWM(LED_COLOUR(i)) && (0x0000FF00 >> 8);
-        txBuff[++arrayPos] = leds[0].getPWM(LED_COLOUR(i)) && (0x000000FF);
+        txBuff[++arrayPos] = leds[j]->getPWM(LED_COLOUR(i)) && (0xFF000000 >> 24);
+        txBuff[++arrayPos] = leds[j]->getPWM(LED_COLOUR(i)) && (0x00FF0000 >> 16);
+        txBuff[++arrayPos] = leds[j]->getPWM(LED_COLOUR(i)) && (0x0000FF00 >> 8);
+        txBuff[++arrayPos] = leds[j]->getPWM(LED_COLOUR(i)) && (0x000000FF);
       }
     }
     Serial.write(txBuff,telemetryCommsPacketLength);
-    leds[0].setPWM(RED_, 100);
     lastLedTxUpdate = millis();
   }
 }

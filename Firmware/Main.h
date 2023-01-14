@@ -13,7 +13,7 @@
 
 // Library Includes
 using namespace std;
-
+#include <vector>
 // System Includes
 #include "Channels.h"
 #include "Buttons.h"
@@ -34,8 +34,8 @@ extern void setup(void);
 extern void loop(void);
 
 // External variables
-extern LEDDriver * leds;
-extern RGBColourDriver * stripDrivers;
-extern FadeDriver * fadeDrivers;
-extern HueDriver * hueDrivers;
+extern vector<LEDDriver*> leds;
+extern vector<RGBColourDriver*> stripDrivers;
+extern vector<FadeDriver*> fadeDrivers;
+extern vector<HueDriver*> hueDrivers;
 #endif //__MAIN_H__
