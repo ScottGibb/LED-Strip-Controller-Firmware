@@ -21,8 +21,8 @@
 typedef struct HSV_t
 {
   float hue;        /*360 Degree value 0-360*/
-  float saturation; /*% Based Value 0-1*/
-  float value; /*% Based value 0-1*/
+  float saturation; /*% Based Value 0-100*/
+  float value; /*% Based value 0-100*/
 } HSV_t;
 
 /**

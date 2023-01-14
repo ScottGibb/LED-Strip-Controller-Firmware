@@ -47,9 +47,10 @@ void setup(void) {
   commsParser = new CommsParser(115200, 500);
   HSV_t hsv = {
     .hue = 107,
-    .saturation = 0.89,
-    .value = 0.92
+    .saturation = 89,
+    .value = 92
   };
+  fadeDrivers[1]->stopFade();
   hueDrivers[1]->setHue(hsv);
 }
 /**

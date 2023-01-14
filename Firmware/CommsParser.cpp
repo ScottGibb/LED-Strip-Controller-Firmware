@@ -92,6 +92,7 @@ void CommsParser::parseAndUpdate(void)
   FunctionsCommsProtocol_t functionsMessagePacket;
   RGBControlCommsProtocol_t rgbMessagePacket;
   HueControlCommsProtocol_t hueMessagePacket;
+  HSV_t hsv;
 
   functionsMessagePacket.channel = CHANNEL(rxBuff[0]);
   rgbMessagePacket.channel = CHANNEL(rxBuff[0]);
@@ -120,13 +121,14 @@ void CommsParser::parseAndUpdate(void)
   case HUE_CONTROL:
     hueMessagePacket.hue = (float)((uint32_t)rxBuff[2] << 24 | (uint32_t)rxBuff[3] << 16 | (uint32_t)rxBuff[4] << 8 | (uint32_t)rxBuff[5]);
     hueMessagePacket.saturation = (float)((uint32_t)rxBuff[6] << 24 | (uint32_t)rxBuff[7] << 16 | (uint32_t)rxBuff[8] << 8 | (uint32_t)rxBuff[9]);
-    hueMessagePacket.brightness = (float)((uint32_t)rxBuff[10] << 24 | (uint32_t)rxBuff[11] << 16 | (uint32_t)rxBuff[12] << 8 | (uint32_t)rxBuff[13]);
-    HSV_t hsb;
-    hsb.hue = hueMessagePacket.hue;
-    hsb.saturation = hueMessagePacket.saturation;
-    hsb.value = hueMessagePacket.brightness;
+    hueMessagePacket.saturation = (float)((uint32_t)rxBuff[10] << 24 | (uint32_t)rxBuff[11] << 16 | (uint32_t)rxBuff[12] << 8 | (uint32_t)rxBuff[13]);
+    
+    hsv.hue = hueMessagePacket.hue;
+    hsv.saturation = hueMessagePacket.saturation;
+    hsv.value = hueMessagePacket.saturation;
+    
     fadeDriver->stopFade();
-    hueDriver->setHue(hsb);
+    hueDriver->setHue(hsv);
     break;
 
   default:

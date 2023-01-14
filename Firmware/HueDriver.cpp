@@ -32,7 +32,7 @@ void HueDriver::setHue(HSV_t hsv)
   // https://www.rapidtables.com/convert/color/hsv-to-rgb.html
   convertLimits(&hsv);
   float C = hsv.value * hsv.saturation;
-  float X = C * (1.0 - (fmodf(hsv.hue / 60, 2.0) - 1.0));
+  float X = C * (1.0 - (fmodf(hsv.hue / 60.0, 2.0) - 1.0));
   float m = hsv.value - C;
   uint8_t rgb[3] = {0};
   if (0 <= hsv.hue && hsv.hue < 60)
@@ -76,9 +76,13 @@ void HueDriver::setHue(HSV_t hsv)
 }
 void HueDriver::convertLimits(HSV_t *hsv)
 {
-  limiter(&hsv->hue, 0, 360);
-  limiter(&hsv->saturation, 0, 1);
-  limiter(&hsv->value, 0, 1);
+  //Scale values down before limiting them
+  hsv->value = hsv->value/100.0;
+  hsv->saturation = hsv->saturation/100.0;
+  
+  limiter(&hsv->hue, 0.0, 360.0);
+  limiter(&hsv->saturation, 0.0, 1.0);
+  limiter(&hsv->value, 0.0, 1.0);
 }
 void HueDriver::limiter(float *value, float minValue, float maxValue)
 {

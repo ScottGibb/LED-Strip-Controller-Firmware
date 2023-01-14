@@ -10,7 +10,7 @@
 #include "Main.h"
 
 // External Constants
-constexpr uint8_t controlCommsPacketLength = 14; //HUE Control +1
+constexpr uint8_t controlCommsPacketLength = 9; //Biggest Control Packet Size + Channel ID
 constexpr uint8_t channelPacketSize = 4;                                             // CHANNEL ID + 3 * pwm values
 constexpr uint8_t telemetryCommsPacketLength = channelPacketSize * NUM_CHANNELS + 2; // TX_MSG_ID + number of channels
 
@@ -40,9 +40,9 @@ typedef struct
 {
   enum CHANNEL channel : 8; // 8 Bits Byte 0
   enum FADE_TYPE mode : 8;  // 16 Bits Byte 1
-  float hue;                // 24 Bits Byte 2-5
-  float saturation;         // 32 Bits Byte 6-9
-  float brightness;         // 30 Bits Byte 10-13
+  uint16_t hue;                // 24 Bits Byte 2-4
+  uint8_t saturation;         // 32 Bits Byte 5
+  uint8_t brightness;         // 30 Bits Byte 6
 } HueControlCommsProtocol_t;
 
 /**
