@@ -21,10 +21,10 @@ static void setupLED(uint8_t index, uint32_t redPin, uint32_t greenPin, uint32_t
 
 // Global Variables
 
-vector<LEDDriver*> leds;
-vector<RGBColourDriver*> stripDrivers;
-vector<FadeDriver*> fadeDrivers;
-vector<HueDriver*> hueDrivers;
+vector<LEDDriver *> leds;
+vector<RGBColourDriver *> stripDrivers;
+vector<FadeDriver *> fadeDrivers;
+vector<HueDriver *> hueDrivers;
 
 ButtonsDriver *buttonsDriver;
 StatusIndicator *statusIndicator;
@@ -38,27 +38,28 @@ CommsParser *commsParser;
  * @brief setup function for firmware intialisation
  *
  */
-void setup(void)
-{
+void setup(void) {
 
   statusIndicator = new StatusIndicator(STATUS_LED_PIN);
   // powerMonitor = new PowerMonitor(CURRENT_SENSOR_PIN, VOLTAGE_SENSOR_PIN, POWER_SENSOR_UPDATE_PERIOD);
   //fanController = new FanController();
   setupDrivers();
-  commsParser = new CommsParser(115200,500);
-
-  
+  commsParser = new CommsParser(115200, 500);
+  HSV_t hsv = {
+    .hue = 107,
+    .saturation = 0.89,
+    .value = 0.92
+  };
+  hueDrivers[1]->setHue(hsv);
 }
 /**
  * @brief Main Arduino Loop
  * Consiting of soft timer application loops for LED Strip Drivers, comms and buttons
  *
  */
-void loop(void)
-{
+void loop(void) {
   statusIndicator->loop();
-  for (uint8_t i = 0; i < fadeDrivers.size(); i++)
-  {
+  for (uint8_t i = 0; i < fadeDrivers.size(); i++) {
     fadeDrivers[i]->fadeLoop();
   }
   commsParser->loop();
@@ -70,8 +71,7 @@ void loop(void)
  * @brief Main Setup function for fimrware, calling all driver initialisation functions and creating all objects
  *
  */
-void setupDrivers(void)
-{
+void setupDrivers(void) {
 
   // led One
   setupLED(0, CHANNEL_1_R_PIN, CHANNEL_1_G_PIN, CHANNEL_1_B_PIN);
@@ -95,11 +95,10 @@ void setupDrivers(void)
  * @param greenPin the pin number associated with the green pin of the RGB led
  * @param bluePin the pin number associated with the blue pin of the RGB led
  */
-void setupLED(uint8_t index, uint32_t redPin, uint32_t greenPin, uint32_t bluePin)
-{
-  LEDDriver* led = new LEDDriver(redPin, greenPin, bluePin);
+void setupLED(uint8_t index, uint32_t redPin, uint32_t greenPin, uint32_t bluePin) {
+  LEDDriver *led = new LEDDriver(redPin, greenPin, bluePin);
   leds.push_back(led);
-  RGBColourDriver* colDriver = new RGBColourDriver(led);
+  RGBColourDriver *colDriver = new RGBColourDriver(led);
   stripDrivers.push_back(colDriver);
 
   fadeDrivers.push_back(new FadeDriver(colDriver));

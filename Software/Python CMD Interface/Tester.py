@@ -21,8 +21,8 @@ while True:
     mode = int(input("Please Enter the mode in which you would like to choose: (0-7)"))
     if mode == FADE_TYPE.HUE_CTRL.value:
         hue = float(input("Please enter the Hue value (0.0-360.0)"))
-        saturation = float(input("Please enter the Hue value (0.0-1.0)"))
-        brightness = float(input("Please enter the Hue value (0.0-1.0)"))
+        saturation = float(input("Please enter the Saturation value (0.0-1.0)"))
+        brightness = float(input("Please enter the Brightness value (0.0-1.0)"))
         tx_msg = bytearray([channel, mode]) + struct.pack("f", hue) + struct.pack("f", saturation) + struct.pack("f",
                                                                                                                  brightness)
 

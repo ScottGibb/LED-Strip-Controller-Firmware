@@ -121,10 +121,10 @@ void CommsParser::parseAndUpdate(void)
     hueMessagePacket.hue = (float)((uint32_t)rxBuff[2] << 24 | (uint32_t)rxBuff[3] << 16 | (uint32_t)rxBuff[4] << 8 | (uint32_t)rxBuff[5]);
     hueMessagePacket.saturation = (float)((uint32_t)rxBuff[6] << 24 | (uint32_t)rxBuff[7] << 16 | (uint32_t)rxBuff[8] << 8 | (uint32_t)rxBuff[9]);
     hueMessagePacket.brightness = (float)((uint32_t)rxBuff[10] << 24 | (uint32_t)rxBuff[11] << 16 | (uint32_t)rxBuff[12] << 8 | (uint32_t)rxBuff[13]);
-    HSB_t hsb;
+    HSV_t hsb;
     hsb.hue = hueMessagePacket.hue;
     hsb.saturation = hueMessagePacket.saturation;
-    hsb.brightness = hueMessagePacket.brightness;
+    hsb.value = hueMessagePacket.brightness;
     fadeDriver->stopFade();
     hueDriver->setHue(hsb);
     break;
