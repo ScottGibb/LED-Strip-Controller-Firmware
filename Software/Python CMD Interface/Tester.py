@@ -10,6 +10,7 @@ COM_PORT = input("What port is the hardware connected on?")
 
 ser = serial.Serial(COM_PORT)
 ser.parity = serial.PARITY_EVEN
+ser.timeout = 1
 ser.stopbits = serial.STOPBITS_ONE
 ser.bytesize = serial.EIGHTBITS
 
@@ -44,4 +45,4 @@ while True:
     print(tx_msg)
     print("Return Message:")
     for i in range(0, RX_MSG_CNT):
-        print(ser.readline())
+        print(ser.read)

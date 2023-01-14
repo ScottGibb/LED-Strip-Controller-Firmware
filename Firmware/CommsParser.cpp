@@ -165,5 +165,8 @@ void CommsParser::sendLEDUpdate(void)
         txBuff[++arrayPos] = leds[0].getPWM(LED_COLOUR(i)) && (0x000000FF);
       }
     }
+    Serial.write(txBuff,telemetryCommsPacketLength);
+    leds[0].setPWM(RED_, 100);
+    lastLedTxUpdate = millis();
   }
 }

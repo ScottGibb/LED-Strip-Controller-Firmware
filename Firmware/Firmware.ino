@@ -12,6 +12,7 @@
 // Library Includes
 #include <Arduino.h>
 #include <malloc.h>
+#include <stdint.h>
 
 using namespace std;
 
@@ -44,6 +45,7 @@ void setup(void)
   setupArrays();
   setupDrivers();
   commsParser = new CommsParser(115200,500);
+
 }
 /**
  * @brief Main Arduino Loop
