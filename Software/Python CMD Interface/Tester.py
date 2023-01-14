@@ -18,7 +18,7 @@ ser.bytesize = serial.EIGHTBITS
 while True:
     tx_msg = None
     channel = int((input("Please Enter the Channel in which you would like to Change (1-3):")))
-    mode = int(input("Please Enter the mode in which you would like to choose: (0-6)"))
+    mode = int(input("Please Enter the mode in which you would like to choose: (0-7)"))
     if mode == FADE_TYPE.HUE_CTRL.value:
         hue = float(input("Please enter the Hue value (0.0-360.0)"))
         saturation = float(input("Please enter the Hue value (0.0-1.0)"))
