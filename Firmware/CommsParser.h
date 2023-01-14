@@ -17,8 +17,34 @@
 // Project Includes
 #include "CommsStructures.h"
 
-// External Function Prototypes
-extern void setupComms(void);
-extern void commsLoop(void);
+class CommsParser
+{
+public:
+    CommsParser(uint32_t baudrate, uint32_t ledTxUpdatePeriod);
+    ~CommsParser();
+    void loop();
+
+private:
+    // Internal Constants
+    const uint32_t SERIAL_BAUDRATE;
+    static constexpr uint8_t RX_LEN = controlCommsPacketLength;
+    static constexpr uint8_t TX_LEN = telemetryCommsPacketLength;
+    // Drivers
+    RGBColourDriver *colourDriver;
+    FadeDriver *fadeDriver;
+    HueDriver *hueDriver;
+    LEDDriver *ledDriver;
+    // Update Rates
+    const uint32_t LED_TX_UPDATE_PERIOD;
+    uint32_t lastLedTxUpdate = 0;
+    // Serial Comms Buffers
+    uint8_t rxBuff[RX_LEN] = {0};
+    uint8_t txBuff[TX_LEN] = {0};
+
+    void selectDrivers(enum CHANNEL channel);
+    void receiveUpdate(void);
+    void parseAndUpdate(void);
+    void sendLEDUpdate(void);
+};
 
 #endif

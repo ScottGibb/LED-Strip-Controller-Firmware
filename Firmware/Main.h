@@ -12,7 +12,6 @@
 #define __MAIN_H__
 
 // Library Includes
-#include <vector>
 using namespace std;
 
 // System Includes

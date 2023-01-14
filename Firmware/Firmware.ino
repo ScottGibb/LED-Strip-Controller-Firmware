@@ -30,6 +30,7 @@ ButtonsDriver *buttonsDriver;
 StatusIndicator *statusIndicator;
 
 PowerMonitor *powerMonitor;
+CommsParser *commsParser;
 
 /**
  * @brief setup function for firmware intialisation
@@ -39,10 +40,10 @@ void setup(void)
 {
 
   statusIndicator = new StatusIndicator(STATUS_LED_PIN);
-  powerMonitor = new PowerMonitor(CURRENT_SENSOR_PIN, VOLTAGE_SENSOR_PIN, POWER_SENSOR_UPDATE_PERIOD);
+  // powerMonitor = new PowerMonitor(CURRENT_SENSOR_PIN, VOLTAGE_SENSOR_PIN, POWER_SENSOR_UPDATE_PERIOD);
   setupArrays();
   setupDrivers();
-  setupComms();
+  commsParser = new CommsParser(115200,500);
 }
 /**
  * @brief Main Arduino Loop
@@ -56,9 +57,9 @@ void loop(void)
   {
     fadeDrivers[i].fadeLoop();
   }
-  commsLoop();
+  commsParser->loop();
   buttonsDriver->loop();
-  powerMonitor->loop();
+  // powerMonitor->loop();
 }
 /**
  * @brief Sets up all the memory allocation for the arrays.

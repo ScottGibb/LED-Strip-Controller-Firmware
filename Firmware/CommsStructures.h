@@ -10,9 +10,9 @@
 #include "Main.h"
 
 // External Constants
-const uint8_t controlCommsPacketLength = 20;
-const uint8_t channelPacketSize = 4;                                             // CHANNEL ID + 3 * pwm values
-const uint8_t telemetryCommsPacketLength = channelPacketSize * NUM_CHANNELS + 2; // TX_MSG_ID + number of channels
+constexpr uint8_t controlCommsPacketLength = 14; //HUE Control +1
+constexpr uint8_t channelPacketSize = 4;                                             // CHANNEL ID + 3 * pwm values
+constexpr uint8_t telemetryCommsPacketLength = channelPacketSize * NUM_CHANNELS + 2; // TX_MSG_ID + number of channels
 
 /**
  * @brief Commmunication Protocol Struct used to outline the Comms Packet being sent to the MCU for control of the system.
@@ -31,9 +31,9 @@ typedef struct
 {
   enum CHANNEL channel : 8; // 8 Bits Byte 0
   enum FADE_TYPE mode : 8;  // 16 Bits Byte 1
-  uint8_t redPWM;           // 24 Bits Byte 2-5
-  uint8_t greenPWM;         // 32 Bits Byte 6-9
-  uint8_t bluePWM;          // 30 Bits Byte 10-13
+  uint8_t redPWM;           // 24 Bits Byte 2
+  uint8_t greenPWM;         // 32 Bits Byte 3
+  uint8_t bluePWM;          // 30 Bits Byte 4
 } RGBControlCommsProtocol_t;
 
 typedef struct

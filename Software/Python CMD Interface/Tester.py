@@ -5,7 +5,7 @@ import serial
 from Types import FADE_TYPE, CHANNEL, COLOUR
 
 # Serial Variables
-RX_MSG_CNT = 5
+RX_MSG_CNT = 14
 COM_PORT = input("What port is the hardware connected on?")
 
 ser = serial.Serial(COM_PORT)
@@ -29,7 +29,7 @@ while True:
         redPWM = int(input("Pleas enter the red value (0-255"))
         greenPWM = int(input("Pleas enter the green value (0-255"))
         bluePWM = int(input("Pleas enter the blue value (0-255"))
-        tx_msg = bytearray([channel, mode, redPWM, greenPWM, bluePWM])
+        tx_msg = bytearray([channel, mode, redPWM, greenPWM, bluePWM])+bytearray([0]*9)
     else:
         colour = int(input("Please enter the colour you would like to have on this channel (0-12)"))
         brightness = int(input("Please now select brightness: (0-100)"))
@@ -38,7 +38,7 @@ while True:
             period = int(input("You have selected fading, please select the period of fading in ms"))
 
         # Construct Message
-        tx_msg = bytearray([channel, mode, colour, brightness]) + period.to_bytes(4, "big")
+        tx_msg = bytearray([channel, mode, colour, brightness]) + period.to_bytes(4, "big") + bytearray([0]*6)
     ser.write(tx_msg)
     print("Sent Message")
     print(tx_msg)

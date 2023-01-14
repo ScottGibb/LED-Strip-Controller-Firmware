@@ -48,3 +48,11 @@ class CHANNEL(Enum):
     CHANNEL_1 = 1
     CHANNEL_2 = 2
     CHANNEL_3 = 3
+
+
+class TX_MSG_ID(Enum):
+    """
+    TX_MSG_ID defines the different tx messages the hardware can send
+    """
+    LED_UPDATE = 0
+    PWR_UPDATE = 1
