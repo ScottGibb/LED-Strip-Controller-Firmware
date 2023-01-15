@@ -11,26 +11,36 @@
 #include "Main.h"
 // Library Includes
 #include <Arduino.h>
-#include <vector.>
-
+#include <vector>
 using namespace std;
+//Project Includes
+#include "ICommunicator.h"
+#include "SerialCommunicator.h"
+#include "CommsParser.h"
+#include "ButtonsDriver.h"
+#include "ButtonHandler.h"
+#include "FanController.h"
+#include "PowerMonitor.h"
+#include "PowerSensors.h"
+#include "Channels.h"
+#include "Buttons.h"
+#include "StatusIndicator.h"
 
 // Method Prototypes
 static void setupDrivers(void);
 static void setupLED(uint8_t index, uint32_t redPin, uint32_t greenPin, uint32_t bluePin);
 
 // Global Variables
-
 vector<LEDDriver *> leds;
 vector<RGBColourDriver *> stripDrivers;
 vector<FadeDriver *> fadeDrivers;
 vector<HueDriver *> hueDrivers;
 
 ButtonsDriver *buttonsDriver;
-StatusIndicator *statusIndicator;
 
 PowerMonitor *powerMonitor;
 FanController *fanController;
+StatusIndicator *statusIndicator;
 
 CommsParser *commsParser;
 
@@ -44,14 +54,22 @@ void setup(void) {
   // powerMonitor = new PowerMonitor(CURRENT_SENSOR_PIN, VOLTAGE_SENSOR_PIN, POWER_SENSOR_UPDATE_PERIOD);
   //fanController = new FanController();
   setupDrivers();
-  commsParser = new CommsParser(115200, 500);
-  HSV_t hsv = {
-    .hue = 107,
-    .saturation = 89,
-    .value = 92
+
+  // Setup Comms
+  vector<ICommunicator*> comms;
+  comms.push_back(new SerialCommunicator(115200));
+  commsParser = new CommsParser(comms,500,1000);
+
+  leds[1]->setPWM(RED_, 100);
+  stripDrivers[2]->setColour(MAGENTA,100);
+  fadeDrivers[0]->startFade(SINE,1000,100);
+  HSV_t hsv ={
+    .hue = 94,
+    .saturation =88,
+    .value =68
   };
-  fadeDrivers[1]->stopFade();
-  hueDrivers[1]->setHue(hsv);
+  hueDrivers[1]->setHue(hsv);  
+ 
 }
 /**
  * @brief Main Arduino Loop

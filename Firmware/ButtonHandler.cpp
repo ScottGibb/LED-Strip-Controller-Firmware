@@ -12,11 +12,17 @@
 
 // Project Includes
 #include "Main.h"
+#include "Buttons.h"
 #include "ButtonsDriver.h"
 // System Includes
 #include <stdint.h>
 #include <vector>
 
+typedef struct ChannelStates_t{
+    FadeState_t fadeStates; 
+    uint8_t brightness;
+    HSV_t hsv; 
+};
 // Internal Variables
 static uint8_t prevBrightness[4];
 static FadeState_t prevStates[4];
