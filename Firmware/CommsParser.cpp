@@ -132,7 +132,7 @@ void CommsParser::ledChangeCommand(void) {
   }
 }
 /**
- * @brief sends out an update regarding the system
+ * @brief sends out an update regarding the LED system
  * | UPDATE ID | Arguments |
  * | UPDATE ID |  NUM LEDS | LED NUM |  RED  | GREEN | BLUE | XXXX
  *

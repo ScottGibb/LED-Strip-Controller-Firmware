@@ -43,7 +43,13 @@ Finally the last Driver to be discussed is the HueDriver, this is due to the nee
 Due to the ongoing switching and power regulation a fan was added to the design, As for controlling this fan it was decided that PWM control of the fan would be ideal so that it wasn't constantly on.
 
 ## CommsParser
-The CommsParser file is responsible for decoding incoming messages and performing the corresponding actions. This means that this file is usually in control of the system as it responds to incoming requests from the user via a USB Serial channel. This file is not object orientated at present. It also contains a StateSaver Object which is used to store the most recent commands sent to the device.
+The CommsParser class is responsible for decoding incoming messages and performing the corresponding actions. This means that this file is usually in control of the system as it responds to incoming requests from the user via a range of possible communicators. The class queries every communicator for their command messages.
+
+## ICommunicator
+The ICommunicator class is a pure virtual class which contains both a receive and transmit method that will be implemented in the corresponding concrete classes.
+
+### SerialCommunicator
+One of the concrete communicator classes is the SerialCommunicator class which does both the transmitting and receiving on UART USB Serial. This can be changed using the #define SERIAL in the class cpp file.
 
 ## StateSaver
 The StateSaver object is used to store the most recent commands sent to to the hardware, this is done so that they can be reloaded at the next boot sequence allowing the system to store its previous state. //todo Finish implementing this code

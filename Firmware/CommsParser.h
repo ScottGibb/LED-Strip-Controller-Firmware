@@ -18,12 +18,31 @@
 #include "CommsStructures.h"
 #include "ICommunicator.h"
 
+/**
+ * @brief CommsParser class concerned with byte level parsing and updating the corresponding drivers
+ * 
+ */
 class CommsParser
 {
 public:
+    /**
+     * @brief Construct a new Comms Parser object
+     * 
+     * @param comms a vector containing the corresponding communicator objects
+     * @param ledTxRate //the rate in ms in which led update messages will be sent
+     * @param pwrTxRate //the rate in ms in which pwr update messages will be sent
+     */
     CommsParser(vector<ICommunicator*> comms, uint32_t ledTxRate, uint32_t pwrTxRate);
+    /**
+     * @brief Destroy the Comms Parser object
+     * 
+     */
     ~CommsParser();
-    void loop();
+    /**
+     * @brief Soft Timed loop for comm parsing
+     * 
+     */
+    void loop(void);
 
 private:
     vector<ICommunicator*> comms;
@@ -44,10 +63,26 @@ private:
     const uint32_t PWR_TX_UPDATE_PERIOD;
     uint32_t lastPwrUpdate;
 
-
+    /**
+     * @brief Selects the driver that will be updated
+     * 
+     * @param channel the channel to be chosen
+     */
     void selectDrivers(enum CHANNEL channel);
+    /**
+     * @brief Parses the incoming message and updates the corresponding drivers
+     * 
+     */
     void parseAndUpdate(void);
+    /**
+     * @brief Soft timed method that will send out periodic updates of what the LEDs are currently doing
+     * 
+     */
     void sendLEDUpdate(void);
+    /**
+     * @brief Parses the buffer message concerning the led
+     * 
+     */
     void ledChangeCommand(void);
 };
 
