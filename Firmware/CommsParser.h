@@ -48,6 +48,7 @@ private:
     void selectDrivers(enum CHANNEL channel);
     void parseAndUpdate(void);
     void sendLEDUpdate(void);
+    void ledChangeCommand(void);
 };
 
 #endif

@@ -15,7 +15,7 @@ SerialCommunicator::~SerialCommunicator()
 bool SerialCommunicator:: loop(uint8_t *buff, uint8_t len)
 {
     if(Serial.available()){
-
+         
         Serial.readBytes((char*)buff,len);
         return true;
     }

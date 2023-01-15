@@ -56,3 +56,10 @@ class TX_MSG_ID(Enum):
     """
     LED_UPDATE = 0
     PWR_UPDATE = 1
+
+
+class CTRL_CMD_ID(Enum):
+    """
+    CTRL_CMD_ID defines the different messages that can be sent to the hardware
+    """
+    LED_CHANGE = 0

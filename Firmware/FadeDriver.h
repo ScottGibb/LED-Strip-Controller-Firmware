@@ -18,7 +18,7 @@
 #include "ColourDriver.h"
 
 // Constants
-const uint32_t NUM_MODES = 6;
+const uint32_t NUM_MODES = 8;
 
 /**
  * @brief Enum describing the different fade effects that the Fade Driver can do.

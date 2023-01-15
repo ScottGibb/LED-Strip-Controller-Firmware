@@ -56,20 +56,20 @@ void setup(void) {
   setupDrivers();
 
   // Setup Comms
-  vector<ICommunicator*> comms;
+  vector<ICommunicator *> comms;
   comms.push_back(new SerialCommunicator(115200));
-  commsParser = new CommsParser(comms,500,1000);
+  commsParser = new CommsParser(comms, 500, 1000);
 
-  leds[1]->setPWM(RED_, 100);
-  stripDrivers[2]->setColour(MAGENTA,100);
-  fadeDrivers[0]->startFade(SINE,1000,100);
-  HSV_t hsv ={
+  fadeDrivers[0]->startFade(COLOUR_CHANGE, 1000, 100);
+  stripDrivers[2]->setColour(MAGENTA, 100);
+  fadeDrivers[2]->startFade(SINE, 1000, 100);
+
+  HSV_t hsv = {
     .hue = 94,
-    .saturation =88,
-    .value =68
+    .saturation = 88,
+    .value = 68
   };
-  hueDrivers[1]->setHue(hsv);  
- 
+  hueDrivers[1]->setHue(hsv);
 }
 /**
  * @brief Main Arduino Loop

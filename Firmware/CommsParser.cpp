@@ -76,68 +76,61 @@ void CommsParser::selectDrivers(enum CHANNEL channel) {
 /**
  * @brief Communication loop responsible for polling the UART USB Bus and deconstructing the received message and calling the apropriate drivers for fading and colour changes
  *
- * | Channel | Mode | Colour | Brightness |   PERIOD   |
- * | Channel | Mode |  Red   |   Green    |    Blue    |
- * | Channel | Mode |  Hue   | Saturation | Brightness |
+ * | CTRL_CMD_ID | Channel | Mode | Colour | Brightness |   PERIOD   |
+ * | CTRL_CMD_ID | Channel | Mode |  Red   |   Green    |    Blue    |
+ * | CTRL_CMD_ID | Channel | Mode |  Hue   | Saturation | Brightness |
  * @return |*
  */
 void CommsParser::parseAndUpdate(void) {
-
-  // Fill C Message
-  FunctionsCommsProtocol_t functionsMessagePacket;
-  RGBControlCommsProtocol_t rgbMessagePacket;
-  HueControlCommsProtocol_t hueMessagePacket;
-  HSV_t hsv;
-
-  functionsMessagePacket.channel = CHANNEL(rxBuff[0]);
-  rgbMessagePacket.channel = CHANNEL(rxBuff[0]);
-  hueMessagePacket.channel = CHANNEL(rxBuff[0]);
-
-  functionsMessagePacket.mode = FADE_TYPE(rxBuff[1]);
-  rgbMessagePacket.mode = FADE_TYPE(rxBuff[1]);
-  hueMessagePacket.mode = FADE_TYPE(rxBuff[1]);
-
-  selectDrivers(functionsMessagePacket.channel);
-
-  switch (functionsMessagePacket.mode) {
-
-    case RGB_CONTROL:
-      rgbMessagePacket.redPWM = rxBuff[2];
-      rgbMessagePacket.greenPWM = rxBuff[3];
-      rgbMessagePacket.bluePWM = rxBuff[4];
-      uint8_t leds[3];
-      leds[0] = rgbMessagePacket.redPWM;
-      leds[1] = rgbMessagePacket.greenPWM;
-      leds[2] = rgbMessagePacket.bluePWM;
-      fadeDriver->stopFade();
-      ledDriver->setPWMS(leds);
-      break;
-    case HUE_CONTROL:
-      hueMessagePacket.hue = (float)((uint32_t)rxBuff[2] << 24 | (uint32_t)rxBuff[3] << 16 | (uint32_t)rxBuff[4] << 8 | (uint32_t)rxBuff[5]);
-      hueMessagePacket.saturation = (float)((uint32_t)rxBuff[6] << 24 | (uint32_t)rxBuff[7] << 16 | (uint32_t)rxBuff[8] << 8 | (uint32_t)rxBuff[9]);
-      hueMessagePacket.saturation = (float)((uint32_t)rxBuff[10] << 24 | (uint32_t)rxBuff[11] << 16 | (uint32_t)rxBuff[12] << 8 | (uint32_t)rxBuff[13]);
-
-      hsv.hue = hueMessagePacket.hue;
-      hsv.saturation = hueMessagePacket.saturation;
-      hsv.value = hueMessagePacket.saturation;
-
-      fadeDriver->stopFade();
-      hueDriver->setHue(hsv);
+  switch ((CTRL_CMD_ID)rxBuff[0]) {
+    case LED_CHANGE:
+      ledChangeCommand();
       break;
 
     default:
-      functionsMessagePacket.colour = COLOUR(rxBuff[2]);
-      functionsMessagePacket.brightness = rxBuff[3];
-      functionsMessagePacket.period = (uint32_t)rxBuff[4] << 24 | (uint32_t)rxBuff[5] << 16 | (uint32_t)rxBuff[6] << 8 | (uint32_t)rxBuff[7];
-
-      fadeDriver->startFade(functionsMessagePacket.mode, functionsMessagePacket.period, functionsMessagePacket.brightness);
-      colourDriver->setColour(functionsMessagePacket.colour);
-      if (functionsMessagePacket.mode == NONE) {
-        colourDriver->setBrightness(functionsMessagePacket.brightness);
-      }
+      break;
   }
 }
 
+void CommsParser::ledChangeCommand(void) {
+  CHANNEL channel = (CHANNEL)rxBuff[1];
+  FADE_TYPE mode = (FADE_TYPE)rxBuff[2];
+  selectDrivers(channel);
+  switch (mode) {
+
+    case RGB_CONTROL:
+      uint8_t rgbLeds[NUM_LEDS];
+      rgbLeds[0] = rxBuff[3];
+      rgbLeds[1] = rxBuff[4];
+      rgbLeds[2] = rxBuff[5];
+      fadeDriver->stopFade();  //Start in RGB Mode, Fade Driver is essentially disabled
+      ledDriver->setPWMS(rgbLeds);
+      break;
+
+    case HUE_CONTROL:
+      {
+        HSV_t hsv = {
+          .hue = (uint16_t)rxBuff[3] << 8 | (uint16_t)rxBuff[4],
+          .saturation = rxBuff[5],
+          .value = rxBuff[6]
+        };
+        fadeDriver->stopFade();
+        hueDriver->setHue(hsv);
+      }
+      break;
+    default:
+   
+      COLOUR colour = COLOUR(rxBuff[3]);
+      uint8_t brightness = rxBuff[4];
+      uint32_t period = (uint32_t)rxBuff[5] << 24 | (uint32_t)rxBuff[6] << 16 | (uint32_t)rxBuff[7] << 8 | (uint32_t)rxBuff[8];
+
+      fadeDriver->startFade(mode, period, brightness);
+      colourDriver->setColour(colour);
+      if (mode == NONE) {
+        colourDriver->setBrightness(brightness);
+      }
+  }
+}
 /**
  * @brief sends out an update regarding the system
  * | UPDATE ID | Arguments |
