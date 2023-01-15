@@ -42,9 +42,9 @@ typedef struct
   enum CTRL_CMD_ID : 8;     // 8 Bits Byte 0
   enum CHANNEL channel : 8; // 16 Bits Byte 1
   enum FADE_TYPE mode : 8;  // 32 Bits Byte 2
-  enum COLOUR colour : 8;   // 40 Bits Byte 3-4
-  uint8_t brightness;       // 48 Bits Byte 5
-  uint32_t period;          // 80 Bits Byte 6-8
+  enum COLOUR colour : 8;   // 40 Bits Byte 3
+  uint8_t brightness;       // 48 Bits Byte 4
+  uint32_t period;          // 80 Bits Byte 5-8
 } FunctionsCommsProtocol_t;
 
 typedef struct
