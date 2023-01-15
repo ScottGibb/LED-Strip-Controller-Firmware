@@ -51,6 +51,9 @@ The ICommunicator class is a pure virtual class which contains both a receive an
 ### SerialCommunicator
 One of the concrete communicator classes is the SerialCommunicator class which does both the transmitting and receiving on UART USB Serial. This can be changed using the #define SERIAL in the class cpp file.
 
+### IPCommunicator
+Is for future implementations, where WiFi enabled microcontrollers are used to run the system and the hardware API will be accesed over an apropriate IP method.
+
 ## StateSaver
 The StateSaver object is used to store the most recent commands sent to to the hardware, this is done so that they can be reloaded at the next boot sequence allowing the system to store its previous state. //todo Finish implementing this code
 
