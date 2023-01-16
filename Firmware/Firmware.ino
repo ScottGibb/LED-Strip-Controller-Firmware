@@ -65,9 +65,9 @@ void setup(void) {
   fadeDrivers[2]->startFade(SINE, 1000, 100);
 
   HSV_t hsv = {
-    .hue = 94,
-    .saturation = 88,
-    .value = 68
+    .hue = 120,
+    .saturation = 100,
+    .value = 100
   };
   hueDrivers[1]->setHue(hsv);
 }

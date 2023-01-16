@@ -15,87 +15,59 @@
 #include <stdint.h>
 #include <math.h>
 
-HueDriver::HueDriver(LEDDriver *ledDriver)
-{
+HueDriver::HueDriver(LEDDriver *ledDriver) {
   this->ledDriver = ledDriver;
   currentHSV.value = 0;
   currentHSV.hue = 0;
   currentHSV.saturation = 0;
 }
 
-HueDriver::~HueDriver()
-{
+HueDriver::~HueDriver() {
 }
 
-void HueDriver::setHue(HSV_t hsv)
-{
-  // https://www.rapidtables.com/convert/color/hsv-to-rgb.html
+void HueDriver::setHue(HSV_t hsv) {
   convertLimits(&hsv);
-  float C = hsv.value * hsv.saturation;
-  float X = C * (1.0 - (fmodf(hsv.hue / 60.0, 2.0) - 1.0));
-  float m = hsv.value - C;
-  uint8_t rgb[3] = {0};
-  if (0 <= hsv.hue && hsv.hue < 60)
-  {
-    rgb[0] = (C + m) * 255.0;
-    rgb[1] = (X + m) * 255.0;
-    rgb[2] = (0.0 + m) * 255.0;
+  //-------------------------------------------------------------
+  //https://www.codespeedy.com/hsv-to-rgb-in-cpp/
+
+  float s = hsv.saturation / 100;
+  float v = hsv.value / 100;
+  float C = s * v;
+  float X = C * (1 - abs(fmod(hsv.hue / 60.0, 2) - 1));
+  float m = v - C;
+  float r, g, b;
+  if (hsv.hue >= 0 && hsv.hue < 60) {
+    r = C, g = X, b = 0;
+  } else if (hsv.hue >= 60 && hsv.hue < 120) {
+    r = X, g = C, b = 0;
+  } else if (hsv.hue >= 120 && hsv.hue < 180) {
+    r = 0, g = C, b = X;
+  } else if (hsv.hue >= 180 && hsv.hue < 240) {
+    r = 0, g = X, b = C;
+  } else if (hsv.hue >= 240 && hsv.hue < 300) {
+    r = X, g = 0, b = C;
+  } else {
+    r = C, g = 0, b = X;
   }
-  else if (60 <= hsv.hue && hsv.hue < 120)
-  {
-    rgb[0] = (X + m) * 255.0;
-    rgb[1] = (C + m) * 255.0;
-    rgb[2] = (0.0 + m) * 255.0;
-  }
-  else if (120 <= hsv.hue && hsv.hue < 180)
-  {
-    rgb[0] = (0.0 + m) * 255.0;
-    rgb[1] = (C + m) * 255.0;
-    rgb[2] = (X + m) * 255.0;
-  }
-  else if (180 <= hsv.hue && hsv.hue < 240)
-  {
-    rgb[0] = (0.0 + m) * 255.0;
-    rgb[1] = (X + m) * 255.0;
-    rgb[2] = (C + m) * 255.0;
-  }
-  else if (240 <= hsv.hue && hsv.hue < 300)
-  {
-    rgb[0] = (X + m) * 255.0;
-    rgb[1] = (0.0 + m) * 255.0;
-    rgb[2] = (C + m) * 255.0;
-  }
-  else if (300 <= hsv.hue && hsv.hue < 360)
-  {
-    rgb[0] = (C + m) * 255.0;
-    rgb[1] = (0.0 + m) * 255.0;
-    rgb[2] = (X + m) * 255.0;
-  }
-  currentHSV = hsv;
+  uint8_t rgb[NUM_LEDS];
+  rgb[0] = (r + m) * 255;
+  rgb[1] = (g + m) * 255;
+  rgb[2] = (b + m) * 255;
+  //------------------------------------------------------------
   ledDriver->setPWMS(rgb);
 }
-void HueDriver::convertLimits(HSV_t *hsv)
-{
-  //Scale values down before limiting them
-  hsv->value = hsv->value/100.0;
-  hsv->saturation = hsv->saturation/100.0;
-  
+void HueDriver::convertLimits(HSV_t *hsv) {
   limiter(&hsv->hue, 0.0, 360.0);
-  limiter(&hsv->saturation, 0.0, 1.0);
-  limiter(&hsv->value, 0.0, 1.0);
+  limiter(&hsv->saturation, 0.0, 100.0);
+  limiter(&hsv->value, 0.0, 100.0);
 }
-void HueDriver::limiter(float *value, float minValue, float maxValue)
-{
-  if (*value > maxValue)
-  {
+void HueDriver::limiter(float *value, float minValue, float maxValue) {
+  if (*value > maxValue) {
     *value = maxValue;
-  }
-  else if (*value < minValue)
-  {
+  } else if (*value < minValue) {
     *value = minValue;
   }
 }
-HSV_t HueDriver::getHue(void)
-{
+HSV_t HueDriver::getHue(void) {
   return currentHSV;
 }
