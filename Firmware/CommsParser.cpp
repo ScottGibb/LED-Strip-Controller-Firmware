@@ -22,7 +22,7 @@ using namespace std;
 #include "ColourDriver.h"
 #include "FadeDriver.h"
 #include "ICommunicator.h"
-#include "StateSaver.h"
+#include "MemoryHandler.h"
 #include "Channels.h"
 
 /**
@@ -110,9 +110,9 @@ void CommsParser::ledChangeCommand(void) {
     case HUE_CONTROL:
       {
         HSV_t hsv = {
-          .hue = (uint16_t)rxBuff[3] << 8 | (uint16_t)rxBuff[4],
-          .saturation = rxBuff[5],
-          .value = rxBuff[6]
+          .hue = ((uint16_t)rxBuff[3] << 8 | (uint16_t)rxBuff[4])*1.0f,
+          .saturation = rxBuff[5] *1.0f,
+          .value = rxBuff[6] *1.0f
         };
         fadeDriver->stopFade();
         hueDriver->setHue(hsv);
