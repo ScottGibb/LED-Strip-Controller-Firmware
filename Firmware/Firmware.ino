@@ -12,8 +12,8 @@
 // Library Includes
 #include <Arduino.h>
 #include <vector>
-using namespace std;
-//Project Includes
+#include <map>
+// Project Includes
 #include "ICommunicator.h"
 #include "SerialCommunicator.h"
 #include "CommsParser.h"
@@ -25,9 +25,12 @@ using namespace std;
 #include "Channels.h"
 #include "Buttons.h"
 #include "StatusIndicator.h"
+#include "MemoryHandler.h"
+#include "STM32F103C8T6MemoryMap.h"
 
 // Method Prototypes
 static void setupDrivers(void);
+static void setupMemory(void);
 static void setupLED(uint32_t redPin, uint32_t greenPin, uint32_t bluePin);
 
 // Global Variables
@@ -43,6 +46,7 @@ FanController *fanController;
 StatusIndicator *statusIndicator;
 
 CommsParser *commsParser;
+MemoryHandler *memoryHandler;
 
 /**
  * @brief setup function for firmware intialisation
@@ -52,14 +56,15 @@ void setup(void) {
 
   statusIndicator = new StatusIndicator(STATUS_LED_PIN);
   // powerMonitor = new PowerMonitor(CURRENT_SENSOR_PIN, VOLTAGE_SENSOR_PIN, POWER_SENSOR_UPDATE_PERIOD);
-  //fanController = new FanController();
+  // fanController = new FanController();
   setupDrivers();
-
+  setupMemory();
   // Setup Comms
   vector<ICommunicator *> comms;
   comms.push_back(new SerialCommunicator(115200));
   commsParser = new CommsParser(comms, 500, 1000);
 
+  // Test Code
   fadeDrivers[0]->startFade(COLOUR_CHANGE, 1000, 100);
   stripDrivers[2]->setColour(MAGENTA, 100);
   fadeDrivers[2]->startFade(SINE, 1000, 100);
@@ -92,7 +97,6 @@ void loop(void) {
  */
 void setupDrivers(void) {
 
-
   // led One
   setupLED(CHANNEL_1_R_PIN, CHANNEL_1_G_PIN, CHANNEL_1_B_PIN);
 
@@ -121,4 +125,36 @@ void setupLED(uint32_t redPin, uint32_t greenPin, uint32_t bluePin) {
 
   fadeDrivers.push_back(new FadeDriver(colDriver));
   hueDrivers.push_back(new HueDriver(led));
+}
+
+void setupMemory(void) {
+
+  MemoryMap_t systemInfoMap = {
+    .MEMORY_START = SYSTEM_INFO_START,
+    .MEMORY_END = SYSTEM_INFO_END,
+    .MEMORY_SIZE = SYSTEM_INFO_MEM_SIZE,
+    .SLOT_SIZE = SYSTEM_INFO_SLOT_SIZE,
+    .NUM_SLOTS = NUM_SYSTEM_INFO
+
+  };
+
+  MemoryMap_t channelControlMap = {
+    .MEMORY_START = CHANNEL_CONTROL_START,
+    .MEMORY_END = CHANNEL_CONTROL_END,
+    .MEMORY_SIZE = CHANNEL_CONTROL_MEM_SIZE,
+    .SLOT_SIZE = CHANNEL_CONTROL_SLOT_SIZE,
+    .NUM_SLOTS = NUM_CHANNEL_CONTROLS
+
+  };
+
+  MemoryMap_t userModeMap = {
+    .MEMORY_START = USER_MODE_START,
+    .MEMORY_END = USER_MODE_END,
+    .MEMORY_SIZE = USER_MODE_MEM_SIZE,
+    .SLOT_SIZE = USER_MODE_SLOT_SIZE,
+    .NUM_SLOTS = NUM_USER_MODES
+
+  };
+  std::map<SEGMENT, MemoryMap_t> memMap{ { SEGMENT::SYSTEM_INFO, systemInfoMap }, { SEGMENT::CHANNEL_CMDS, channelControlMap }, { SEGMENT::USER_MODES, userModeMap } };
+  MemoryHandler::getInstance(memMap);
 }
