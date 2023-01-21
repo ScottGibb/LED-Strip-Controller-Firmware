@@ -1,9 +1,13 @@
 #include "MemoryHandler.h"
 
+//Library Includes
 #include <EEPROM.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include <map>
+
+//Declaring an instance of Memory Handler
+MemoryHandler* MemoryHandler::instance = nullptr;
 
 MemoryHandler::MemoryHandler(std::map<SEGMENT, MemoryMap_t> memory)
     : MEMORY_MAP(memory)
@@ -58,14 +62,24 @@ MEMORY_ERR MemoryHandler ::checkValidity(SEGMENT seg, uint16_t pos, uint16_t dat
   {
     return MEMORY_ERR::SLOT_OUT_OF_BOUNDS;
   }
+  return MEMORY_ERR::OK;
 }
 
-MemoryHandler * MemoryHandler::getInstance(std::map<SEGMENT, MemoryMap_t> memory)
+MemoryHandler *MemoryHandler::getInstance(std::map<SEGMENT, MemoryMap_t> memory)
 {
-  if(memoryHandler == nullptr){
-      memoryHandler = new MemoryHandler(memory);
-      return memoryHandler;
-  }else{
-    return memoryHandler;
+  if(MemoryHandler::instance == nullptr){
+      MemoryHandler::instance = new MemoryHandler(memory);
   }
+    return instance;
+  
 }
+
+MemoryHandler *MemoryHandler::getInstance(){
+
+if(MemoryHandler::instance == nullptr){
+  return nullptr;
+}
+return instance;
+}
+
+

@@ -1,3 +1,4 @@
+#include <sys/types.h>
 /**
  * @file CommsParser.cpp
  * @author Scott Gibb (smgibb@yahoo.com)
@@ -32,6 +33,11 @@ using namespace std;
 CommsParser::CommsParser(vector<ICommunicator*> comms, uint32_t ledTxRate, uint32_t pwrTxRate)
   : LED_TX_UPDATE_PERIOD(ledTxRate), PWR_TX_UPDATE_PERIOD(pwrTxRate) {
   this->comms = comms;
+  memHandler = MemoryHandler::getInstance();
+  if(memHandler == nullptr){
+      while(1);//Better Error Handler
+  }
+  loadMessages();
 }
 
 /**
@@ -43,6 +49,7 @@ void CommsParser::loop(void) {
     if (comms[i]->loop(rxBuff, controlCommsPacketLength)) {  //Loop Through comms modules and check for updates
       //Message Received, parse and update
       parseAndUpdate();
+      saveMessage();
     }
   }
   //Transmit Update Messages
@@ -157,5 +164,19 @@ void CommsParser::sendLEDUpdate(void) {
       comms[i]->transmit(txBuff, telemetryCommsPacketLength);
     }
     lastLedTxUpdate = millis();
+  }
+}
+
+void CommsParser::saveMessage(void){
+  CHANNEL channel = (CHANNEL)rxBuff[1];
+  uint8_t savePos = static_cast<uint8_t>(channel) -1;
+  memHandler->saveData(SEGMENT::CHANNEL_CMDS, savePos, rxBuff, controlCommsPacketLength);
+
+}
+
+void CommsParser::loadMessages(void){
+  for(uint8_t i =0; i <NUM_CHANNELS;i++){
+      memHandler->saveData(SEGMENT::CHANNEL_CMDS, i, rxBuff, controlCommsPacketLength);
+      parseAndUpdate();
   }
 }

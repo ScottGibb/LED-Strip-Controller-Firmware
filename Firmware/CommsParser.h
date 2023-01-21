@@ -17,6 +17,7 @@
 // Project Includes
 #include "CommsStructures.h"
 #include "ICommunicator.h"
+#include "MemoryHandler.h"
 
 /**
  * @brief CommsParser class concerned with byte level parsing and updating the corresponding drivers
@@ -56,7 +57,7 @@ private:
     FadeDriver *fadeDriver;
     HueDriver *hueDriver;
     LEDDriver *ledDriver;
-
+    MemoryHandler *memHandler;
     // Update Rates
     const uint32_t LED_TX_UPDATE_PERIOD;
     uint32_t lastLedTxUpdate;
@@ -84,6 +85,8 @@ private:
      * 
      */
     void ledChangeCommand(void);
+    void saveMessage(void);
+    void loadMessages(void);
 };
 
 #endif

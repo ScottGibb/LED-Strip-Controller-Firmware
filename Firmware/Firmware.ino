@@ -53,12 +53,11 @@ MemoryHandler *memoryHandler;
  *
  */
 void setup(void) {
-
+  setupMemory();
   statusIndicator = new StatusIndicator(STATUS_LED_PIN);
   // powerMonitor = new PowerMonitor(CURRENT_SENSOR_PIN, VOLTAGE_SENSOR_PIN, POWER_SENSOR_UPDATE_PERIOD);
   // fanController = new FanController();
   setupDrivers();
-  setupMemory();
   // Setup Comms
   vector<ICommunicator *> comms;
   comms.push_back(new SerialCommunicator(115200));
@@ -156,5 +155,5 @@ void setupMemory(void) {
 
   };
   std::map<SEGMENT, MemoryMap_t> memMap{ { SEGMENT::SYSTEM_INFO, systemInfoMap }, { SEGMENT::CHANNEL_CMDS, channelControlMap }, { SEGMENT::USER_MODES, userModeMap } };
-  MemoryHandler::getInstance(memMap);
+  memoryHandler = MemoryHandler::getInstance(memMap);
 }
