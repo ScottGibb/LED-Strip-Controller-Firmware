@@ -53,18 +53,23 @@ MemoryHandler *memoryHandler;
  *
  */
 void setup(void) {
+  Serial.begin(115200);
+  Serial.println("About to setup memory");
   setupMemory();
+  
   statusIndicator = new StatusIndicator(STATUS_LED_PIN);
   // powerMonitor = new PowerMonitor(CURRENT_SENSOR_PIN, VOLTAGE_SENSOR_PIN, POWER_SENSOR_UPDATE_PERIOD);
   // fanController = new FanController();
   setupDrivers();
+
+ 
   // Setup Comms
   vector<ICommunicator *> comms;
   comms.push_back(new SerialCommunicator(115200));
-  commsParser = new CommsParser(comms, 500, 1000);
+  commsParser = new CommsParser(comms, 500, 1000); //<-- Cant get Past Here!
 
   // Test Code
-  fadeDrivers[0]->startFade(COLOUR_CHANGE, 1000, 100);
+  fadeDrivers[0]->startFade(COLOUR_CHANGE, 1000, 100); //<--- Code Crashes here, any access to a driver fails
   stripDrivers[2]->setColour(MAGENTA, 100);
   fadeDrivers[2]->startFade(SINE, 1000, 100);
 

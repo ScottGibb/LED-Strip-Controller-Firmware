@@ -25,7 +25,6 @@ using namespace std;
 #include "ICommunicator.h"
 #include "MemoryHandler.h"
 #include "Channels.h"
-
 /**
  * @brief Sets up the Communication channel
  *
@@ -33,10 +32,16 @@ using namespace std;
 CommsParser::CommsParser(vector<ICommunicator*> comms, uint32_t ledTxRate, uint32_t pwrTxRate)
   : LED_TX_UPDATE_PERIOD(ledTxRate), PWR_TX_UPDATE_PERIOD(pwrTxRate) {
   this->comms = comms;
+
   memHandler = MemoryHandler::getInstance();
-  if(memHandler == nullptr){
-      while(1);//Better Error Handler
+
+  if (memHandler == nullptr) {
+    while (1)
+    Serial.begin(115200);
+    Serial.println("Im stuck here in Comms Parser!!");
   }
+
+
   loadMessages();
 }
 
@@ -117,21 +122,22 @@ void CommsParser::ledChangeCommand(void) {
     case HUE_CONTROL:
       {
         HSV_t hsv = {
-          .hue = ((uint16_t)rxBuff[3] << 8 | (uint16_t)rxBuff[4])*1.0f,
-          .saturation = rxBuff[5] *1.0f,
-          .value = rxBuff[6] *1.0f
+          .hue = ((uint16_t)rxBuff[3] << 8 | (uint16_t)rxBuff[4]) * 1.0f,
+          .saturation = rxBuff[5] * 1.0f,
+          .value = rxBuff[6] * 1.0f
         };
         fadeDriver->stopFade();
         hueDriver->setHue(hsv);
       }
       break;
     default:
-   
+
       COLOUR colour = COLOUR(rxBuff[3]);
       uint8_t brightness = rxBuff[4];
       uint32_t period = (uint32_t)rxBuff[5] << 24 | (uint32_t)rxBuff[6] << 16 | (uint32_t)rxBuff[7] << 8 | (uint32_t)rxBuff[8];
 
-      fadeDriver->startFade(mode, period, brightness);
+
+      fadeDriver->startFade(mode, period, brightness);  //<--- Code Chrashes here!!
       colourDriver->setColour(colour);
       if (mode == NONE) {
         colourDriver->setBrightness(brightness);
@@ -167,16 +173,15 @@ void CommsParser::sendLEDUpdate(void) {
   }
 }
 
-void CommsParser::saveMessage(void){
+void CommsParser::saveMessage(void) {
   CHANNEL channel = (CHANNEL)rxBuff[1];
-  uint8_t savePos = static_cast<uint8_t>(channel) -1;
+  uint8_t savePos = static_cast<uint8_t>(channel) - 1;
   memHandler->saveData(SEGMENT::CHANNEL_CMDS, savePos, rxBuff, controlCommsPacketLength);
-
 }
 
-void CommsParser::loadMessages(void){
-  for(uint8_t i =0; i <NUM_CHANNELS;i++){
-      memHandler->saveData(SEGMENT::CHANNEL_CMDS, i, rxBuff, controlCommsPacketLength);
-      parseAndUpdate();
+void CommsParser::loadMessages(void) {
+  for (uint8_t i = 0; i < leds.size(); i++) {
+    memHandler->loadData(SEGMENT::CHANNEL_CMDS, i, rxBuff, controlCommsPacketLength);
+    parseAndUpdate();
   }
 }
