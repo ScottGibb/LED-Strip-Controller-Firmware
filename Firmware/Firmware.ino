@@ -34,10 +34,10 @@ static void setupMemory(void);
 static void setupLED(uint32_t redPin, uint32_t greenPin, uint32_t bluePin);
 
 // Global Variables
-vector<LEDDriver *> leds(NUM_LEDS);
-vector<RGBColourDriver *> stripDrivers(NUM_LEDS);
-vector<FadeDriver *> fadeDrivers(NUM_LEDS);
-vector<HueDriver *> hueDrivers(NUM_LEDS);
+vector<LEDDriver *> leds;
+vector<RGBColourDriver *> stripDrivers;
+vector<FadeDriver *> fadeDrivers;
+vector<HueDriver *> hueDrivers;
 
 ButtonsDriver *buttonsDriver;
 
@@ -53,8 +53,6 @@ MemoryHandler *memoryHandler;
  *
  */
 void setup(void) {
-  Serial.begin(115200);
-  Serial.println("About to setup memory");
   setupMemory();
   
   statusIndicator = new StatusIndicator(STATUS_LED_PIN);
@@ -66,7 +64,10 @@ void setup(void) {
   // Setup Comms
   vector<ICommunicator *> comms;
   comms.push_back(new SerialCommunicator(115200));
-  commsParser = new CommsParser(comms, 500, 1000); //<-- Cant get Past Here!
+  commsParser = new CommsParser(comms, 500, 1000); 
+
+
+
 
   // Test Code
   fadeDrivers[0]->startFade(COLOUR_CHANGE, 1000, 100); //<--- Code Crashes here, any access to a driver fails
@@ -79,6 +80,8 @@ void setup(void) {
     .value = 100
   };
   hueDrivers[1]->setHue(hsv);
+
+ 
 }
 /**
  * @brief Main Arduino Loop

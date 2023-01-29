@@ -37,7 +37,7 @@ CommsParser::CommsParser(vector<ICommunicator*> comms, uint32_t ledTxRate, uint3
 
   if (memHandler == nullptr) {
     while (1)
-    Serial.begin(115200);
+      Serial.begin(115200);
     Serial.println("Im stuck here in Comms Parser!!");
   }
 
@@ -66,14 +66,17 @@ void CommsParser::loop(void) {
  * @param channel [in] the channel to be selected
  */
 void CommsParser::selectDrivers(enum CHANNEL channel) {
+
   switch (channel) {
     case CHANNEL_1:
     case CHANNEL_2:
     case CHANNEL_3:
+
       ledDriver = leds[channel - 1];
       hueDriver = hueDrivers[channel - 1];
       colourDriver = stripDrivers[channel - 1];
       fadeDriver = fadeDrivers[channel - 1];
+
       break;
     case CHANNEL_NS:
     default:
@@ -108,6 +111,9 @@ void CommsParser::ledChangeCommand(void) {
   CHANNEL channel = (CHANNEL)rxBuff[1];
   FADE_TYPE mode = (FADE_TYPE)rxBuff[2];
   selectDrivers(channel);
+  if (channel == CHANNEL_NS) {
+    return; // Return if no valid was selected!
+  }
   switch (mode) {
 
     case RGB_CONTROL:
@@ -137,7 +143,7 @@ void CommsParser::ledChangeCommand(void) {
       uint32_t period = (uint32_t)rxBuff[5] << 24 | (uint32_t)rxBuff[6] << 16 | (uint32_t)rxBuff[7] << 8 | (uint32_t)rxBuff[8];
 
 
-      fadeDriver->startFade(mode, period, brightness);  //<--- Code Chrashes here!!
+      fadeDriver->startFade(mode, period, brightness); 
       colourDriver->setColour(colour);
       if (mode == NONE) {
         colourDriver->setBrightness(brightness);
