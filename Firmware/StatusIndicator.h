@@ -21,7 +21,7 @@ public:
     void loop(void);
 
 private:
-    const uint32_t REFRESH_PERIOD = 200;
+    const uint32_t REFRESH_PERIOD = 500;
     uint32_t lastUpdateTime = {0};
     bool pinState = {false};
     uint32_t pin;

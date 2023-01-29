@@ -69,17 +69,17 @@ void setup(void) {
 
 
 
-  // Test Code
-  fadeDrivers[0]->startFade(COLOUR_CHANGE, 1000, 100); //<--- Code Crashes here, any access to a driver fails
-  stripDrivers[2]->setColour(MAGENTA, 100);
-  fadeDrivers[2]->startFade(SINE, 1000, 100);
+  // // Test Code
+  // fadeDrivers[0]->startFade(COLOUR_CHANGE, 1000, 100); //<--- Code Crashes here, any access to a driver fails
+  // stripDrivers[2]->setColour(MAGENTA, 100);
+  // fadeDrivers[2]->startFade(SINE, 1000, 100);
 
-  HSV_t hsv = {
-    .hue = 120,
-    .saturation = 100,
-    .value = 100
-  };
-  hueDrivers[1]->setHue(hsv);
+  // HSV_t hsv = {
+  //   .hue = 120,
+  //   .saturation = 100,
+  //   .value = 100
+  // };
+  // hueDrivers[1]->setHue(hsv);
 
  
 }
