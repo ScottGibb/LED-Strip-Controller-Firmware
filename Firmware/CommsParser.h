@@ -85,7 +85,14 @@ private:
      * 
      */
     void ledChangeCommand(void);
+    /**
+     * @brief Saves a message for offline storage
+     * 
+     */
     void saveMessage(void);
+    /**
+     * @brief Loads messages from offline storage
+     */
     void loadMessages(void);
 };
 

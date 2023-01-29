@@ -1,7 +1,7 @@
 /**
  * @file Firmware.ino
  * @author Scott Gibb (smgibb@yahoo.com)
- * @brief LED Light Strip Controller firmware based on the STM32F103C8T6 microcontroller utilising the Arduino framework. The
+ * @brief A modular LED Light Strip Controller firmware which is using the arduino framework.
  * @version 0.1
  * @date 2022-10-03
  *
@@ -28,7 +28,7 @@
 #include "MemoryHandler.h"
 #include "STM32F103C8T6MemoryMap.h"
 
-// Method Prototypes
+// Function Prototypes
 static void setupDrivers(void);
 static void setupMemory(void);
 static void setupLED(uint32_t redPin, uint32_t greenPin, uint32_t bluePin);
@@ -65,27 +65,11 @@ void setup(void) {
   vector<ICommunicator *> comms;
   comms.push_back(new SerialCommunicator(115200));
   commsParser = new CommsParser(comms, 500, 1000); 
-
-
-
-
-  // // Test Code
-  // fadeDrivers[0]->startFade(COLOUR_CHANGE, 1000, 100); //<--- Code Crashes here, any access to a driver fails
-  // stripDrivers[2]->setColour(MAGENTA, 100);
-  // fadeDrivers[2]->startFade(SINE, 1000, 100);
-
-  // HSV_t hsv = {
-  //   .hue = 120,
-  //   .saturation = 100,
-  //   .value = 100
-  // };
-  // hueDrivers[1]->setHue(hsv);
-
  
 }
 /**
  * @brief Main Arduino Loop
- * Consiting of soft timer application loops for LED Strip Drivers, comms and buttons
+ * Consisting of soft timer application loops for LED Strip Drivers, comms and buttons
  *
  */
 void loop(void) {
@@ -134,6 +118,10 @@ void setupLED(uint32_t redPin, uint32_t greenPin, uint32_t bluePin) {
   hueDrivers.push_back(new HueDriver(led));
 }
 
+/**
+ * @brief Sets up the memory structs for each segment of EEPROM memory
+ * 
+ */
 void setupMemory(void) {
 
   MemoryMap_t systemInfoMap = {
