@@ -11,6 +11,8 @@
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
+#define MCU_CHOICE 0
+
 // Library Includes
 using namespace std;
 #include <vector>

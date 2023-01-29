@@ -9,7 +9,7 @@
 #include "FadeDriver.h"
 #include "Channels.h"
 #include "Main.h"
-#include "STM32F103C8T6MemoryMap.h"
+#include "MemoryMap.h"
 
 // External Constants
 constexpr uint8_t controlCommsPacketLength = 10; // Data Structures Padded to this size

@@ -26,7 +26,7 @@
 #include "Buttons.h"
 #include "StatusIndicator.h"
 #include "MemoryHandler.h"
-#include "STM32F103C8T6MemoryMap.h"
+#include "MemoryMap.h"
 
 // Function Prototypes
 static void setupDrivers(void);
@@ -54,7 +54,6 @@ MemoryHandler *memoryHandler;
  */
 void setup(void) {
   setupMemory();
-  
   statusIndicator = new StatusIndicator(STATUS_LED_PIN);
   // powerMonitor = new PowerMonitor(CURRENT_SENSOR_PIN, VOLTAGE_SENSOR_PIN, POWER_SENSOR_UPDATE_PERIOD);
   // fanController = new FanController();
