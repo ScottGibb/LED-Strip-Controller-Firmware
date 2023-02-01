@@ -1,3 +1,13 @@
+/**
+ * @file STM32F103C8T6MemoryMap.h
+ * @author Scott Gibb (smgibb@yahoo.com)
+ * @brief This file contains the preprocessor Memory Map for allocating the Flash memory for the LED Controller Project
+ * @version 0.1
+ * @date 2023-02-01
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #ifndef STM32F103C8T6_MEMORY_MAP_H
 #define STM32F103C8T6_MEMORY_MAP_H
 
