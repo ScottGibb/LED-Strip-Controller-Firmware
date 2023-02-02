@@ -5,7 +5,7 @@
 
 #include "LEDDriver.h"
 
-AbstractUserModeHandler::AbstractUserModeHandler(LEDDriver *driverIn, uint8_t *bufferIn, uint8_t bufferLength)
+AbstractUserModeHandler::AbstractUserModeHandler(LEDDriver *driverIn, uint8_t *bufferIn, uint32_t bufferLength)
 {
     length = bufferLength;
     buffer = new uint8_t[bufferLength];

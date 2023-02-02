@@ -4,9 +4,9 @@
  * @brief Hue Driver Header file outlining the interface for controlling LEDs using HUE values instead of RGB values
  * @version 0.1
  * @date 2022-12-08
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 #ifndef __HUE_DRIVER_H__
 #define __HUE_DRIVER_H__
@@ -22,7 +22,7 @@ typedef struct HSV_t
 {
   float hue;        /*360 Degree value 0-360*/
   float saturation; /*% Based Value 0-100*/
-  float value; /*% Based value 0-100*/
+  float value;      /*% Based value 0-100*/
 } HSV_t;
 
 /**

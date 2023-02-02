@@ -22,10 +22,9 @@ using namespace std;
 #include "ColourDriver.h"
 #include "FadeDriver.h"
 
-
 // External variables
-extern vector<LEDDriver*> leds;
-extern vector<RGBColourDriver*> stripDrivers;
-extern vector<FadeDriver*> fadeDrivers;
-extern vector<HueDriver*> hueDrivers;
+extern vector<LEDDriver *> leds;
+extern vector<RGBColourDriver *> stripDrivers;
+extern vector<FadeDriver *> fadeDrivers;
+extern vector<HueDriver *> hueDrivers;
 #endif //__MAIN_H__

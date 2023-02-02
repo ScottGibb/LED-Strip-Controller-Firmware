@@ -16,36 +16,36 @@
 class FanController
 /**
  * @brief FanController class responsible for controlling a fan using PWM
- * 
+ *
  */
 {
 public:
-/**
- * @brief Construct a new Fan Controller object
- * 
- * @param fanPin 
- */
+    /**
+     * @brief Construct a new Fan Controller object
+     *
+     * @param fanPin
+     */
     FanController(uint32_t fanPin);
     /**
      * @brief Destroy the Fan Controller object
-     * 
+     *
      */
     ~FanController();
     /**
      * @brief Changes the fan duty cycle (0-100)
-     * 
-     * @param duty 
+     *
+     * @param duty
      */
     void changeDuty(uint8_t duty);
     /**
      * @brief Get the currentDuty
-     * 
-     * @return uint8_t 
+     *
+     * @return uint8_t
      */
     uint8_t getDuty(void);
 
 private:
-    const uint8_t MAX_PWM =255;
+    const uint8_t MAX_PWM = 255;
     uint8_t duty;
     uint8_t pwm;
     uint32_t fanPin;

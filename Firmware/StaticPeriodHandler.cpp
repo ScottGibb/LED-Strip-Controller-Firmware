@@ -4,14 +4,13 @@
 
 #include "LEDDriver.h"
 
-StaticPeriodHandler::StaticPeriodHandler(LEDDriver *driver, uint8_t *bufferIn, uint8_t bufferLength)
-: AbstractUserModeHandler(driver, bufferIn, bufferLength)
+StaticPeriodHandler::StaticPeriodHandler(LEDDriver *driver, uint8_t *bufferIn, uint32_t bufferLength)
+    : AbstractUserModeHandler(driver, bufferIn, bufferLength)
 {
-
 }
 StaticPeriodHandler::~StaticPeriodHandler()
 {
 }
-void StaticPeriodHandler:: loop()
+void StaticPeriodHandler::loop()
 {
 }

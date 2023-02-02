@@ -87,33 +87,33 @@ private:
   std::map<SEGMENT, MemoryMap_t> MEMORY_MAP;
   /**
    * @brief Construct a new Memory Handler object, Private Constructor, so object can only be instantiated through the getInstance methods
-   * 
-   * @param MemoryMap 
+   *
+   * @param MemoryMap
    */
   MemoryHandler(std::map<SEGMENT, MemoryMap_t> MemoryMap);
   /**
    * @brief Construct a new Memory Handler object
-   * 
+   *
    */
   MemoryHandler(const MemoryHandler &) = delete;
   /**
-   * @brief 
-   * 
-   * @return MemoryHandler& 
+   * @brief
+   *
+   * @return MemoryHandler&
    */
   MemoryHandler &operator=(const MemoryHandler &) = delete;
   /**
    * @brief Destroy the Memory Handler object
-   * 
+   *
    */
   ~MemoryHandler();
   /**
    * @brief Checks the Memory position to see if the operation is valid
-   * 
+   *
    * @param seg the chosen segment
    * @param pos the chosen slot
-   * @param dataLen the length of the data 
-   * @return MEMORY_ERR 
+   * @param dataLen the length of the data
+   * @return MEMORY_ERR
    */
   MEMORY_ERR checkValidity(SEGMENT seg, uint16_t pos, uint16_t dataLen);
 };

@@ -16,7 +16,7 @@
 
 /**
  * @brief Power statistics struct
- * 
+ *
  */
 typedef struct
 {
@@ -42,41 +42,41 @@ public:
     PowerMonitor(uint32_t currentPin, uint32_t voltagePin, uint32_t updatePeriod);
     /**
      * @brief Destroy the Power Monitor object
-     * 
+     *
      */
     ~PowerMonitor();
     /**
      * @brief Calculates the new power stats
-     * 
+     *
      */
     void loop(void);
     /**
      * @brief Get the last known current value, measured in Amps
-     * 
-     * @return float 
+     *
+     * @return float
      */
     float getCurrent(void);
     /**
-     * @brief Get the last known voltage measured 
-     * 
-     * @return float 
+     * @brief Get the last known voltage measured
+     *
+     * @return float
      */
     float getVoltage(void);
     /**
      * @brief Get the last known power calculated
-     * 
-     * @return float 
+     *
+     * @return float
      */
     float getPower(void);
     /**
      * @brief Gets the current power stats
-     * 
-     * @return Power_t 
+     *
+     * @return Power_t
      */
     Power_t getStats(void);
 
 private:
-    uint16_t ADC_RANGE = 2^12;
+    uint16_t ADC_RANGE = 2 ^ 12;
     float MAX_ADC_VOLTAGE = 3.3;
     uint32_t updatePeriod;
     uint32_t lastUpdateTime;

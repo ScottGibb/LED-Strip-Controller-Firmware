@@ -25,8 +25,8 @@ static FadeState_t prevStates[NUM_LEDS];
 
 // External Variables
 uint8_t NUM_BUTTONS = 4;
-uint32_t buttonPins[4] = { BUTTON_1_PIN, BUTTON_2_PIN, BUTTON_3_PIN, BUTTON_4_PIN };
-func_type functions[4] = { buttonOneFunction, buttonTwoFunction, buttonThreeFunction, buttonFourFunction };
+uint32_t buttonPins[4] = {BUTTON_1_PIN, BUTTON_2_PIN, BUTTON_3_PIN, BUTTON_4_PIN};
+func_type functions[4] = {buttonOneFunction, buttonTwoFunction, buttonThreeFunction, buttonFourFunction};
 
 // Internal Function Prototypes
 static void toggleButtonLogic(uint8_t *brightness, FadeState_t *state, RGBColourDriver *colDriver, HueDriver *hueDriver, FadeDriver *fadeDriver);
@@ -41,7 +41,8 @@ void buttonFourFunction(void);
  * @brief Button One Logic
  *
  */
-void buttonOneFunction(void) {
+void buttonOneFunction(void)
+{
   toggleButtonLogic(&prevBrightness[0], &prevStates[0], stripDrivers[0], hueDrivers[0], fadeDrivers[0]);
 }
 
@@ -49,7 +50,8 @@ void buttonOneFunction(void) {
  * @brief Button Two Logic
  *
  */
-void buttonTwoFunction(void) {
+void buttonTwoFunction(void)
+{
 
   toggleButtonLogic(&prevBrightness[1], &prevStates[1], stripDrivers[1], hueDrivers[1], fadeDrivers[1]);
 }
@@ -58,7 +60,8 @@ void buttonTwoFunction(void) {
  * @brief Button Three Logic
  *
  */
-void buttonThreeFunction(void) {
+void buttonThreeFunction(void)
+{
 
   toggleButtonLogic(&prevBrightness[2], &prevStates[2], stripDrivers[2], hueDrivers[2], fadeDrivers[2]);
 }
@@ -67,19 +70,25 @@ void buttonThreeFunction(void) {
  * @brief Button Four Logic
  *
  */
-void buttonFourFunction(void) {
+void buttonFourFunction(void)
+{
   static bool onOff = false;
 
-  if (onOff) {
+  if (onOff)
+  {
     uint8_t minBrightness = 0;
-    for (uint8_t i = 0; i < stripDrivers.size(); i++) {
+    for (uint8_t i = 0; i < stripDrivers.size(); i++)
+    {
       fadeDrivers[i]->stopFade();
       stripDrivers[i]->setColour(WHITE, minBrightness);
     }
     onOff = false;
-  } else {
+  }
+  else
+  {
     uint8_t maxBrightness = 100;
-    for (uint8_t i = 0; i < stripDrivers.size(); i++) {
+    for (uint8_t i = 0; i < stripDrivers.size(); i++)
+    {
       stripDrivers[i]->setColour(WHITE, maxBrightness);
     }
     onOff = true;
@@ -94,19 +103,22 @@ void buttonFourFunction(void) {
  * @param[out] colDriver the colourDriver associated with the state
  * @param[out] fadeDriver the fadeDriver associated with state
  */
-void toggleButtonLogic(uint8_t *brightness, FadeState_t *state, RGBColourDriver *colDriver, HueDriver *hueDriver, FadeDriver *fadeDriver) {
+void toggleButtonLogic(uint8_t *brightness, FadeState_t *state, RGBColourDriver *colDriver, HueDriver *hueDriver, FadeDriver *fadeDriver)
+{
 
-  if (colDriver->getBrightness() != 0) {
+  if (colDriver->getBrightness() != 0)
+  {
     *brightness = colDriver->getBrightness();
     colDriver->setBrightness(0);
     *state = fadeDriver->getFade();
 
     fadeDriver->stopFade();
-  } else {
+  }
+  else
+  {
     colDriver->setBrightness(*brightness);
     *brightness = colDriver->getBrightness();
     fadeDriver->startFade(*state);
     *state = fadeDriver->getFade();
   }
 }
-

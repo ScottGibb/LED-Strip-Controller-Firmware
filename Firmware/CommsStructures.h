@@ -86,8 +86,8 @@ typedef struct
  */
 typedef struct
 {
-  enum CTRL_CMD_ID command : 8;                   // 8 Bits Byte 0
-  uint8_t userModeNo;                             // 8 Bits Byte 1
+  enum CTRL_CMD_ID command : 8;                // 8 Bits Byte 0
+  uint8_t userModeNo;                          // 8 Bits Byte 1
   uint8_t userModePoints[USER_MODE_SLOT_SIZE]; // 8 Bits Byte 2- USER_MODE_END +3
 } UserModeSaveProtocol_t;
 
