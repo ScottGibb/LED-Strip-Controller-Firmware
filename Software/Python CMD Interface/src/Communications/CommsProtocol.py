@@ -1,14 +1,14 @@
 # This Python file contains the methods required to interact with the hardware by creating the desired byte packet using the Types.py file and then sending it to the hardware using the CommsProtocol.py file.
 
-from Types import COLOUR, CTRL_CMD_ID
-from Types import CHANNEL
-from Types import FADE_TYPE
-from Types import TX_MSG_SIZE
+from Communications.Types import COLOUR, CTRL_CMD_ID
+from Communications.Types import CHANNEL
+from Communications.Types import FADE_TYPE
+from Communications.Types import TX_MSG_SIZE
 
 
 def create_constant_colour_message(channel: CHANNEL, colour: COLOUR, brightness):
     bytes = bytearray([CTRL_CMD_ID.LED_CHANGE.value, channel.value,
-                       FADE_TYPE.NONE, colour, brightness])
+                       FADE_TYPE.NONE.value, colour, brightness]+ [0] * 4)
     return _add_padding(bytes)
 
 
@@ -18,15 +18,15 @@ def create_fade_message(channel: CHANNEL, fade_type: FADE_TYPE, colour: COLOUR, 
     return _add_padding(bytes)
 
 
-def create_rgb_message(channel: CHANNEL, mode: FADE_TYPE, red, green, blue):
+def create_rgb_message(channel: CHANNEL, red, green, blue):
     bytes = bytearray([CTRL_CMD_ID.LED_CHANGE.value,
-                       channel.value, mode.value, red, green, blue])
+                       channel.value, FADE_TYPE.RGB_CTRL.value, red, green, blue])
     return _add_padding(bytes)
 
 
-def create_hsb_message(channel: CHANNEL, mode: FADE_TYPE, hue, saturation, brightness):
+def create_hsb_message(channel: CHANNEL, hue, saturation, brightness):
     hue_bytes = hue.to_bytes(2, "big")
-    bytes = bytearray([CTRL_CMD_ID.LED_CHANGE.value, channel.value, mode.value]) + \
+    bytes = bytearray([CTRL_CMD_ID.LED_CHANGE.value, channel.value, FADE_TYPE.HUE_CTRL.value]) + \
         hue_bytes + bytearray([saturation, brightness])
     return _add_padding(bytes)
 

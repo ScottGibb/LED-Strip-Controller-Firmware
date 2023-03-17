@@ -3,6 +3,7 @@ import struct
 import threading
 import binascii
 import serial
+import socket
 
 from Communications.CommsProtocol import create_constant_colour_message, create_fade_message, create_rgb_message, create_hsb_message
 from Communications.Types import CHANNEL, COLOUR, FADE_TYPE
@@ -30,8 +31,7 @@ def ask_user_for_hue(channel, mode):
     user_message = "Please select the Brightness value you would like to choose: ("+str(
         user_bounds.get("START")) + " - "+str(user_bounds.get("END"))+")"
     brightness = int(ask_user_numeric(user_message, user_bounds))
-    hue_bytes = hue.to_bytes(2, 'big')
-    return create_hsb_message(channel, mode, hue_bytes[0], hue_bytes[1], saturation, brightness)
+    return create_hsb_message(channel, hue, saturation, brightness)
 
 
 def ask_user_for_rgb(channel, mode):
@@ -54,7 +54,7 @@ def ask_user_for_rgb(channel, mode):
     user_message = "Please select the Blue value you would like to choose: ("+str(
         user_bounds.get("START")) + " - "+str(user_bounds.get("END"))+")"
     blue = int(ask_user_numeric(user_message, user_bounds))
-    return create_rgb_message(channel, mode, red, green, blue)
+    return create_rgb_message(channel, red, green, blue)
 
 
 def ask_user_for_colour(channel, mode):
@@ -83,7 +83,7 @@ def ask_user_for_colour(channel, mode):
     # Ask the user for the period
     period = 0
     message = None
-    if mode != FADE_TYPE.NONE.value:
+    if mode != FADE_TYPE.NONE:
         user_bounds = {"START": 0, "END": 4294967295}
         user_message = "Please select the period of the fade in ms: ("+str(
             user_bounds.get("START")) + " - "+str(user_bounds.get("END"))+")"
@@ -99,26 +99,29 @@ def user_loop(communicator):
     while True:
         tx_msg = None
         # Ask user for channel
-        user_bounds = {"START": 0, "END": 3}
+        user_bounds = {"START": 1, "END": 3}
         user_message = "Please select the channel you would like to change: ("+str(
             user_bounds.get("START")) + " - "+str(user_bounds.get("END"))+")"
-        channel = int(ask_user_numeric(user_message, user_bounds))
+        channel = CHANNEL(int(ask_user_numeric(user_message, user_bounds)))
 
         # Ask user for mode
         user_bounds = {"START": 0, "END": 7}
         user_message = "Please select the mode you would like to choose: ("+str(
             user_bounds.get("START")) + " - "+str(user_bounds.get("END"))+")"
-        mode = int(ask_user_numeric(user_message, user_bounds))
+        mode = FADE_TYPE(int(ask_user_numeric(user_message, user_bounds)))
 
-        if mode == FADE_TYPE.HUE_CTRL.value:
+        if mode == FADE_TYPE.HUE_CTRL:
             tx_msg = ask_user_for_hue(channel, mode)
-        elif mode == FADE_TYPE.RGB_CTRL.value:
+        elif mode == FADE_TYPE.RGB_CTRL:
             tx_msg = ask_user_for_rgb(channel, mode)
         else:
             tx_msg = ask_user_for_colour(channel, mode)
 
         # Add padding to the message and send it
-        communicator.write(tx_msg)
+        if(isinstance(communicator, socket.socket)):
+           communicator.sendall(tx_msg)
+        elif(isinstance(communicator, serial.Serial)):
+            communicator.write(tx_msg)
         print("Sent Message")
         print(binascii.hexlify(tx_msg))
 
@@ -130,16 +133,32 @@ def main():
         communicator_options)+")"
     chosen_comms = ask_user_word(user_message, communicator_options)
     if chosen_comms == "TCP-IP":
-        pass
-        # communicator = TCPCommunicator()
-    elif chosen_comms == "Serial":
-        port = input("What port is the hardware connected on?")
-        communicator = serial.Serial(port)
-        communicator.parity = serial.PARITY_EVEN
-        communicator.timeout = 1
-        communicator.stopbits = serial.STOPBITS_ONE
-        communicator.bytesize = serial.EIGHTBITS
-        communicator.baudrate = 115200
+        connected = False
+        while(connected == False):
+            ip = input("What IP is the hardware connected on?")
+            port = input("What port is the hardware connected on?")
+            try:
+                communicator = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                communicator.connect((ip, int(port)))
+                connected = True
+            except socket.error:
+                print("Could not connect to the hardware on IP: "+ip +
+                      " and port: "+port)
+    elif chosen_comms== "Serial":
+        connected =False
+        while(connected == False):
+            port = input("What port is the hardware connected on?")
+            try:
+                communicator = serial.Serial(port)
+                communicator.parity = serial.PARITY_EVEN
+                communicator.timeout = 1
+                communicator.stopbits = serial.STOPBITS_ONE
+                communicator.bytesize = serial.EIGHTBITS
+                communicator.baudrate = 115200
+                connected = True
+            except serial.SerialException:
+                print("Could not connect to the hardware on port: "+port)
+            
 
     user_loop(communicator)
 

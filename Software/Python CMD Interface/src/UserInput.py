@@ -9,6 +9,7 @@ def ask_user_word(message, validInputs):
         print("Invalid: Please try again")
         print("The options are: " + str(validInputs))
         usr_input = input("Enter a valid input: ")
+    return usr_input
 
 
 def ask_user_numeric(message, bounds):
