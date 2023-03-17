@@ -5,6 +5,7 @@ import binascii
 import serial
 import socket
 
+# Local Imports
 from Communications.CommsProtocol import create_constant_colour_message, create_fade_message, create_rgb_message, create_hsb_message
 from Communications.Types import CHANNEL, COLOUR, FADE_TYPE
 from UserInput import ask_user_numeric, ask_user_word
@@ -96,6 +97,11 @@ def ask_user_for_colour(channel, mode):
 
 
 def user_loop(communicator):
+    """_summary_: The main loop of the program
+
+    Args:
+        communicator (_type_): _description_ The communicator to use to send messages
+    """
     while True:
         tx_msg = None
         # Ask user for channel
@@ -127,6 +133,8 @@ def user_loop(communicator):
 
 
 def main():
+    """_summary_: The main function of the program
+    """
     communicator = None
     communicator_options = {"TCP-IP", "Serial"}
     user_message = "Please select the communication method you would like to use: ("+str(

@@ -27,7 +27,7 @@ As for improvements to the python command interface, the following changes could
 
 # Useful Links
 
--  [Docker](https://docs.docker.com/)
--  [Portainer](https://www.portainer.io/)
+- [Docker](https://docs.docker.com/)
+- [Portainer](https://www.portainer.io/)
 - [Python](https://www.python.org/)
 - [PySerial](https://pyserial.readthedocs.io/en/latest/)

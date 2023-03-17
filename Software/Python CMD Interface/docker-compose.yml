@@ -5,5 +5,5 @@ services:
     build: .
     image: cmdline-controller:v1
     container_name: cmdline-controller
-    privelege: true
+    privileged: true
     restart: always
