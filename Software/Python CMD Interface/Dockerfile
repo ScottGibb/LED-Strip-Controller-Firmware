@@ -1,4 +1,4 @@
-FROM raspbian/stretch
+FROM python:3.9
 
 LABEL maintainer="Scott Gibb"
 
@@ -8,10 +8,9 @@ RUN apt-get update && \
 
 WORKDIR /app
 
-COPY python-requirements.txt .
-RUN pip3 install -r python-requirements.txt
-
 COPY src ./src
+COPY python-requirements.txt ./python-requirements.txt
+RUN pip3 install -r python-requirements.txt
 
 ENTRYPOINT ["python3"]
 CMD ["-u","src/main.py"]
