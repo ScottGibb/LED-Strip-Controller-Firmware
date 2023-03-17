@@ -1,5 +1,9 @@
 from enum import Enum
 
+# Buffer Sizes
+RX_MSG_CNT = 14
+TX_MSG_SIZE = 10
+
 
 class COLOUR(Enum):
     """_summary_
