@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.9-slim-buster
 
 LABEL maintainer="Scott Gibb"
 
@@ -8,9 +8,9 @@ RUN apt-get update && \
 
 WORKDIR /app
 
-COPY src ./src
+COPY . . 
 COPY python-requirements.txt ./python-requirements.txt
 RUN pip3 install -r python-requirements.txt
 
 ENTRYPOINT ["python3"]
-CMD ["-u","src/main.py"]
+CMD ["-u","src/Main.py"]
