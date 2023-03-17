@@ -12,11 +12,9 @@
   },
   "author": "Scott McIntosh Gibb",
   "license": "MIT License",
-
   "node-red": {
     "nodes": {
       "lower-case": "LED-Controller.js"
     }
   }
 }
-

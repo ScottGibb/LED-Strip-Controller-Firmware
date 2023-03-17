@@ -1,19 +1,16 @@
-FROM raspbian/stretch
+FROM python:3.9-slim-buster
+
 LABEL maintainer="Scott Gibb"
-RUN apt-get update
-RUN apt-get install -y build-essential
-RUN apt-get install python3-pip -y
 
-COPY Tester.py /
-COPY Types.py /
-COPY requirements.txt /
+RUN apt-get update && \
+    apt-get install -y build-essential && \
+    apt-get install -y python3-pip
 
-RUN pip3 install -r requirements.txt
+WORKDIR /app
+
+COPY . . 
+COPY python-requirements.txt ./python-requirements.txt
+RUN pip3 install -r python-requirements.txt
 
 ENTRYPOINT ["python3"]
-CMD ["-u","Tester.py"]
-
-
-
-
-
+CMD ["-u","src/Main.py"]

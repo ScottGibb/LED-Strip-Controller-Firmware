@@ -1,5 +1,9 @@
 from enum import Enum
 
+# Buffer Sizes
+RX_MSG_CNT = 14
+TX_MSG_SIZE = 10
+
 
 class COLOUR(Enum):
     """_summary_
@@ -20,6 +24,7 @@ class COLOUR(Enum):
     CHARTREUSE = 10
     YELLOW = 11
     ORANGE = 12
+    NUM_COLOURS = 13
 
 
 class FADE_TYPE(Enum):
@@ -36,6 +41,7 @@ class FADE_TYPE(Enum):
     COLOUR_CHANGE = 5
     RGB_CTRL = 6
     HUE_CTRL = 7
+    SIZE = 8
 
 
 class CHANNEL(Enum):
@@ -48,6 +54,7 @@ class CHANNEL(Enum):
     CHANNEL_1 = 1
     CHANNEL_2 = 2
     CHANNEL_3 = 3
+    NUM_CHANNELS = 3
 
 
 class TX_MSG_ID(Enum):
