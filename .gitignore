@@ -216,6 +216,6 @@ fabric.properties
 
 .vscode
 
-.bkp
+*.bkp
 .dtmp
 .$Diagrams.drawio.dtmp
