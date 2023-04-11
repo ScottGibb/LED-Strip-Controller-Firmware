@@ -18,7 +18,7 @@
 #include "SerialCommunicator.h"
 #include "CommsParser.h"
 #include "ButtonsDriver.h"
-#include "ButtonHandler.h"
+#include "Buttons.h"
 #include "FanController.h"
 #include "PowerMonitor.h"
 #include "PowerSensors.h"
