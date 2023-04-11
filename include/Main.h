@@ -11,6 +11,10 @@
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
+/**
+ * @brief Select the MCU Used in the Design
+ *
+ */
 #define MCU_CHOICE 0
 
 // Library Includes

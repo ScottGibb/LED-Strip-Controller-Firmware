@@ -16,7 +16,6 @@
 #include <Arduino.h>
 // Project Includes
 #include "PowerSensors.h"
-
 PowerMonitor::PowerMonitor(uint32_t currentPin, uint32_t voltagePin, uint32_t updatePeriod)
 {
     powerStats.current = 0;

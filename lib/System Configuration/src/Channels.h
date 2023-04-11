@@ -5,5 +5,5 @@
 #elif MCU_CHOICE == 1
 
 #else
-#error "Select the correct Memory Map!"
+#error "Select the correct MCU!"
 #endif
