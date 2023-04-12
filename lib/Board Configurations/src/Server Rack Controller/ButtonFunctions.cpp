@@ -8,12 +8,14 @@
  * @copyright Copyright (c) 2022
  *
  */
-#include "STM32F103C8T6ButtonFunctions.h"
+#include "Server Rack Controller/ButtonFunctions.h"
+// Library Includes
+#include "Server Rack Controller/Buttons.h"
+#include "Server Rack Controller/Channels.h"
 
 // Project Includes
 #include "Main.h"
-#include "Buttons.h"
-#include "Channels.h"
+
 #include "ButtonsDriver.h"
 // System Includes
 #include <stdint.h>

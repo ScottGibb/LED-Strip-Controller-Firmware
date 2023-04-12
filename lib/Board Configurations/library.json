@@ -1,0 +1,8 @@
+{
+    "name": "Board Configurations",
+    "build": {
+        "flag": [
+            "-I include/Server Rack Controller"
+        ]
+    }
+}

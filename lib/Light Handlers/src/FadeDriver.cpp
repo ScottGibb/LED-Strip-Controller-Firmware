@@ -11,7 +11,7 @@
 #include "FadeDriver.h"
 
 // Library Includes
-#include <arduino.h>
+#include <Arduino.h>
 #include <math.h>
 // Library Includes
 #include "ColourDriver.h"
