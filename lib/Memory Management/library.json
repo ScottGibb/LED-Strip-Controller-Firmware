@@ -1,0 +1,13 @@
+{
+    "name": "Memory Management",
+    "description": "Memory Management, responsible for storing user mode patterns on the MCU onboard storage",
+    "authors": [
+        {
+            "name": "Scott Gibb",
+            "email": "smgibb@yahoo.com",
+            "url": "https://github.com/ScottGibb"
+        }
+    ],
+    "frameworks": "arduino",
+    "license": "GNU General Public License v3.0"
+}

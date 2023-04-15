@@ -1,0 +1,13 @@
+{
+    "name": "System State Management",
+    "description": "System State Management, responsible for maintaining the system state and indicating that the system is operational",
+    "authors": [
+        {
+            "name": "Scott Gibb",
+            "email": "smgibb@yahoo.com",
+            "url": "https://github.com/ScottGibb"
+        }
+    ],
+    "frameworks": "arduino",
+    "license": "GNU General Public License v3.0"
+}

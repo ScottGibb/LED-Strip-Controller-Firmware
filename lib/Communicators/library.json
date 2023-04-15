@@ -1,0 +1,13 @@
+{
+    "name": "Communicators",
+    "description": "Communicators library associated with dealing with low level comms bearers such as IP or Serial",
+    "authors": [
+        {
+            "name": "Scott Gibb",
+            "email": "smgibb@yahoo.com",
+            "url": "https://github.com/ScottGibb"
+        }
+    ],
+    "frameworks": "arduino",
+    "license": "GNU General Public License v3.0"
+}

@@ -1,0 +1,17 @@
+{
+    "name": "Communications",
+    "description": "Communications Library associated with high level communications and protocols",
+    "authors": [
+        {
+            "name": "Scott Gibb",
+            "email": "smgibb@yahoo.com",
+            "url": "https://github.com/ScottGibb"
+        }
+    ],
+    "license": "GNU General Public License v3.0",
+    "dependencies": {
+        "System Configuration": "",
+        "Communicators": "",
+        "Memory Management": ""
+    }
+}

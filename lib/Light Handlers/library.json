@@ -1,0 +1,16 @@
+{
+    "name": "Light Handlers",
+    "description": "A collection of light handlers for performing different patterns and light effects",
+    "authors": [
+        {
+            "name": "Scott Gibb",
+            "email": "smgibb@yahoo.com",
+            "url": "https://github.com/ScottGibb"
+        }
+    ],
+    "dependencies": {
+        "Light Drivers": ""
+    },
+    "frameworks": "arduino",
+    "license": "GNU General Public License v3.0"
+}
