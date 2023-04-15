@@ -10,8 +10,35 @@ This repository contains all the firmware to control the LED Strip Controller Ha
 
 ## System Architecture
 
-As for the system architecture it's designed to be interacted with via a byte stream sent over an interface. At present there is a UART interface over USB. However, there are plans to utilize an IP interface over WiFi. The byte stream is then parsed by the firmware and the appropriate action is taken. The firmware is designed to be as flexible as possible, whilst maintaining an easy-to-use interface. The firmware is designed to be used with the LED Strip Controller Software Applications. The architecture of the full system, it is shown below:
+As for the system architecture it's designed to be interacted with via a byte stream sent over an interface. At present there is a UART interface over USB. However, there are plans to utilize an IP interface over WiFi. The byte stream is then parsed by the firmware and the appropriate action is taken. The firmware is designed to be as flexible as possible, whilst maintaining an easy-to-use interface. The firmware is designed to be used with the LED Strip Controller Software Applications. The architecture of the full system, is shown below:
 
+## Project Structure
+
+This Project uses the PlatformIO Build system and as such adheres to their build structure and folder structure, the project is split into multiple folders outlined as follows:
+- docs: holds all diagrams and pictures related to the project
+- include: Holds the main header file responsible for the high-level aspects of the project
+
+```
+├───docs
+├───include
+├───lib
+│   ├───Board Configurations
+│   ├───Buttons
+│   ├───Communications
+│   ├───Communicators
+│   ├───Light Drivers
+│   ├───Light Handlers
+│   ├───Memory Management
+│   ├───Misc Peripherals
+│   ├───System Configuration
+│   ├───System State Management
+│   └───User Mode Handlers
+├───src
+└───test
+```
+- lib: contains all private libraries for the project.
+- src: contains the main application source code
+- test: contains all of the unit tests for the project.
 <center>
 
 ![System Architecture](docs/High_Level_System_Diagram.png)

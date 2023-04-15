@@ -1,46 +1,11 @@
+# Private Library Modules
 
-This directory is intended for project specific (private) libraries.
-PlatformIO will compile them to static libraries and link into executable file.
+## Summary
 
-The source code of each library should be placed in a an own separate directory
-("lib/your_library_name/[here are source files]").
+This folder is responsible for containing the individual private libraries for the project. These libraries are designed so that depending on the platform being used, each module can be pulled in and utilized in the main file. This allows the platform to use whatever code is needed for its particular application.
 
-For example, see a structure of the following two libraries `Foo` and `Bar`:
+## Platform IO Documentation
 
-|--lib
-|  |
-|  |--Bar
-|  |  |--docs
-|  |  |--examples
-|  |  |--src
-|  |     |- Bar.c
-|  |     |- Bar.h
-|  |  |- library.json (optional, custom build options, etc) https://docs.platformio.org/page/librarymanager/config.html
-|  |
-|  |--Foo
-|  |  |- Foo.c
-|  |  |- Foo.h
-|  |
-|  |- README --> THIS FILE
-|
-|- platformio.ini
-|--src
-   |- main.c
-
-and a contents of `src/main.c`:
-```
-#include <Foo.h>
-#include <Bar.h>
-
-int main (void)
-{
-  ...
-}
-
-```
-
-PlatformIO Library Dependency Finder will find automatically dependent
-libraries scanning project source files.
-
-More information about PlatformIO Library Dependency Finder
-- https://docs.platformio.org/page/librarymanager/ldf.html
+- [Creating a Library](https://docs.platformio.org/en/latest/librarymanager/creating.html)
+- [Library JSON](https://docs.platformio.org/en/latest/manifests/library-json/index.html)
+- [Library Dependency Finder (LDF)](https://docs.platformio.org/en/latest/librarymanager/ldf.html)
