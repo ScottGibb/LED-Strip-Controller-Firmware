@@ -15,8 +15,6 @@ As for the system architecture it's designed to be interacted with via a byte st
 ## Project Structure
 
 This Project uses the PlatformIO Build system and as such adheres to their build structure and folder structure, the project is split into multiple folders outlined as follows:
-- docs: holds all diagrams and pictures related to the project
-- include: Holds the main header file responsible for the high-level aspects of the project
 
 ```
 ├───docs
@@ -36,6 +34,8 @@ This Project uses the PlatformIO Build system and as such adheres to their build
 ├───src
 └───test
 ```
+- docs: holds all diagrams and pictures related to the project
+- include: Holds the main header file responsible for the high-level aspects of the project
 - lib: contains all private libraries for the project.
 - src: contains the main application source code
 - test: contains all of the unit tests for the project.
