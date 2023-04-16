@@ -1,9 +1,9 @@
-name: PlatformIO Build
+name: Static Analysis
 
 on: [push]
 
 jobs:
-  build:
+  Static_Analysis:
     runs-on: ubuntu-latest
 
     steps:
