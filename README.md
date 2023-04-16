@@ -71,6 +71,14 @@ The system does require some onboard memory to utilize the User Mode system. Thi
 </center>
 
 
+## Building the Project
+
+This project uses the PlatformIO Build system and as such can be built using the PlatformIO IDE or the PlatformIO CLI. For this simply clone this repository and open the folder using the PlatformIO plugin in VSCode. The IDE should then flag and install all the dependencies based on the platform.ini file.
+
+- [PlatformIO](https://platformio.org/)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [PlatformIO Plugin for VSCode](https://marketplace.visualstudio.com/items?itemName=platformio.platformio-ide)
+
 ## LED Strip Controller Repository Links
 
 - [Manifest](https://github.com/ScottGibb/LED-Strip-Controller-Manifest) This repository contains the manifest file for the LED Strip Controller project. Which allows the cloning of all the repositories in one go.
