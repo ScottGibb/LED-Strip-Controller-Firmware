@@ -21,4 +21,4 @@ jobs:
         run: pip install --upgrade platformio
 
       - name: PlatformIO Static Aalysis
-        run: pio check --environment genericSTM32F103C8
+        run: pio check --environment genericSTM32F103C8 --fail-on-defect medium
