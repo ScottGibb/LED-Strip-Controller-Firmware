@@ -1,5 +1,5 @@
 # LED Strip Controller Firmware
-
+[![PlatformIO Build](https://github.com/ScottGibb/LED-Strip-Controller-Firmware/actions/workflows/Build.yaml/badge.svg?branch=main)](https://github.com/ScottGibb/LED-Strip-Controller-Firmware/actions/workflows/Build.yaml)
 <center>
 <img src="docs/Languages-And-Tools.png">
 </center>
