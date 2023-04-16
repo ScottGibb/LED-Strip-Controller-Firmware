@@ -1,0 +1,16 @@
+{
+    "name": "User Mode Handlers",
+    "description": "This library adds User Mode functionality which will read the stored memory segments and create lighting patterns and effects",
+    "authors": [
+        {
+            "name": "Scott Gibb",
+            "email": "smgibb@yahoo.com",
+            "url": "https://github.com/ScottGibb"
+        }
+    ],
+    "dependencies": {
+        "Light Drivers": ""
+    },
+    "frameworks": "arduino",
+    "license": "GNU General Public License v3.0"
+}

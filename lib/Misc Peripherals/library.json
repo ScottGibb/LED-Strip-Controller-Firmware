@@ -1,0 +1,13 @@
+{
+    "name": "Misc Peripherals",
+    "description": "Miscellaneous peripherals for the embedded hardware, focusing on Fan control and Power monitoring",
+    "authors": [
+        {
+            "name": "Scott Gibb",
+            "email": "smgibb@yahoo.com",
+            "url": "https://github.com/ScottGibb"
+        }
+    ],
+    "frameworks": "arduino",
+    "license": "GNU General Public License v3.0"
+}

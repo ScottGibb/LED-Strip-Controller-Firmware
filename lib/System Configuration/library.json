@@ -1,0 +1,16 @@
+{
+    "name": "System Configuration",
+    "description": "System Configuration, responsible for loading the individual header files for the hardware platforms",
+    "authors": [
+        {
+            "name": "Scott Gibb",
+            "email": "smgibb@yahoo.com",
+            "url": "https://github.com/ScottGibb"
+        }
+    ],
+    "dependencies": {
+        "Board Configurations": ""
+    },
+    "frameworks": "arduino",
+    "license": "GNU General Public License v3.0"
+}

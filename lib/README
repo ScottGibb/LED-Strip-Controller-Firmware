@@ -1,0 +1,11 @@
+# Private Library Modules
+
+## Summary
+
+This folder is responsible for containing the individual private libraries for the project. These libraries are designed so that depending on the platform being used, each module can be pulled in and utilized in the main file. This allows the platform to use whatever code is needed for its particular application.
+
+## Platform IO Documentation
+
+- [Creating a Library](https://docs.platformio.org/en/latest/librarymanager/creating.html)
+- [Library JSON](https://docs.platformio.org/en/latest/manifests/library-json/index.html)
+- [Library Dependency Finder (LDF)](https://docs.platformio.org/en/latest/librarymanager/ldf.html)

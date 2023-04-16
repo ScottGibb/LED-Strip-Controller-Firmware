@@ -1,0 +1,9 @@
+# Project Includes
+
+## Summary
+
+This folder contains the main header files used for the whole project, these are independent of the library modules used.
+
+## Useful Links
+
+- [GCC Header Files](https://gcc.gnu.org/onlinedocs/cpp/Header-Files.html)

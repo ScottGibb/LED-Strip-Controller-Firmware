@@ -1,0 +1,13 @@
+{
+    "name": "Light Drivers",
+    "description": "Light Drivers associated with controlling the PWM for RGB LEDS, performs RGB and Hue control",
+    "authors": [
+        {
+            "name": "Scott Gibb",
+            "email": "smgibb@yahoo.com",
+            "url": "https://github.com/ScottGibb"
+        }
+    ],
+    "frameworks": "arduino",
+    "license": "GNU General Public License v3.0"
+}

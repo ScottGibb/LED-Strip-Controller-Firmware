@@ -1,0 +1,13 @@
+{
+    "name": "Buttons",
+    "description": "Buttons Driver firmware for software defined buttons",
+    "authors": [
+        {
+            "name": "Scotgt Gibb",
+            "email": "smgibb@yahoo.com",
+            "url": "https://github.com/ScottGibb"
+        }
+    ],
+    "frameworks": "arduino",
+    "license": "GNU General Public License v3.0"
+}
