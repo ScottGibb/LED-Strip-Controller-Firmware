@@ -3,7 +3,8 @@ name: Static Analysis
 on: [push]
 
 jobs:
-  Static_Analysis:
+  Source_Code_Static_Analysis:
+    name: C++ Static Analysis
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +20,11 @@ jobs:
           python-version: '3.9'
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
-
-      - name: PlatformIO Static Aalysis
+      
+      - name: PlatformIO Static Analysis
         run: pio check --fail-on-defect high
 
+      - name: Markdown lint check
+        uses: markdownlint/markdownlint@v0.24.0
+        with:
+          files: '**/*.md'

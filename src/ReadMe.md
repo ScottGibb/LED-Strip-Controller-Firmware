@@ -6,7 +6,8 @@ The LED Strip firmware is written using the Arduino framework. This allowed for 
 
 As you can see in the above diagram, the system is built on a set of layers, each of which get more and more abstracted from the hardware. As you go up the stack, the concepts of pins and hardware specific functions becomes non existent.
 
-# Class Diagram
+## Class Diagram
+
 As for the classes used in the design, the class diagram for the system is shown below:
 
 ![Class Diagram](../docs/Diagrams-Firmware%20Class%20Diagram.png)
@@ -34,9 +35,11 @@ At the next set of abstraction are a set of colour driving classes which do a va
 The first driver for this was the ColourDriver class which is a very simple class that allow the user to select a colour from the COLOUR enum and the driver will then set the LEDs to this colour, the user can then set the brightness of this colour and the driver will work out how to do the rest.
 
 ### FadeDriver
+
 As for the Fade Driver, this is a special class which uses the colourDriver currently and a predefined method to create different patterns such as square, triangle and sine waves. This is all done inside the driver class. To add more to this simply add a new private method for the pattern and call it with the loop inside the class. Again these methods are designed to be polling and non-blocking methods
 
 ### HueDriver
+
 Finally the last Driver to be discussed is the HueDriver, this is due to the need to have Hue control rather than RGB control. When integrating with Alexa, Node-Red uses Hue values rather than RGB. As such this functionality was built into the firmware using this converter class.
 
 ## FanController
