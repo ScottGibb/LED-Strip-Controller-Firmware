@@ -24,7 +24,11 @@ jobs:
       - name: PlatformIO Static Analysis
         run: pio check --fail-on-defect high
 
+  Markdown_Lint_Check:
+    name: Markdown Lint Check
+    runs-on: ubuntu-latest
+    steps:
       - name: Markdown lint check
         run: |
-          sudo apt-get install -y markdownlint
+          npm install -g markdownlint-cli
           markdownlint 
