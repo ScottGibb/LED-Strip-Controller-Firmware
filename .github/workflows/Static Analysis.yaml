@@ -28,7 +28,9 @@ jobs:
     name: Markdown Lint Check
     runs-on: ubuntu-latest
     steps:
-      - name: Markdown lint check
-        run: |
-          npm install -g markdownlint-cli
-          markdownlint 
+      - name: Install markdownlint-cli
+        run: npm install -g markdownlint-cli
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run markdownlint
+        run: markdownlint '**/*.md'
