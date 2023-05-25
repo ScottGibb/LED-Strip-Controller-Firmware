@@ -1,5 +1,7 @@
 # LED Strip Controller Firmware
+
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![PlatformIO Build](https://github.com/ScottGibb/LED-Strip-Controller-Firmware/actions/workflows/Build.yaml/badge.svg?branch=main)](https://github.com/ScottGibb/LED-Strip-Controller-Firmware/actions/workflows/Build.yaml)
+
 <center>
 <img src="docs/Languages-And-Tools.png">
 </center>
@@ -33,7 +35,8 @@ This Project uses the PlatformIO Build system and as such adheres to their build
 │   └───User Mode Handlers
 ├───src
 └───test
-```
+```shell
+
 - docs: holds all diagrams and pictures related to the project
 - include: Holds the main header file responsible for the high-level aspects of the project
 - lib: contains all private libraries for the project.
