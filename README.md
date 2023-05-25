@@ -1,5 +1,7 @@
 # LED Strip Controller Firmware
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![PlatformIO Build](https://github.com/ScottGibb/LED-Strip-Controller-Firmware/actions/workflows/Build.yaml/badge.svg?branch=main)](https://github.com/ScottGibb/LED-Strip-Controller-Firmware/actions/workflows/Build.yaml)
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Static Analysis](https://github.com/ScottGibb/LED-Strip-Controller-Firmware/actions/workflows/Static%20Analysis.yaml/badge.svg)](https://github.com/ScottGibb/LED-Strip-Controller-Firmware/actions/workflows/Static%20Analysis.yaml) [![PlatformIO Build](https://github.com/ScottGibb/LED-Strip-Controller-Firmware/actions/workflows/Build.yaml/badge.svg?branch=main)](https://github.com/ScottGibb/LED-Strip-Controller-Firmware/actions/workflows/Build.yaml)
+
 <center>
 <img src="docs/Languages-And-Tools.png">
 </center>
@@ -16,7 +18,7 @@ As for the system architecture it's designed to be interacted with via a byte st
 
 This Project uses the PlatformIO Build system and as such adheres to their build structure and folder structure, the project is split into multiple folders outlined as follows:
 
-```
+```shell
 ├───docs
 ├───include
 ├───lib
@@ -34,11 +36,13 @@ This Project uses the PlatformIO Build system and as such adheres to their build
 ├───src
 └───test
 ```
+
 - docs: holds all diagrams and pictures related to the project
 - include: Holds the main header file responsible for the high-level aspects of the project
 - lib: contains all private libraries for the project.
 - src: contains the main application source code
 - test: contains all of the unit tests for the project.
+
 <center>
 
 ![System Architecture](docs/High_Level_System_Diagram.png)
@@ -61,7 +65,6 @@ The firmware is split into multiple layers which follow this layer convention:
 
 The idea behind this is that the Arduino layer is abstracted away from the rest of the firmware. This allows the firmware logic to be used across multiple platforms and prevents it from being tied into the Arduino framework.
 
-
 ## Memory Map
 
 The system does require some onboard memory to utilize the User Mode system. This allows the user to create custom colour waveforms and thus create custom effects. The memory map for the STM32F103C8T6 microcontroller is shown below:
@@ -69,7 +72,6 @@ The system does require some onboard memory to utilize the User Mode system. Thi
 <center>
 <img src = "docs/Memory Map.png">
 </center>
-
 
 ## Building the Project
 
@@ -85,4 +87,3 @@ This project uses the PlatformIO Build system and as such can be built using the
 - [Hardware](https://github.com/ScottGibb/LED-Strip-Controller-Hardware) This repository contains the hardware design files for the LED Strip Controller project.
 - [Firmware](https://github.com/ScottGibb/LED-Strip-Controller-Firmware) This repository contains the firmware for the LED Strip Controller project.
 - [Software](https://github.com/ScottGibb/LED-Strip-Controller-Software) This repository contains the software for the LED Strip Controller project.
-
