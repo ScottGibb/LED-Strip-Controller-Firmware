@@ -27,4 +27,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Run markdownlint
-        run: markdownlint '**/*.md'
+        run: |
+           echo "Checking Markdown files"
+           markdownlint '**/*.md'
+
+  JSON_Lint_Check:
+    name: JSON Lint Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install jsonlint
+        run: apt install python3-demjson
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run jsonlint
+        run: | 
+            echo "Checking JSON files"
+            # JSON Lint doesnt seem to like wildcards overly much
+            jsonlint **.json
+            jsonlint **/**/*.json
+
+
+      
