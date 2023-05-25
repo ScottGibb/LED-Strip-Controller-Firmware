@@ -1,9 +1,11 @@
+---
+
 name: Static Analysis
 
 on: [push]
 
 jobs:
-# Commenting out Shell Check as no shell scripts in this repo
+#   Commenting out Shell Check as no shell scripts in this repo
 #   Shell_Check:
 #     name: Shell Check
 #     runs-on: ubuntu-latest
@@ -40,11 +42,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Run jsonlint
-        run: | 
+        run: |
             echo "Checking JSON files"
             # JSON Lint doesnt seem to like wildcards overly much
             jsonlint **.json
             jsonlint **/**/*.json
 
-
-      
+  YAML_Lint_Check:
+    name: YAML Lint Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install yamllint
+        run: sudo apt install yamllint
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run yamllint
+        run: |
+            echo "Checking YAML files"
+            yamllint .github/**/**.yaml
