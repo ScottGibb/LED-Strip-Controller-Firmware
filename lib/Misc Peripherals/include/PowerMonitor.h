@@ -9,8 +9,8 @@
  *
  */
 
-#ifndef __POWER_MONITOR_H__
-#define __POWER_MONITOR_H__
+#ifndef POWER_MONITOR_H
+#define POWER_MONITOR_H
 
 #include "stdint.h"
 
@@ -39,7 +39,7 @@ public:
      * @param voltagePin The pin that the voltage sensor is connected too
      * @param updatePeriod The time in which the sensors are polled
      */
-    PowerMonitor(uint32_t currentPin, uint32_t voltagePin, uint32_t updatePeriod);
+    PowerMonitor(const uint32_t currentPin, const uint32_t voltagePin, const uint32_t updatePeriod);
     /**
      * @brief Destroy the Power Monitor object
      *
@@ -76,11 +76,12 @@ public:
     Power_t getStats(void);
 
 private:
-    uint32_t updatePeriod;
+    const uint32_t VOLTAGE_PIN;
+    const uint32_t CURRENT_PIN;
+    const uint32_t UPDATE_PERIOD;
     uint32_t lastUpdateTime;
+   
     Power_t powerStats;
-    uint32_t voltagePin;
-    uint32_t currentPin;
 };
 
 #endif

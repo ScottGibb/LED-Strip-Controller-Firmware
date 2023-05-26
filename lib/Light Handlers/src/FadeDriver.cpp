@@ -9,15 +9,13 @@
  *
  */
 #include "FadeDriver.h"
-
+// Project Includes
+#include "ColourDriver.h"
 // Library Includes
 #include <Arduino.h>
 #include <math.h>
-// Library Includes
-#include "ColourDriver.h"
 
-// Constansts
-static const uint32_t STEP_SIZE = 1; // ms
+
 
 FadeDriver::FadeDriver(RGBColourDriver *driver)
 {
@@ -48,7 +46,7 @@ void FadeDriver::startFade(FadeState_t fadeState)
   currentState = fadeState;
 }
 
-void FadeDriver::fadeLoop(void)
+void FadeDriver::fadeLoop()
 {
   if ((millis() - lastFadeUpdateTime > STEP_SIZE))
   {
@@ -99,19 +97,19 @@ void FadeDriver::fadeLoop(void)
   }
 }
 
-void FadeDriver::stopFade(void)
+void FadeDriver::stopFade()
 {
   currentState.fade = NONE;
   currentState.period = 0;
   currentState.halfPeriod = 0;
 }
 
-FadeState_t FadeDriver::getFade(void)
+FadeState_t FadeDriver::getFade()
 {
   return currentState;
 }
 
-void FadeDriver::squareWave(void)
+void FadeDriver::squareWave()
 {
   if (currentStep < currentState.halfPeriod)
   {
@@ -123,12 +121,12 @@ void FadeDriver::squareWave(void)
   }
 }
 
-void FadeDriver::sawToothWave(void)
+void FadeDriver::sawToothWave()
 {
   driver->setBrightness(((1.0 * (currentStep) / currentState.period)) * currentState.maxBrightness);
 }
 
-void FadeDriver::triangleWave(void)
+void FadeDriver::triangleWave()
 {
   if (currentStep < currentState.halfPeriod)
   {
@@ -141,7 +139,7 @@ void FadeDriver::triangleWave(void)
   }
 }
 
-void FadeDriver::sineWave(void)
+void FadeDriver::sineWave()
 {
 
   float angle = (currentStep * 1.0 / currentState.halfPeriod);

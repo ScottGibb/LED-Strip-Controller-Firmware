@@ -8,26 +8,29 @@
  * @copyright Copyright (c) 2022
  *
  */
-#ifndef __MAIN_H__
-#define __MAIN_H__
+#ifndef MAIN_H
+#define MAIN_H
+
+// System Includes
+#include "ColourDriver.h"
+#include "FadeDriver.h"
+#include "HueDriver.h"
+#include "LEDDriver.h"
+
+// Library Includes
+#include <vector>
+using namespace std;
+
 /**
  * @brief Select the MCU Used in the Design
  *
  */
 #define MCU_CHOICE 0
 
-// Library Includes
-using namespace std;
-#include <vector>
-// System Includes
-#include "LEDDriver.h"
-#include "HueDriver.h"
-#include "ColourDriver.h"
-#include "FadeDriver.h"
 
 // External variables
 extern vector<LEDDriver *> leds;
 extern vector<RGBColourDriver *> stripDrivers;
 extern vector<FadeDriver *> fadeDrivers;
 extern vector<HueDriver *> hueDrivers;
-#endif //__MAIN_H__
+#endif//MAIN_H

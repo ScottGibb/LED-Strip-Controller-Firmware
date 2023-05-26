@@ -26,24 +26,24 @@ static uint8_t prevBrightness[NUM_LEDS];
 static FadeState_t prevStates[NUM_LEDS];
 
 // External Variables
-uint8_t NUM_BUTTONS = 4;
-uint32_t buttonPins[4] = {BUTTON_1_PIN, BUTTON_2_PIN, BUTTON_3_PIN, BUTTON_4_PIN};
-func_type functions[4] = {buttonOneFunction, buttonTwoFunction, buttonThreeFunction, buttonFourFunction};
+const uint8_t NUM_BUTTONS = 4;
+const uint32_t buttonPins[4] = {BUTTON_1_PIN, BUTTON_2_PIN, BUTTON_3_PIN, BUTTON_4_PIN};
+const func_type functions[4] = {buttonOneFunction, buttonTwoFunction, buttonThreeFunction, buttonFourFunction};
 
 // Internal Function Prototypes
 static void toggleButtonLogic(uint8_t *brightness, FadeState_t *state, RGBColourDriver *colDriver, HueDriver *hueDriver, FadeDriver *fadeDriver);
 
 // External Function Prototypes
-void buttonOneFunction(void);
-void buttonTwoFunction(void);
-void buttonThreeFunction(void);
-void buttonFourFunction(void);
+void buttonOneFunction();
+void buttonTwoFunction();
+void buttonThreeFunction();
+void buttonFourFunction();
 
 /**
  * @brief Button One Logic
  *
  */
-void buttonOneFunction(void)
+void buttonOneFunction()
 {
   toggleButtonLogic(&prevBrightness[0], &prevStates[0], stripDrivers[0], hueDrivers[0], fadeDrivers[0]);
 }
@@ -52,7 +52,7 @@ void buttonOneFunction(void)
  * @brief Button Two Logic
  *
  */
-void buttonTwoFunction(void)
+void buttonTwoFunction()
 {
 
   toggleButtonLogic(&prevBrightness[1], &prevStates[1], stripDrivers[1], hueDrivers[1], fadeDrivers[1]);
@@ -62,7 +62,7 @@ void buttonTwoFunction(void)
  * @brief Button Three Logic
  *
  */
-void buttonThreeFunction(void)
+void buttonThreeFunction()
 {
 
   toggleButtonLogic(&prevBrightness[2], &prevStates[2], stripDrivers[2], hueDrivers[2], fadeDrivers[2]);
@@ -72,7 +72,7 @@ void buttonThreeFunction(void)
  * @brief Button Four Logic
  *
  */
-void buttonFourFunction(void)
+void buttonFourFunction()
 {
   static bool onOff = false;
 

@@ -1,11 +1,13 @@
-#ifndef __ABSTRACTUSERMODEHANDLER__H
-#define __ABSTRACTUSERMODEHANDLER__H
+#ifndef ABSTRACT_USER_MODE_HANDLER_H
+#define ABSTRACT_USER_MODE_HANDLER_H
 
-// Library Includes
-#include <stdint.h>
 // Project Includes
 #include "IModeHandler.h"
 #include "LEDDriver.h"
+
+// Library Includes
+#include <stdint.h>
+
 
 /**
  * @brief AbstractUserModeHandler
@@ -34,10 +36,12 @@ public:
      */
     virtual void loop() = 0;
 
+    AbstractUserModeHandler(const AbstractUserModeHandler &) = delete;
+    AbstractUserModeHandler &operator=(const AbstractUserModeHandler &) = delete;
 private:
     uint8_t *buffer;
     uint8_t length;
     LEDDriver *driver;
 };
 
-#endif
+#endif//ABSTRACT_USER_MODE_HANDLER_H

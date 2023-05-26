@@ -8,8 +8,8 @@
  * @copyright Copyright (c) 2022
  *
  */
-#ifndef __HUE_DRIVER_H__
-#define __HUE_DRIVER_H__
+#ifndef HUE_DRIVER_H
+#define HUE_DRIVER_H
 
 // Project Includes
 #include "LEDDriver.h"
@@ -74,4 +74,4 @@ private:
   void limiter(float *value, float minValue, float maxValue);
 };
 
-#endif
+#endif//HUE_DRIVER_H

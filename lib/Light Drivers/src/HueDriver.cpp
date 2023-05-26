@@ -11,9 +11,10 @@
 #include "HueDriver.h"
 // Project Includes
 #include "LEDDriver.h"
+
 // System Includes
-#include <stdint.h>
 #include <math.h>
+#include <stdint.h>
 
 HueDriver::HueDriver(LEDDriver *ledDriver)
 {

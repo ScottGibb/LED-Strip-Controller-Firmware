@@ -10,36 +10,34 @@
  */
 
 #include "PowerMonitor.h"
-
-// Library Includes
-#include <stdint.h>
-#include <Arduino.h>
 // Project Includes
 #include "PowerSensors.h"
-PowerMonitor::PowerMonitor(uint32_t currentPin, uint32_t voltagePin, uint32_t updatePeriod)
+// System Includes
+#include <Arduino.h>
+#include <stdint.h>
+
+PowerMonitor::PowerMonitor(uint32_t currentPin, uint32_t voltagePin, uint32_t updatePeriod) : VOLTAGE_PIN(voltagePin), CURRENT_PIN(currentPin),  UPDATE_PERIOD(updatePeriod)
 {
     powerStats.current = 0;
     powerStats.voltage = 0;
     powerStats.power = 0;
     powerStats.lastUpdated = 0;
     lastUpdateTime = 0;
-    this->updatePeriod = updatePeriod;
-    this->currentPin = currentPin;
-    this->voltagePin = voltagePin;
+ 
 }
 
 PowerMonitor::~PowerMonitor()
 {
 }
 
-void PowerMonitor::loop(void)
+void PowerMonitor::loop()
 {
-    if (millis() - lastUpdateTime > updatePeriod)
+    if (millis() - lastUpdateTime > UPDATE_PERIOD)
     {
 
         // Scan ADC Channels
-        uint16_t voltSense = analogRead(voltagePin);
-        uint16_t currentSense = analogRead(currentPin);
+        uint16_t voltSense = analogRead(VOLTAGE_PIN);
+        uint16_t currentSense = analogRead(CURRENT_PIN);
         // Perform Scalars and update
         float voltVoltage = (voltSense / ADC_RANGE) * MAX_ADC_VOLTAGE;
         float voltCurrent = (currentSense / ADC_RANGE) * MAX_ADC_VOLTAGE;
@@ -54,22 +52,22 @@ void PowerMonitor::loop(void)
     }
 }
 
-float PowerMonitor::getCurrent(void)
+float PowerMonitor::getCurrent()
 {
     return powerStats.current;
 }
 
-float PowerMonitor::getVoltage(void)
+float PowerMonitor::getVoltage()
 {
     return powerStats.voltage;
 }
 
-float PowerMonitor::getPower(void)
+float PowerMonitor::getPower()
 {
     return powerStats.power;
 }
 
-Power_t PowerMonitor::getStats(void)
+Power_t PowerMonitor::getStats()
 {
     return powerStats;
 }

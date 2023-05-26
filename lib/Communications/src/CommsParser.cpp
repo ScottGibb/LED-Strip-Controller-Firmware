@@ -11,27 +11,31 @@
  */
 #include "CommsParser.h"
 
-using namespace std;
-// Library Includes
-#include <Arduino.h>
-#include <vector>
-#include <stdint.h>
 // Project Includes
-#include "Main.h"
-#include "HueDriver.h"
-#include "LEDDriver.h"
+#include "Channels.h"
 #include "ColourDriver.h"
 #include "FadeDriver.h"
+#include "HueDriver.h"
 #include "ICommunicator.h"
+#include "LEDDriver.h"
+#include "Main.h"
 #include "MemoryHandler.h"
-#include "Channels.h"
+
+// Library Includes
+#include <Arduino.h>
+#include <stdint.h>
+#include <vector>
+
+using namespace std;
+
 /**
  * @brief Sets up the Communication channel
  *
  */
-CommsParser::CommsParser(vector<ICommunicator *> comms, uint32_t ledTxRate, uint32_t pwrTxRate)
-    : LED_TX_UPDATE_PERIOD(ledTxRate), PWR_TX_UPDATE_PERIOD(pwrTxRate)
+CommsParser::CommsParser(vector<ICommunicator *> comms, const uint32_t ledTxRate, const uint32_t pwrTxRate)
+    : LED_TX_UPDATE_PERIOD(ledTxRate), PWR_TX_UPDATE_PERIOD(pwrTxRate), lastLedTxUpdate(0), lastPwrUpdate(0)
 {
+
   this->comms = comms;
 
   memHandler = MemoryHandler::getInstance();
@@ -44,6 +48,11 @@ CommsParser::CommsParser(vector<ICommunicator *> comms, uint32_t ledTxRate, uint
   }
 
   loadMessages();
+}
+
+CommsParser::~CommsParser()
+{
+
 }
 
 /**
@@ -117,8 +126,8 @@ void CommsParser::parseAndUpdate(void)
 
 void CommsParser::ledChangeCommand(void)
 {
-  CHANNEL channel = (CHANNEL)rxBuff[1];
-  FADE_TYPE mode = (FADE_TYPE)rxBuff[2];
+  CHANNEL channel = static_cast<CHANNEL>(rxBuff[1]);
+  FADE_TYPE mode = static_cast<FADE_TYPE>(rxBuff[2]);
   selectDrivers(channel);
   if (channel == CHANNEL_NS)
   {
@@ -180,10 +189,10 @@ void CommsParser::sendLEDUpdate(void)
       txBuff[arrayPos] = i;
       for (uint8_t j = 0; j < numLeds; j++)
       {
-        txBuff[++arrayPos] = leds[j]->getPWM(LED_COLOUR(i)) && (0xFF000000 >> 24);
-        txBuff[++arrayPos] = leds[j]->getPWM(LED_COLOUR(i)) && (0x00FF0000 >> 16);
-        txBuff[++arrayPos] = leds[j]->getPWM(LED_COLOUR(i)) && (0x0000FF00 >> 8);
-        txBuff[++arrayPos] = leds[j]->getPWM(LED_COLOUR(i)) && (0x000000FF);
+        txBuff[++arrayPos] = leds[j]->getPWM(LED_COLOUR(i)) & (0xFF000000 >> 24);
+        txBuff[++arrayPos] = leds[j]->getPWM(LED_COLOUR(i)) & (0x00FF0000 >> 16);
+        txBuff[++arrayPos] = leds[j]->getPWM(LED_COLOUR(i)) & (0x0000FF00 >> 8);
+        txBuff[++arrayPos] = leds[j]->getPWM(LED_COLOUR(i)) & (0x000000FF);
       }
     }
     for (uint8_t i = 0; i < comms.size(); i++)

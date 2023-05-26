@@ -8,8 +8,8 @@
  * @copyright Copyright (c) 2022
  *
  */
-#ifndef __BUTTON_HANDLER_H__
-#define __BUTTON_HANDLER_H__
+#ifndef BUTTON_FUNCTIONS_H
+#define BUTTON_FUNCTIONS_H
 
 // Project Includes
 #include "ButtonsDriver.h"
@@ -18,9 +18,9 @@
 #include <stdint.h>
 
 // External Variables
-extern uint8_t NUM_BUTTONS;
-extern uint32_t buttonPins[];
-extern func_type functions[];
+extern const uint8_t NUM_BUTTONS;
+extern const uint32_t buttonPins[];
+extern const func_type functions[];
 
 // External Function Prototypes
 
@@ -45,4 +45,4 @@ extern void buttonThreeFunction(void);
  */
 extern void buttonFourFunction(void);
 
-#endif
+#endif//BUTTON_FUNCTIONS_H

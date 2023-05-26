@@ -8,8 +8,8 @@
  * @copyright Copyright (c) 2022
  *
  */
-#ifndef __FAN_CONTROLLER_H__
-#define __FAN_CONTROLLER_H__
+#ifndef FAN_CONTROLLER_H
+#define FAN_CONTROLLER_H
 
 #include <stdint.h>
 
@@ -25,7 +25,7 @@ public:
      *
      * @param fanPin
      */
-    FanController(uint32_t fanPin);
+    FanController(const uint32_t fanPin);
     /**
      * @brief Destroy the Fan Controller object
      *
@@ -46,9 +46,9 @@ public:
 
 private:
     const uint8_t MAX_PWM = 255;
+    const uint32_t FAN_PIN;
     uint8_t duty;
     uint8_t pwm;
-    uint32_t fanPin;
 };
 
-#endif
+#endif//FAN_CONTROLLER_H

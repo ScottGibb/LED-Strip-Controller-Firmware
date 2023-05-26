@@ -1,8 +1,8 @@
 #include "SerialCommunicator.h"
 
 // Library Includes
-#include <stdint.h>
 #include <Arduino.h>
+#include <stdint.h>
 
 #define CHOSEN_SERIAL Serial // USB Serial Selected
 

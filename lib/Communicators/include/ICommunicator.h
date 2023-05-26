@@ -28,4 +28,4 @@ public:
     virtual void transmit(uint8_t *buff, uint8_t len) = 0;
 };
 
-#endif
+#endif//ICOMMUNICATOR_H

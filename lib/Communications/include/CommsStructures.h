@@ -1,15 +1,26 @@
-#ifndef __COMMSSTRUCTURES_H__
-#define __COMMSSTRUCTURES_H__
+/**
+ * @file CommsStructures.h
+ * @brief Communications Structures Header File
+ * @version 0.1
+ * @date 2022-10-03
+ * 
+ * 
+*/
+#ifndef COMMSSTRUCTURES_H
+#define COMMSSTRUCTURES_H
+
+// Project Includes
+#include "Channels.h"
+#include "ColourDriver.h"
+#include "FadeDriver.h"
+#include "Main.h"
+#include "MemoryMap.h"
 
 // Library Includes
 #include <stdint.h>
 
-// Project Includes
-#include "ColourDriver.h"
-#include "FadeDriver.h"
-#include "Channels.h"
-#include "Main.h"
-#include "MemoryMap.h"
+
+
 
 // External Constants
 constexpr uint8_t controlCommsPacketLength = 10; // Data Structures Padded to this size
@@ -101,4 +112,4 @@ typedef struct
   enum CHANNEL channel : 8;     // 8 Bits Byte 1
   uint8_t userModeNo;           // 8 Bits Byte 2
 } UserModeChange_t;
-#endif
+#endif//COMMSSTRUCTURES_H

@@ -14,16 +14,11 @@
 #include <Arduino.h>
 #include <stdint.h>
 
-LEDDriver::LEDDriver(uint8_t redPin, uint8_t greenPin, uint8_t bluePin)
+LEDDriver::LEDDriver(const uint8_t redPin, const uint8_t greenPin, const uint8_t bluePin) : LED_PINS{redPin, greenPin, bluePin}
 {
-
-  ledPins[0] = redPin;
-  ledPins[1] = bluePin;
-  ledPins[2] = greenPin;
-
   for (uint8_t index = 0; index < LED_COLOUR_ENUM_LEN; index++)
   {
-    pinMode(ledPins[index], OUTPUT);
+    pinMode(LED_PINS[index], OUTPUT);
   }
 }
 
@@ -31,24 +26,24 @@ LEDDriver::~LEDDriver()
 {
   for (uint8_t index = 0; index < LED_COLOUR_ENUM_LEN; index++)
   {
-    pinMode(ledPins[index], INPUT);
+    pinMode(LED_PINS[index], INPUT);
   }
 }
 
 void LEDDriver::setPWM(enum LED_COLOUR colour, uint8_t pwm)
 {
-  analogWrite(ledPins[colour], pwm);
+  analogWrite(LED_PINS[colour], pwm);
 }
 
 void LEDDriver::setPWMS(uint8_t *pwms)
 {
   for (uint8_t i = 0; i < LED_COLOUR_ENUM_LEN; i++)
   {
-    analogWrite(ledPins[i], pwms[i]);
+    analogWrite(LED_PINS[i], pwms[i]);
   }
 }
 
 uint8_t LEDDriver::getPWM(enum LED_COLOUR colour)
 {
-  return ledPins[colour];
+  return LED_PINS[colour];
 }

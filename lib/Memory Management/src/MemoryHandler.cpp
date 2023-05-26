@@ -1,10 +1,11 @@
 #include "MemoryHandler.h"
 
-// Library Includes
-#include <EEPROM.h>
-#include <stdint.h>
+// System Includes
 #include <stdbool.h>
+#include <stdint.h>
 #include <map>
+#include <EEPROM.h>
+
 
 // Declaring an instance of Memory Handler
 MemoryHandler *MemoryHandler::instance = nullptr;

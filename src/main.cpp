@@ -9,28 +9,30 @@
  *
  */
 #include "Main.h"
-// Library Includes
-#include <Arduino.h>
-#include <vector>
-#include <map>
+
 // Project Includes
-#include "ICommunicator.h"
-#include "SerialCommunicator.h"
-#include "CommsParser.h"
+#include "Buttons.h"
 #include "ButtonsDriver.h"
-#include "Buttons.h"
-#include "FanController.h"
-#include "PowerMonitor.h"
-#include "PowerSensors.h"
 #include "Channels.h"
-#include "Buttons.h"
-#include "StatusIndicator.h"
+#include "CommsParser.h"
+#include "FanController.h"
+#include "ICommunicator.h"
+#include "Main.h"
 #include "MemoryHandler.h"
 #include "MemoryMap.h"
+#include "PowerMonitor.h"
+#include "PowerSensors.h"
+#include "SerialCommunicator.h"
+#include "StatusIndicator.h"
+
+// Library Includes
+#include <Arduino.h>
+#include <map>
+#include <vector>
 
 // Function Prototypes
-static void setupDrivers(void);
-static void setupMemory(void);
+static void setupDrivers();
+static void setupMemory();
 static void setupLED(uint32_t redPin, uint32_t greenPin, uint32_t bluePin);
 
 // Global Variables
@@ -52,7 +54,7 @@ MemoryHandler *memoryHandler;
  * @brief setup function for firmware intialisation
  *
  */
-void setup(void)
+void setup()
 {
   setupMemory();
   statusIndicator = new StatusIndicator(STATUS_LED_PIN);
@@ -70,7 +72,7 @@ void setup(void)
  * Consisting of soft timer application loops for LED Strip Drivers, comms and buttons
  *
  */
-void loop(void)
+void loop()
 {
   statusIndicator->loop();
   for (uint8_t i = 0; i < fadeDrivers.size(); i++)
@@ -86,7 +88,7 @@ void loop(void)
  * @brief Main Setup function for fimrware, calling all driver initialisation functions and creating all objects
  *
  */
-void setupDrivers(void)
+void setupDrivers()
 {
 
   // led One
@@ -124,10 +126,10 @@ void setupLED(uint32_t redPin, uint32_t greenPin, uint32_t bluePin)
  * @brief Sets up the memory structs for each segment of EEPROM memory
  *
  */
-void setupMemory(void)
+void setupMemory()
 {
 
-  MemoryMap_t systemInfoMap = {
+  const MemoryMap_t systemInfoMap = {
       .MEMORY_START = SYSTEM_INFO_START,
       .MEMORY_END = SYSTEM_INFO_END,
       .MEMORY_SIZE = SYSTEM_INFO_MEM_SIZE,
@@ -136,7 +138,7 @@ void setupMemory(void)
 
   };
 
-  MemoryMap_t channelControlMap = {
+  const MemoryMap_t channelControlMap = {
       .MEMORY_START = CHANNEL_CONTROL_START,
       .MEMORY_END = CHANNEL_CONTROL_END,
       .MEMORY_SIZE = CHANNEL_CONTROL_MEM_SIZE,
@@ -145,7 +147,7 @@ void setupMemory(void)
 
   };
 
-  MemoryMap_t userModeMap = {
+  const MemoryMap_t userModeMap = {
       .MEMORY_START = USER_MODE_START,
       .MEMORY_END = USER_MODE_END,
       .MEMORY_SIZE = USER_MODE_MEM_SIZE,

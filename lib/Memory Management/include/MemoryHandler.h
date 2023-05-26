@@ -1,8 +1,8 @@
-#ifndef __STATE_SAVER_H__
-#define __STATE_SAVER_H__
+#ifndef MEMORYHANDLER_H
+#define MEMORYHANDLER_H
 
-#include <stdint.h>
 #include <map>
+#include <stdint.h>
 
 /**
  * @brief SEGMENT enum, outlining the different memory segments
@@ -118,4 +118,4 @@ private:
   MEMORY_ERR checkValidity(SEGMENT seg, uint16_t pos, uint16_t dataLen);
 };
 
-#endif
+#endif//MEMORYHANDLER_H

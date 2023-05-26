@@ -8,13 +8,14 @@
  * @copyright Copyright (c) 2022
  *
  */
-#ifndef __COLOUR_DRIVER__H__
-#define __COLOUR_DRIVER__H__
+#ifndef COLOUR_DRIVER_H
+#define COLOUR_DRIVER_H
 
-// Library Includes
-#include <stdint.h>
 // Project Includes
 #include "LEDDriver.h"
+// Library Includes
+#include <stdint.h>
+
 // External Constants
 const uint8_t NUM_COLOURS = 13;
 
@@ -114,4 +115,4 @@ private:
   void setPWMSignals(uint8_t *colourPWMS, float brightness);
 };
 
-#endif
+#endif//COLOUR_DRIVER_H

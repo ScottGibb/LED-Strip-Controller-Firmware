@@ -1,12 +1,13 @@
-#ifndef __STATICPERIODHANDLER__H
-#define __STATICPERIODHANDLER__H
-
-// Library Includes
-#include <stdint.h>
+#ifndef STATIC_PERIOD_HANDLER_H
+#define STATIC_PERIOD_HANDLER_H
 
 // Project Includes
 #include "AbstractUserModeHandler.h"
 #include "LEDDriver.h"
+// System Includes
+#include <stdint.h>
+
+
 
 /**
  * @brief StaticPeriodHandler is used to interpet the user mode sequence for a static period sequence in which all the data points are spread out equally
@@ -38,4 +39,4 @@ public:
 private:
 };
 
-#endif
+#endif//STATIC_PERIOD_HANDLER_H

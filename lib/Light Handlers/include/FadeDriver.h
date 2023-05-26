@@ -8,14 +8,13 @@
  * @copyright Copyright (c) 2022
  *
  */
-#ifndef __FADE_DRIVER__H_
-#define __FADE_DRIVER__H_
-
-// Library Includes
-#include <stdint.h>
+#ifndef FADE_DRIVER_H
+#define FADE_DRIVER_H
 
 // Project Includes
 #include "ColourDriver.h"
+// Library Includes
+#include <stdint.h>
 
 // Constants
 const uint32_t NUM_MODES = 8;
@@ -83,19 +82,20 @@ public:
    * @brief Gets the current fade state
    * @return FadeState the current fade and its settings
    */
-  FadeState_t getFade(void);
+  FadeState_t getFade();
   /**
    * @brief The Fad Driver application loop
    * Call at frequency faster than 1/STEP_SIZE in order to maintain smooth fade transitions
    */
-  void fadeLoop(void);
+  void fadeLoop();
   /**
    * @brief Stops the current fade and resets all fade settings to default
    *
    */
-  void stopFade(void);
+  void stopFade();
 
 private:
+  const uint32_t STEP_SIZE = 1; // ms
   RGBColourDriver *driver;
   FadeState_t currentState;
   uint32_t lastFadeUpdateTime;
@@ -104,22 +104,22 @@ private:
    * @brief Soft timer implementation of the square wave signal
    *
    */
-  void squareWave(void);
+  void squareWave();
   /**
    * @brief Soft timer implementation of the sawTooth Waveform
    *
    */
-  void sawToothWave(void);
+  void sawToothWave();
   /**
    * @brief Soft timer implementation of the triangular waveform
    *
    */
-  void triangleWave(void);
+  void triangleWave();
   /**
    * @brief Soft Timer implementation of the sine waveform
    *
    */
-  void sineWave(void);
+  void sineWave();
 };
 
-#endif
+#endif//FADE_DRIVER_H

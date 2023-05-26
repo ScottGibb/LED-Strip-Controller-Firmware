@@ -10,32 +10,30 @@
  */
 #include "StatusIndicator.h"
 
-// Library Includes
-#include <stdint.h>
+// System Includes
 #include <Arduino.h>
-// Project Includes
+#include <stdint.h>
 
 /**
  * @brief Sets up Status Indicator LED Pin
  *
  */
-StatusIndicator::StatusIndicator(uint32_t pin)
+StatusIndicator::StatusIndicator(const uint32_t pin) : LED_PIN(pin)
 {
-  this->pin = pin;
-  pinMode(pin, OUTPUT);
-  digitalWrite(pin, pinState);
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, pinState);
 }
 
 /**
  * @brief Status Indicator loop responsible for calling the software timer to update the status indicator
  *
  */
-void StatusIndicator::loop(void)
+void StatusIndicator::loop()
 {
 
   if (millis() - lastUpdateTime > REFRESH_PERIOD)
   {
-    digitalWrite(pin, !pinState);
+    digitalWrite(LED_PIN, !pinState);
     pinState = !pinState;
     lastUpdateTime = millis();
   }

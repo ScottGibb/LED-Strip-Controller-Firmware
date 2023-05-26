@@ -14,20 +14,15 @@
 #include <Arduino.h>
 #include <stdint.h>
 
-ButtonsDriver::ButtonsDriver(uint32_t *buttonPins, uint8_t numButtons, func_type *funcs)
-{
-  this->buttonPins = buttonPins;
-  this->numButtons = numButtons;
-  this->functions = funcs;
-
+ButtonsDriver::ButtonsDriver(const uint32_t *buttonPins, const uint8_t numButtons, const func_type *funcs) : buttonPins(buttonPins), numButtons(numButtons), functions(funcs){
   for (uint8_t index = 0; index < numButtons; index++)
   {
     pinMode(buttonPins[index], INPUT);
   }
 
-  lastDebounceTimes = (uint32_t *)malloc(numButtons * sizeof(uint32_t));
-  buttonStates = (int *)malloc(numButtons * sizeof(int));
-  lastButtonStates = (int *)malloc(numButtons * sizeof(int));
+  lastDebounceTimes = new uint32_t[numButtons];
+  buttonStates = new int[numButtons];
+  lastButtonStates = new int[numButtons];
 
   for (uint8_t index = 0; index < numButtons; index++)
   {
@@ -38,9 +33,12 @@ ButtonsDriver::ButtonsDriver(uint32_t *buttonPins, uint8_t numButtons, func_type
 
 ButtonsDriver::~ButtonsDriver()
 {
+  delete[] lastDebounceTimes;
+  delete[] buttonStates;
+  delete[] lastButtonStates;
 }
 
-void ButtonsDriver::loop(void)
+void ButtonsDriver::loop()
 {
 
   for (uint8_t i = 0; i < numButtons; i++)

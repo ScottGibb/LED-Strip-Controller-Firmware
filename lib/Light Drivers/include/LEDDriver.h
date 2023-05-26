@@ -8,8 +8,8 @@
  * @copyright Copyright (c) 2022
  *
  */
-#ifndef __LED_DRIVER_H__
-#define __LED_DRIVER_H__
+#ifndef LED_DRIVER_H
+#define LED_DRIVER_H
 
 // Library Includes
 #include <stdint.h>
@@ -42,11 +42,11 @@ public:
   /**
    * @brief Construct a new LEDDriver::LEDDriver object
    * LED Driver object is responsible for interfacing directly with the pwm hardware
-   * @param[in] redPin Red RGB PWM Pin
-   * @param[in] greenPin Green RGB PWM Pin
-   * @param[in] bluePin Blue RGB PWM Pin
+   * @param[in] RED_PIN Red RGB PWM Pin
+   * @param[in] GREEN_PIN Green RGB PWM Pin
+   * @param[in] BLUE_PIN Blue RGB PWM Pin
    */
-  LEDDriver(uint8_t redPin, uint8_t greenPin, uint8_t bluePin);
+  LEDDriver(const uint8_t RED_PIN, const uint8_t GREEN_PIN, const uint8_t BLUE_PIN);
   /**
    * @brief Destroy the LEDDriver::LEDDriver object
    * Resets the pin to INPUT mode to reduce power consumption
@@ -75,7 +75,7 @@ public:
 
 private:
   uint8_t pwm[3] = {0};
-  uint8_t ledPins[LED_COLOUR_ENUM_LEN] = {0};
+  const uint8_t LED_PINS[LED_COLOUR_ENUM_LEN] = {0};
 };
 
-#endif
+#endif//LED_DRIVER_H

@@ -2,12 +2,13 @@
 #ifndef SERIALCOMMUNICATOR_H
 #define SERIALCOMMUNICATOR_H
 
+// Project Includes
+#include "ICommunicator.h"
+
 // Library Includes
 #include <stdint.h>
 
-// Project Includes
 
-#include "ICommunicator.h"
 
 /**
  * @brief SerialCommunicator Low level class concerned with interacting with the UART hardware and transmitting bytes
@@ -21,7 +22,7 @@ public:
      *
      * @param BAUDRATE the selected baudrate
      */
-    SerialCommunicator(uint32_t BAUDRATE);
+    SerialCommunicator(const uint32_t BAUDRATE);
     /**
      * @brief Destroy the Serial Communicator object
      *
@@ -34,4 +35,4 @@ public:
 private:
     const uint32_t BAUDRATE;
 };
-#endif
+#endif//SERIALCOMMUNICATOR_H

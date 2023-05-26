@@ -8,8 +8,8 @@
  * @copyright Copyright (c) 2022
  *
  */
-#ifndef __BUTTONS_DRIVER_H__
-#define __BUTTONS_DRIVER_H__
+#ifndef BUTTONS_DRIVER_H
+#define BUTTONS_DRIVER_H
 
 // Library Includes
 #include <stdint.h>
@@ -31,7 +31,7 @@ public:
    * @param[in] numButtons The Number of Buttons
    * @param[in] funcs The function assigned to each button
    */
-  ButtonsDriver(uint32_t *buttonPins, uint8_t numButtons, func_type *funcs);
+  ButtonsDriver(const uint32_t *buttonPins, const uint8_t numButtons, const func_type *funcs);
   /**
    * @brief ButtonsDriver Deconstructor
    *
@@ -44,14 +44,18 @@ public:
    */
   void loop(void);
 
+  ButtonsDriver(const ButtonsDriver &) = delete;
+  ButtonsDriver &operator=(const ButtonsDriver &) = delete;
+
 private:
-  uint32_t *buttonPins;
-  uint8_t numButtons;
-  uint32_t *lastDebounceTimes;
+  const uint32_t *buttonPins;
+  const uint8_t numButtons;
+  const func_type *functions;
   int *buttonStates;
   int *lastButtonStates;
+  uint32_t *lastDebounceTimes;
   const uint32_t MAX_DEBOUNCE_TIME = 50;
-  func_type *functions;
+
 };
 
-#endif
+#endif//BUTTONS_DRIVER_H

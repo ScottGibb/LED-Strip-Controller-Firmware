@@ -8,16 +8,19 @@
  * @copyright Copyright (c) 2022
  *
  */
-#ifndef __COMMS_PARSER_H__
-#define __COMMS_PARSER_H__
+#ifndef COMMS_PARSER_H
+#define COMMS_PARSER_H
 
-// Library Includes
-#include <stdint.h>
-#include <vector>
+
+
 // Project Includes
 #include "CommsStructures.h"
 #include "ICommunicator.h"
 #include "MemoryHandler.h"
+
+// Library Includes
+#include <stdint.h>
+#include <vector>
 
 /**
  * @brief CommsParser class concerned with byte level parsing and updating the corresponding drivers
@@ -33,7 +36,7 @@ public:
      * @param ledTxRate //the rate in ms in which led update messages will be sent
      * @param pwrTxRate //the rate in ms in which pwr update messages will be sent
      */
-    CommsParser(vector<ICommunicator *> comms, uint32_t ledTxRate, uint32_t pwrTxRate);
+    CommsParser(vector<ICommunicator *> comms, const uint32_t ledTxRate, const uint32_t pwrTxRate);
     /**
      * @brief Destroy the Comms Parser object
      *
@@ -96,4 +99,4 @@ private:
     void loadMessages(void);
 };
 
-#endif
+#endif//COMMS_PARSER_H

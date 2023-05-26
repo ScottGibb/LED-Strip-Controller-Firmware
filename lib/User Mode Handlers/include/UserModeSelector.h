@@ -1,12 +1,14 @@
-#ifndef __USERMODESELECTOR__H
-#define __USERMODESELECTOR__H
-
-// Library Includes
-#include <stdint.h>
+#ifndef USER_MODE_SELECTOR_H
+#define USER_MODE_SELECTOR_H
 
 // Project Includes
-#include "LEDDriver.h"
 #include "IModeHandler.h"
+#include "LEDDriver.h"
+
+// System Includes
+#include <stdint.h>
+
+
 
 /**
  * @brief MEMORY_MODE enum outlining the different ways the memory for user mode can be interpreted
@@ -70,4 +72,4 @@ private:
     MEMORY_MODE mode;
 };
 
-#endif
+#endif//USER_MODE_SELECTOR_H

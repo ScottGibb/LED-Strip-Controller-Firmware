@@ -1,11 +1,13 @@
 #include "UserModeSelector.h"
 
-// Library Includes
-#include <stdint.h>
-
 // Project Includes
 #include "StaticPeriodHandler.h"
 #include "LEDDriver.h"
+
+// System Includes
+#include <stdint.h>
+
+
 
 UserModeSelector::UserModeSelector(LEDDriver *driver)
     : driver(driver)

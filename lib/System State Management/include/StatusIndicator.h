@@ -8,8 +8,8 @@
  * @copyright Copyright (c) 2022
  *
  */
-#ifndef __STATUS_INDICATOR_H__
-#define __STATUS_INDICATOR_H__
+#ifndef STATUS_INDICATOR_H
+#define STATUS_INDICATOR_H
 
 #include <stdint.h>
 
@@ -17,14 +17,14 @@
 class StatusIndicator
 {
 public:
-    StatusIndicator(uint32_t pin);
+    StatusIndicator(const uint32_t pin);
     void loop(void);
 
 private:
+    const uint32_t LED_PIN;
     const uint32_t REFRESH_PERIOD = 500;
     uint32_t lastUpdateTime = {0};
     bool pinState = {false};
-    uint32_t pin;
 };
 
 #endif
