@@ -1,84 +1,89 @@
 # LED Strip Controller Firmware
 
-The LED Strip firmware is written using the Arduino framework. This allowed for a higher abstraction level achieved as well as STM32 clones to be used. A such a C++ Object orientated design was taken. Resulting in a set of Drivers and Handlers. The Resulting Firmware layers are shown below:
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Static Analysis](https://github.com/ScottGibb/LED-Strip-Controller-Firmware/actions/workflows/Static%20Analysis.yaml/badge.svg)](https://github.com/ScottGibb/LED-Strip-Controller-Firmware/actions/workflows/Static%20Analysis.yaml) [![PlatformIO Build](https://github.com/ScottGibb/LED-Strip-Controller-Firmware/actions/workflows/Build.yaml/badge.svg?branch=main)](https://github.com/ScottGibb/LED-Strip-Controller-Firmware/actions/workflows/Build.yaml)
 
-![Firmware Layers](../docs/Diagrams-Firmware%20Abstraction%20Layers.png)
+<center>
+<img src="docs/Languages-And-Tools.png">
+</center>
 
-As you can see in the above diagram, the system is built on a set of layers, each of which get more and more abstracted from the hardware. As you go up the stack, the concepts of pins and hardware specific functions becomes non existent.
+## Summary
 
-### Class Diagram
+This repository contains all the firmware to control the LED Strip Controller Hardware variations. The firmware is written in C++ using the Arduino framework, originally I wanted to use the STM32 HAL Drivers, however, the STM32 Microcontrollers were cloned and this resulted in the Arduino framework being used. The firmware is designed to be as flexible as possible, whilst maintaining an easy-to-use interface. The firmware is designed to be used with the LED Strip Controller Software Applications that are described below. The firmware is designed to be used with different microcontrollers.
 
+## System Architecture
 
-As for the classes used in the design, the class diagram for the system is shown below:
+As for the system architecture it's designed to be interacted with via a byte stream sent over an interface. At present there is a UART interface over USB. However, there are plans to utilize an IP interface over WiFi. The byte stream is then parsed by the firmware and the appropriate action is taken. The firmware is designed to be as flexible as possible, whilst maintaining an easy-to-use interface. The firmware is designed to be used with the LED Strip Controller Software Applications. The architecture of the full system is shown below:
 
-![Class Diagram](../docs/Diagrams-Firmware%20Class%20Diagram.png)
+## Project Structure
 
-There are many different types of classes in this design, which use structs as their configuration variables. Due to the complexity of the design, not all variables and methods are shown in the UML diagram. As well as this due to the nature of C++ code, not every file is a class. Files with methods that are not object orientated are highlighted in this diagram using a thick border. Examples of this are Firmware and CommsParser.
+This Project uses the PlatformIO Build system and as such adheres to their build structure and folder structure, the project is split into multiple folders outlined as follows:
 
-### ButtonsDriver
+```shell
+├───docs
+├───include
+├───lib
+│   ├───Board Configurations
+│   ├───Buttons
+│   ├───Communications
+│   ├───Communicators
+│   ├───Light Drivers
+│   ├───Light Handlers
+│   ├───Memory Management
+│   ├───Misc Peripherals
+│   ├───System Configuration
+│   ├───System State Management
+│   └───User Mode Handlers
+├───src
+└───test
+```
 
-The ButtonsDriver class is responsible for running a software timed button system. This class constantly polls the pins fed into the object and will call the corresponding assigned function when a debounced button press happens. This was chosen over a interrupt based system, due to the ability of being able to place this object on any system regardless of wether the system had available interrupts.
+- docs: holds all diagrams and pictures related to the project
+- include: Holds the main header file responsible for the high-level aspects of the project
+- lib: contains all private libraries for the project.
+- src: contains the main application source code
+- test: contains all of the unit tests for the project.
 
-### Button Handler
+<center>
 
-The Button Handler file is not a class but rather a collection of functions that can be pointed too by the ButtonsDriver.
+![System Architecture](docs/High_Level_System_Diagram.png)
 
-### LEDDriver
+</center>
 
-At the lowest layer of abstraction there is an LEDDriver object which is responsible for sending the appropriate PWM signals to the physical hardware led. Due to the hardware using a RGD leds, this class effectively works as an RGB driver allowing the system to set individual colour intensities.
+## Firmware Design
 
-### Colour Drivers
+The firmware is designed to utilize modern C++ principles and be fully object orientated. This was done to allow me to utilize the full power of the C++ language and also allow me to learn new features regarding the language. The class diagram for the firmware is shown below:
 
-At the next set of abstraction are a set of colour driving classes which do a variety of different functions. They all contain a reference to the the LEDDriver which is responsible for the PWM generation. This set of classes provided an extra level of abstraction for creating more complicated lighting effects.
+<center>
+<img src = "docs/Diagrams-Firmware Class Diagram.png">
+</center>
 
-#### ColourDriver
+The firmware is split into multiple layers which follow this layer convention:
 
-The first driver for this was the ColourDriver class which is a very simple class that allow the user to select a colour from the COLOUR enum and the driver will then set the LEDs to this colour, the user can then set the brightness of this colour and the driver will work out how to do the rest.
+<center>
+<img src = "docs/Diagrams-Firmware Abstraction Layers.png">
+</center>
 
-#### FadeDriver
+The idea behind this is that the Arduino layer is abstracted away from the rest of the firmware. This allows the firmware logic to be used across multiple platforms and prevents it from being tied into the Arduino framework.
 
-As for the Fade Driver, this is a special class which uses the colourDriver currently and a predefined method to create different patterns such as square, triangle and sine waves. This is all done inside the driver class. To add more to this simply add a new private method for the pattern and call it with the loop inside the class. Again these methods are designed to be polling and non-blocking methods
+## Memory Map
 
-#### HueDriver
+The system does require some onboard memory to utilize the User Mode system. This allows the user to create custom colour waveforms and thus create custom effects. The memory map for the STM32F103C8T6 microcontroller is shown below:
 
-Finally the last Driver to be discussed is the HueDriver, this is due to the need to have Hue control rather than RGB control. When integrating with Alexa, Node-Red uses Hue values rather than RGB. As such this functionality was built into the firmware using this converter class.
+<center>
+<img src = "docs/Memory Map.png">
+</center>
 
-### FanController
+## Building the Project
 
-Due to the ongoing switching and power regulation a fan was added to the design, As for controlling this fan it was decided that PWM control of the fan would be ideal so that it wasn't constantly on.
+This project uses the PlatformIO Build system and as such can be built using the PlatformIO IDE or the PlatformIO CLI. For this simply clone this repository and open the folder using the PlatformIO plugin in VSCode. The IDE should then flag and install all the dependencies based on the platform.ini file.
 
-### CommsParser
+- [PlatformIO](https://platformio.org/)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [PlatformIO Plugin for VSCode](https://marketplace.visualstudio.com/items?itemName=platformio.platformio-ide)
 
-The CommsParser class is responsible for decoding incoming messages and performing the corresponding actions. This means that this file is usually in control of the system as it responds to incoming requests from the user via a range of possible communicators. The class queries every communicator for their command messages.
+## LED Strip Controller Repository Links
 
-### ICommunicator
-
-The ICommunicator class is a pure virtual class which contains both a receive and transmit method that will be implemented in the corresponding concrete classes.
-
-#### SerialCommunicator
-
-One of the concrete communicator classes is the SerialCommunicator class which does both the transmitting and receiving on UART USB Serial. This can be changed using the #define SERIAL in the class cpp file.
-
-#### IPCommunicator
-
-Is for future implementations, where WiFi enabled microcontrollers are used to run the system and the hardware API will be accesed over an apropriate IP method.
-
-### StateSaver
-
-The StateSaver object is used to store the most recent commands sent to to the hardware, this is done so that they can be reloaded at the next boot sequence allowing the system to store its previous state. //todo Finish implementing this code
-
-### PowerMonitor
-
-One of the additional classes added to the firmware is the PowerMonitor class which is used to read voltage and current values from the PCB that the system sits on. It does this using current and voltage scalars so is independent on exact hardware, however these values are scaled using adc channels. So analogue sensors are required.
-
-### StatusIndicator
-
-Finally the last files to be discussed with this architecture is the StatusIndicator class. Which is a very simple class for simply flashing the on-board led, this is done to show the user that the system has not hung as the light will always flash if the main loop is running.
-
-## Improvements
-
-Many improvements to the firmware can be made, starting with the transitions to STM32 HAL based firmware. This would reduce the code size as well as allow more hardware features to be used such as removing the need for a polling based design and introducing a purely interrupt and timer driven architecture.
-
-## Useful Links
-
-- [STM32duino](https://github.com/stm32duino)
+- [Manifest](https://github.com/ScottGibb/LED-Strip-Controller-Manifest) This repository contains the manifest file for the LED Strip Controller project. Which allows the cloning of all the repositories in one go.
+- [Hardware](https://github.com/ScottGibb/LED-Strip-Controller-Hardware) This repository contains the hardware design files for the LED Strip Controller project.
+- [Firmware](https://github.com/ScottGibb/LED-Strip-Controller-Firmware) This repository contains the firmware for the LED Strip Controller project.
+- [Software](https://github.com/ScottGibb/LED-Strip-Controller-Software) This repository contains the software for the LED Strip Controller project.
