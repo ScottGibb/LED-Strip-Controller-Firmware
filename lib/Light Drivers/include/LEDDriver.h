@@ -13,10 +13,9 @@
 
 // Library Includes
 #include <stdint.h>
+#include <array>
 
-// LED PWM Constants
-const uint8_t MAX_PWM = 255;
-const uint8_t MIN_PWM = 0;
+
 // Constants
 const uint8_t NUM_LEDS = 3;
 /**
@@ -27,9 +26,9 @@ enum LED_COLOUR
 {
   RED_ = 0,
   GREEN_ = 1,
-  BLUE_ = 2
+  BLUE_ = 2,
+  LED_COLOUR_ENUM_LEN =3
 };
-const uint8_t LED_COLOUR_ENUM_LEN = NUM_LEDS;
 
 /**
  * @brief LED Driver Class Declaration
@@ -39,14 +38,17 @@ const uint8_t LED_COLOUR_ENUM_LEN = NUM_LEDS;
 class LEDDriver
 {
 public:
+  // LED PWM Constants
+  static const uint8_t MAX_PWM = 255;
+  static const uint8_t MIN_PWM = 0;
   /**
    * @brief Construct a new LEDDriver::LEDDriver object
    * LED Driver object is responsible for interfacing directly with the pwm hardware
-   * @param[in] RED_PIN Red RGB PWM Pin
-   * @param[in] GREEN_PIN Green RGB PWM Pin
-   * @param[in] BLUE_PIN Blue RGB PWM Pin
+   * @param[in] redPin Red RGB PWM Pin
+   * @param[in] greenPin Green RGB PWM Pin
+   * @param[in] bluePin Blue RGB PWM Pin
    */
-  LEDDriver(const uint8_t RED_PIN, const uint8_t GREEN_PIN, const uint8_t BLUE_PIN);
+  LEDDriver(const uint8_t redPin, const uint8_t greenPin, const uint8_t bluePin);
   /**
    * @brief Destroy the LEDDriver::LEDDriver object
    * Resets the pin to INPUT mode to reduce power consumption
@@ -58,24 +60,25 @@ public:
    * @param[in] colour the colour that pwm value is to be changed
    * @param[in] pwm the pwm to be used on the colour
    */
-  void setPWM(enum LED_COLOUR colour, uint8_t pwm);
+  void setPWM(const enum LED_COLOUR colour, uint8_t pwm);
   /**
    * @brief Setter for PWM of all RGB LEDS
    *
    * @param[in] pwms an array containing the new pwm values to be applied to the RGB LED
    */
-  void setPWMS(uint8_t *pwms);
+  void setPWMS(const uint8_t *pwms);
   /**
    * @brief Getter for the individual PWM values of the RGB LED
    *
    * @param[in] colour selected colour
    * @return[in] uint8_t the pwm cycle currently being used
    */
-  uint8_t getPWM(enum LED_COLOUR colour);
+  uint8_t getPWM(const enum LED_COLOUR colour);
 
 private:
-  uint8_t pwm[3] = {0};
-  const uint8_t LED_PINS[LED_COLOUR_ENUM_LEN] = {0};
+  std::array<uint8_t, LED_COLOUR::LED_COLOUR_ENUM_LEN> pwms;
+  const std::array<uint8_t, LED_COLOUR::LED_COLOUR_ENUM_LEN> LED_PINS;
+
 };
 
 #endif//LED_DRIVER_H

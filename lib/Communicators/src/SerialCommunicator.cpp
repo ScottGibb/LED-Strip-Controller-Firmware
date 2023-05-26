@@ -21,8 +21,9 @@ bool SerialCommunicator::loop(uint8_t *buff, uint8_t len)
 
         CHOSEN_SERIAL.readBytes((char *)buff, len);
         return true;
+    }else{
+        return false;
     }
-    return false;
 }
 void SerialCommunicator::transmit(uint8_t *buff, uint8_t len)
 {

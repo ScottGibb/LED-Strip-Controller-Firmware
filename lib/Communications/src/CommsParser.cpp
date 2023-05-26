@@ -59,7 +59,7 @@ CommsParser::~CommsParser()
  * @brief Responsible for calling send and receive functions
  *
  */
-void CommsParser::loop(void)
+void CommsParser::loop()
 {
   for (uint8_t i = 0; i < comms.size(); i++)
   {
@@ -111,7 +111,7 @@ void CommsParser::selectDrivers(enum CHANNEL channel)
  * | CTRL_CMD_ID | Channel | Mode |  Hue   | Saturation | Brightness |
  * @return |*
  */
-void CommsParser::parseAndUpdate(void)
+void CommsParser::parseAndUpdate()
 {
   switch ((CTRL_CMD_ID)rxBuff[0])
   {
@@ -124,7 +124,7 @@ void CommsParser::parseAndUpdate(void)
   }
 }
 
-void CommsParser::ledChangeCommand(void)
+void CommsParser::ledChangeCommand()
 {
   CHANNEL channel = static_cast<CHANNEL>(rxBuff[1]);
   FADE_TYPE mode = static_cast<FADE_TYPE>(rxBuff[2]);
@@ -175,7 +175,7 @@ void CommsParser::ledChangeCommand(void)
  * | UPDATE ID |  NUM LEDS | LED NUM |  RED  | GREEN | BLUE | XXXX
  *
  */
-void CommsParser::sendLEDUpdate(void)
+void CommsParser::sendLEDUpdate()
 {
   if (millis() - lastLedTxUpdate > LED_TX_UPDATE_PERIOD)
   {
@@ -203,14 +203,14 @@ void CommsParser::sendLEDUpdate(void)
   }
 }
 
-void CommsParser::saveMessage(void)
+void CommsParser::saveMessage()
 {
   CHANNEL channel = (CHANNEL)rxBuff[1];
   uint8_t savePos = static_cast<uint8_t>(channel) - 1;
   memHandler->saveData(SEGMENT::CHANNEL_CMDS, savePos, rxBuff, controlCommsPacketLength);
 }
 
-void CommsParser::loadMessages(void)
+void CommsParser::loadMessages()
 {
   for (uint8_t i = 0; i < leds.size(); i++)
   {

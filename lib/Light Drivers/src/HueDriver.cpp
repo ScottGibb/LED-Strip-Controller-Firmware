@@ -34,40 +34,40 @@ void HueDriver::setHue(HSV_t hsv)
   //-------------------------------------------------------------
   // https://www.codespeedy.com/hsv-to-rgb-in-cpp/
 
-  float s = hsv.saturation / 100;
-  float v = hsv.value / 100;
-  float C = s * v;
+  float saturation = hsv.saturation / 100;
+  float value = hsv.value / 100;
+  float C = saturation * value;
   float X = C * (1 - abs(fmod(hsv.hue / 60.0, 2) - 1));
-  float m = v - C;
-  float r, g, b;
+  float m = value - C;
+  float red, green, blue ={0};
   if (hsv.hue >= 0 && hsv.hue < 60)
   {
-    r = C, g = X, b = 0;
+    red = C, green = X, blue = 0;
   }
   else if (hsv.hue >= 60 && hsv.hue < 120)
   {
-    r = X, g = C, b = 0;
+    red = X, green = C, blue = 0;
   }
   else if (hsv.hue >= 120 && hsv.hue < 180)
   {
-    r = 0, g = C, b = X;
+    red = 0, green = C, blue = X;
   }
   else if (hsv.hue >= 180 && hsv.hue < 240)
   {
-    r = 0, g = X, b = C;
+    red = 0, green = X, blue = C;
   }
   else if (hsv.hue >= 240 && hsv.hue < 300)
   {
-    r = X, g = 0, b = C;
+    red = X, green = 0, blue = C;
   }
   else
   {
-    r = C, g = 0, b = X;
+    red = C, green = 0, blue = X;
   }
   uint8_t rgb[NUM_LEDS];
-  rgb[0] = (r + m) * 255;
-  rgb[1] = (g + m) * 255;
-  rgb[2] = (b + m) * 255;
+  rgb[0] = (red + m) * 255;
+  rgb[1] = (green + m) * 255;
+  rgb[2] = (blue + m) * 255;
   //------------------------------------------------------------
   ledDriver->setPWMS(rgb);
 }
@@ -88,7 +88,7 @@ void HueDriver::limiter(float *value, float minValue, float maxValue)
     *value = minValue;
   }
 }
-HSV_t HueDriver::getHue(void)
+HSV_t HueDriver::getHue()
 {
   return currentHSV;
 }

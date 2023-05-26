@@ -12,11 +12,12 @@
 
 // Library Includes
 #include <Arduino.h>
+#include <array>
 #include <stdint.h>
 
 LEDDriver::LEDDriver(const uint8_t redPin, const uint8_t greenPin, const uint8_t bluePin) : LED_PINS{redPin, greenPin, bluePin}
 {
-  for (uint8_t index = 0; index < LED_COLOUR_ENUM_LEN; index++)
+  for (uint8_t index = 0; index < LED_COLOUR::LED_COLOUR_ENUM_LEN; index++)
   {
     pinMode(LED_PINS[index], OUTPUT);
   }
@@ -24,18 +25,18 @@ LEDDriver::LEDDriver(const uint8_t redPin, const uint8_t greenPin, const uint8_t
 
 LEDDriver::~LEDDriver()
 {
-  for (uint8_t index = 0; index < LED_COLOUR_ENUM_LEN; index++)
+  for (uint8_t index = 0; index < LED_COLOUR::LED_COLOUR_ENUM_LEN; index++)
   {
     pinMode(LED_PINS[index], INPUT);
   }
 }
 
-void LEDDriver::setPWM(enum LED_COLOUR colour, uint8_t pwm)
+void LEDDriver::setPWM(const enum LED_COLOUR colour, const uint8_t pwm)
 {
   analogWrite(LED_PINS[colour], pwm);
 }
 
-void LEDDriver::setPWMS(uint8_t *pwms)
+void LEDDriver::setPWMS(const uint8_t *pwms)
 {
   for (uint8_t i = 0; i < LED_COLOUR_ENUM_LEN; i++)
   {
@@ -43,7 +44,7 @@ void LEDDriver::setPWMS(uint8_t *pwms)
   }
 }
 
-uint8_t LEDDriver::getPWM(enum LED_COLOUR colour)
+uint8_t LEDDriver::getPWM(const enum LED_COLOUR colour)
 {
   return LED_PINS[colour];
 }

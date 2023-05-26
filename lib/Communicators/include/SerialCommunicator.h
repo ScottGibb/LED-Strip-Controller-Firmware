@@ -29,8 +29,8 @@ public:
      */
     ~SerialCommunicator();
 
-    bool loop(uint8_t *buff, uint8_t len);
-    void transmit(uint8_t *buff, uint8_t len);
+    bool loop(uint8_t *buff, uint8_t len) final;
+    void transmit(uint8_t *buff, uint8_t len) final;
 
 private:
     const uint32_t BAUDRATE;

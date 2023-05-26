@@ -46,7 +46,7 @@ public:
      * @brief Soft Timed loop for comm parsing
      *
      */
-    void loop(void);
+    void loop();
 
 private:
     vector<ICommunicator *> comms;
@@ -77,26 +77,26 @@ private:
      * @brief Parses the incoming message and updates the corresponding drivers
      *
      */
-    void parseAndUpdate(void);
+    void parseAndUpdate();
     /**
      * @brief Soft timed method that will send out periodic updates of what the LEDs are currently doing
      *
      */
-    void sendLEDUpdate(void);
+    void sendLEDUpdate();
     /**
      * @brief Parses the buffer message concerning the led
      *
      */
-    void ledChangeCommand(void);
+    void ledChangeCommand();
     /**
      * @brief Saves a message for offline storage
      *
      */
-    void saveMessage(void);
+    void saveMessage();
     /**
      * @brief Loads messages from offline storage
      */
-    void loadMessages(void);
+    void loadMessages();
 };
 
 #endif//COMMS_PARSER_H
