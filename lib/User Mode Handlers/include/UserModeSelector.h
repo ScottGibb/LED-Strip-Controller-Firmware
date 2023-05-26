@@ -16,7 +16,8 @@ enum class MEMORY_MODE
 {
     STATIC_MODE = 0,
     DYNAMIC_MODE = 1,
-    NOT_SELECTED = 2
+    NOT_SELECTED = 2,
+    MEMORY_MODE_LEN = 3
 };
 
 /**

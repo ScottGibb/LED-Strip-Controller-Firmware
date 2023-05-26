@@ -18,7 +18,7 @@
 RGBColourDriver::RGBColourDriver(LEDDriver *driver)
 {
   this->driver = driver;
-  uint8_t zeroPWM[NUM_LEDS] = {0};
+  uint8_t zeroPWM[LEDDriver::NUM_LEDS] = {0};
   this->driver->setPWMS(zeroPWM);
   colourState.bluePWM = 0;
   colourState.redPWM = 0;
@@ -37,7 +37,7 @@ void RGBColourDriver::setColour(enum COLOUR colour)
 
 void RGBColourDriver::setColour(enum COLOUR colour, float brightness)
 {
-  uint8_t colourPWMS[NUM_LEDS] = {0};
+  std::array<uint8_t,LEDDriver::NUM_LEDS>colourPWMS = {0};
   switch (colour)
   {
 
@@ -93,7 +93,8 @@ void RGBColourDriver::setColour(enum COLOUR colour, float brightness)
     break;
   }
   colourState.colour = colour;
-  setPWMSignals(colourPWMS, brightness);
+
+  setPWMSignals(colourPWMS.data(), brightness);//todo Temporary Compiler Fix
 }
 
 enum COLOUR RGBColourDriver::getColour()

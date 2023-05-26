@@ -17,7 +17,6 @@
 #include "CommsParser.h"
 #include "FanController.h"
 #include "ICommunicator.h"
-#include "Main.h"
 #include "MemoryHandler.h"
 #include "MemoryMap.h"
 #include "PowerMonitor.h"

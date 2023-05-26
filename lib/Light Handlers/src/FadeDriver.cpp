@@ -15,15 +15,13 @@
 #include <Arduino.h>
 #include <math.h>
 
-FadeDriver::FadeDriver(RGBColourDriver *driver)
+FadeDriver::FadeDriver(RGBColourDriver *driver) : driver(driver),currentStep(0)
 {
-  this->driver = driver;
   lastFadeUpdateTime = millis();
   currentState.fade = NONE;
   currentState.period = 0;
   currentState.halfPeriod = 0;
   currentState.maxBrightness = 0;
-  currentStep = 0;
 }
 
 FadeDriver::~FadeDriver()
@@ -82,13 +80,13 @@ void FadeDriver::fadeLoop()
       currentStep = 0;
       if (currentState.fade == COLOUR_CHANGE)
       {
-        uint8_t col = (uint8_t)driver->getColour();
+        uint8_t col = static_cast<uint8_t>(driver->getColour());
         col++;
         if (col == NUM_COLOURS)
         {
           col = 0;
         }
-        driver->setColour(COLOUR(col));
+        driver->setColour(static_cast<COLOUR>(col));
       }
     }
     lastFadeUpdateTime = millis();
@@ -127,16 +125,17 @@ void FadeDriver::sawToothWave()
 
 void FadeDriver::triangleWave()
 {
+  uint8_t brightness = 0;
   if (currentStep < currentState.halfPeriod)
   {
-    uint8_t brightness = static_cast<uint8_t>((((currentStep)*1.0) / currentState.halfPeriod) * currentState.maxBrightness);
-    driver->setBrightness(brightness);
+    brightness = static_cast<uint8_t>((((currentStep)*1.0) / currentState.halfPeriod) * currentState.maxBrightness);
   }
   else
   {
-    uint8_t brightness = (((currentState.period - currentStep) * 1.0) / currentState.halfPeriod) * currentState.maxBrightness;
-    driver->setBrightness(brightness);
+    brightness = (((currentState.period - currentStep) * 1.0) / currentState.halfPeriod) * currentState.maxBrightness;
   }
+  driver->setBrightness(brightness);
+
 }
 
 void FadeDriver::sineWave()
