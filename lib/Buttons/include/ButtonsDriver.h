@@ -55,7 +55,6 @@ private:
   int *lastButtonStates;
   uint32_t *lastDebounceTimes;
   const uint32_t MAX_DEBOUNCE_TIME = 50;
-
 };
 
-#endif//BUTTONS_DRIVER_H
+#endif // BUTTONS_DRIVER_H

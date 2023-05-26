@@ -7,8 +7,6 @@
 // System Includes
 #include <stdint.h>
 
-
-
 UserModeSelector::UserModeSelector(LEDDriver *driver)
     : driver(driver)
 {

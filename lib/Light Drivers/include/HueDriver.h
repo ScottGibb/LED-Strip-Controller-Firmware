@@ -74,4 +74,4 @@ private:
   void limiter(float *value, float minValue, float maxValue);
 };
 
-#endif//HUE_DRIVER_H
+#endif // HUE_DRIVER_H

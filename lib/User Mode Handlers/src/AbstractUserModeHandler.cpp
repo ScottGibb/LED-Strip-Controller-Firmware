@@ -1,10 +1,9 @@
 #include "AbstractUserModeHandler.h"
 
-
-//Project Includes
+// Project Includes
 #include "LEDDriver.h"
 
-//System Includes
+// System Includes
 #include <stdint.h>
 #include <string.h>
 

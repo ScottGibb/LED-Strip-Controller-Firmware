@@ -6,7 +6,6 @@
 #include <map>
 #include <EEPROM.h>
 
-
 // Declaring an instance of Memory Handler
 MemoryHandler *MemoryHandler::instance = nullptr;
 

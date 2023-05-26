@@ -14,7 +14,7 @@
 // System Includes
 #include <Arduino.h>
 
-FanController::FanController(const uint32_t fanPin) :FAN_PIN(fanPin), pwm(0), duty(0)
+FanController::FanController(const uint32_t fanPin) : FAN_PIN(fanPin), pwm(0), duty(0)
 {
   pinMode(this->FAN_PIN, OUTPUT);
 }
@@ -25,7 +25,7 @@ FanController::~FanController()
 
 void FanController::changeDuty(uint8_t newDuty)
 {
-  uint16_t newPWM = (newDuty / 100.0) * MAX_PWM;
+  uint16_t newPWM = static_cast<uint16_t>((newDuty / 100.0) * MAX_PWM);
   analogWrite(FAN_PIN, newPWM);
   this->pwm = newPWM;
   this->duty = newDuty;

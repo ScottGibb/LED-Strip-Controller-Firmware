@@ -51,4 +51,4 @@ private:
     uint8_t pwm;
 };
 
-#endif//FAN_CONTROLLER_H
+#endif // FAN_CONTROLLER_H

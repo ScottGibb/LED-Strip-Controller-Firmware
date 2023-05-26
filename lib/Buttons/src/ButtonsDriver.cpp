@@ -14,7 +14,8 @@
 #include <Arduino.h>
 #include <stdint.h>
 
-ButtonsDriver::ButtonsDriver(const uint32_t *buttonPins, const uint8_t numButtons, const func_type *funcs) : buttonPins(buttonPins), numButtons(numButtons), functions(funcs){
+ButtonsDriver::ButtonsDriver(const uint32_t *buttonPins, const uint8_t numButtons, const func_type *funcs) : buttonPins(buttonPins), numButtons(numButtons), functions(funcs)
+{
   for (uint8_t index = 0; index < numButtons; index++)
   {
     pinMode(buttonPins[index], INPUT);

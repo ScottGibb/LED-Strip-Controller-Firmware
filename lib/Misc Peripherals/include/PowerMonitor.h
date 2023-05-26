@@ -80,7 +80,7 @@ private:
     const uint32_t CURRENT_PIN;
     const uint32_t UPDATE_PERIOD;
     uint32_t lastUpdateTime;
-   
+
     Power_t powerStats;
 };
 

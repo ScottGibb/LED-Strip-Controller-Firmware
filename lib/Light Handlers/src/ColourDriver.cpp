@@ -10,10 +10,10 @@
  */
 #include "ColourDriver.h"
 
-// Library Includes
-#include <stdint.h>
 // Project Includes
 #include "LEDDriver.h"
+// Library Includes
+#include <stdint.h>
 
 RGBColourDriver::RGBColourDriver(LEDDriver *driver)
 {
@@ -42,54 +42,54 @@ void RGBColourDriver::setColour(enum COLOUR colour, float brightness)
   {
 
   case RED:
-    colourPWMS[0] = (brightness / 100.0) * LEDDriver::MAX_PWM;
+    colourPWMS[0] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
     break;
   case GREEN:
-    colourPWMS[1] = (brightness / 100.0) * LEDDriver::MAX_PWM;
+    colourPWMS[1] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
     break;
   case BLUE:
-    colourPWMS[2] = (brightness / 100.0) * LEDDriver::MAX_PWM;
+    colourPWMS[2] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
     break;
   case WHITE:
-    colourPWMS[0] = (brightness / 100.0) * LEDDriver::MAX_PWM;
-    colourPWMS[1] = (brightness / 100.0) * LEDDriver::MAX_PWM;
-    colourPWMS[2] = (brightness / 100.0) * LEDDriver::MAX_PWM;
+    colourPWMS[0] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
+    colourPWMS[1] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
+    colourPWMS[2] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
     break;
   case ROSE:
-    colourPWMS[0] = (brightness / 100.0) * LEDDriver::MAX_PWM;
-    colourPWMS[2] = (brightness / 200.0) * LEDDriver::MAX_PWM; // Only goes to half PWM on Blue LED
+    colourPWMS[0] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
+    colourPWMS[2] = static_cast<uint8_t>((brightness / 200.0) * LEDDriver::MAX_PWM); // Only goes to half PWM on Blue LED
     break;
   case MAGENTA:
-    colourPWMS[0] = (brightness / 100.0) * LEDDriver::MAX_PWM;
-    colourPWMS[2] = (brightness / 100.0) * LEDDriver::MAX_PWM;
+    colourPWMS[0] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
+    colourPWMS[2] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
     break;
   case VIOLET:
-    colourPWMS[0] = (brightness / 200.0) * LEDDriver::MAX_PWM; // Only goes to half PWM on Red LED
-    colourPWMS[2] = (brightness / 100.0) * LEDDriver::MAX_PWM;
+    colourPWMS[0] = static_cast<uint8_t>((brightness / 200.0) * LEDDriver::MAX_PWM); // Only goes to half PWM on Red LED
+    colourPWMS[2] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
     break;
   case AZURE:
-    colourPWMS[1] = (brightness / 200.0) * LEDDriver::MAX_PWM; // Only goes to half PWM on Green LED
-    colourPWMS[2] = (brightness / 100.0) * LEDDriver::MAX_PWM;
+    colourPWMS[1] = static_cast<uint8_t>((brightness / 200.0) * LEDDriver::MAX_PWM); // Only goes to half PWM on Green LED
+    colourPWMS[2] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
     break;
   case CYAN:
-    colourPWMS[1] = (brightness / 100.0) * LEDDriver::MAX_PWM;
-    colourPWMS[2] = (brightness / 100.0) * LEDDriver::MAX_PWM;
+    colourPWMS[1] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
+    colourPWMS[2] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
     break;
   case AQUAMARINE:
-    colourPWMS[1] = (brightness / 100.0) * LEDDriver::MAX_PWM;
-    colourPWMS[2] = (brightness / 200.0) * LEDDriver::MAX_PWM; // Only goes to half PWM on Blue LED
+    colourPWMS[1] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
+    colourPWMS[2] = static_cast<uint8_t>((brightness / 200.0) * LEDDriver::MAX_PWM); // Only goes to half PWM on Blue LED
     break;
   case CHARTREUSE:
-    colourPWMS[0] = (brightness / 200.0) * LEDDriver::MAX_PWM; // Only goes to half PWM on Green LED
-    colourPWMS[1] = (brightness / 100.0) * LEDDriver::MAX_PWM;
+    colourPWMS[0] = static_cast<uint8_t>((brightness / 200.0) * LEDDriver::MAX_PWM); // Only goes to half PWM on Green LED
+    colourPWMS[1] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
     break;
   case YELLOW:
-    colourPWMS[0] = (brightness / 100.0) * LEDDriver::MAX_PWM;
-    colourPWMS[1] = (brightness / 100.0) * LEDDriver::MAX_PWM;
+    colourPWMS[0] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
+    colourPWMS[1] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
     break;
   case ORANGE:
-    colourPWMS[0] = (brightness / 100.0) * LEDDriver::MAX_PWM;
-    colourPWMS[1] = (brightness / 200.0) * LEDDriver::MAX_PWM;
+    colourPWMS[0] = static_cast<uint8_t>((brightness / 100.0) * LEDDriver::MAX_PWM);
+    colourPWMS[1] = static_cast<uint8_t>((brightness / 200.0) * LEDDriver::MAX_PWM);
     break;
   }
   colourState.colour = colour;
@@ -106,7 +106,7 @@ void RGBColourDriver::setPWMSignals(uint8_t *colourPWMS, float brightness)
   colourState.redPWM = colourPWMS[0];
   colourState.greenPWM = colourPWMS[1];
   colourState.bluePWM = colourPWMS[2];
-  colourState.brightness = brightness;
+  colourState.brightness = static_cast<uint8_t>(brightness);
   driver->setPWMS(colourPWMS);
 }
 

@@ -16,14 +16,13 @@
 #include <Arduino.h>
 #include <stdint.h>
 
-PowerMonitor::PowerMonitor(uint32_t currentPin, uint32_t voltagePin, uint32_t updatePeriod) : VOLTAGE_PIN(voltagePin), CURRENT_PIN(currentPin),  UPDATE_PERIOD(updatePeriod)
+PowerMonitor::PowerMonitor(uint32_t currentPin, uint32_t voltagePin, uint32_t updatePeriod) : VOLTAGE_PIN(voltagePin), CURRENT_PIN(currentPin), UPDATE_PERIOD(updatePeriod)
 {
     powerStats.current = 0;
     powerStats.voltage = 0;
     powerStats.power = 0;
     powerStats.lastUpdated = 0;
     lastUpdateTime = 0;
- 
 }
 
 PowerMonitor::~PowerMonitor()
@@ -39,8 +38,8 @@ void PowerMonitor::loop()
         uint16_t voltSense = analogRead(VOLTAGE_PIN);
         uint16_t currentSense = analogRead(CURRENT_PIN);
         // Perform Scalars and update
-        float voltVoltage = (voltSense / ADC_RANGE) * MAX_ADC_VOLTAGE;
-        float voltCurrent = (currentSense / ADC_RANGE) * MAX_ADC_VOLTAGE;
+        float voltVoltage = static_cast<float>((1.0 * voltSense / ADC_RANGE) * MAX_ADC_VOLTAGE);
+        float voltCurrent = static_cast<float>((1.0 * currentSense / ADC_RANGE) * MAX_ADC_VOLTAGE);
 
         powerStats.voltage = VOLTAGE_SCALAR * voltVoltage;
         powerStats.current = CURRENT_SENSOR_SCALAR * voltCurrent;

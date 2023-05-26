@@ -1,7 +1,6 @@
 #ifndef I_MODE_HANDLER_H
 #define I_MODE_HANDLER_H
 
-
 // Project Includes
 #include "LEDDriver.h"
 // Library Includes
@@ -20,4 +19,4 @@ public:
     virtual void loop() = 0;
 };
 
-#endif//I_MODE_HANDLER_H
+#endif // I_MODE_HANDLER_H

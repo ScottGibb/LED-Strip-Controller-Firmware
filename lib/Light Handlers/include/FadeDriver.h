@@ -122,4 +122,4 @@ private:
   void sineWave();
 };
 
-#endif//FADE_DRIVER_H
+#endif // FADE_DRIVER_H

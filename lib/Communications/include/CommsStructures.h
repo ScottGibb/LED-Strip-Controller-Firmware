@@ -3,9 +3,9 @@
  * @brief Communications Structures Header File
  * @version 0.1
  * @date 2022-10-03
- * 
- * 
-*/
+ *
+ *
+ */
 #ifndef COMMSSTRUCTURES_H
 #define COMMSSTRUCTURES_H
 
@@ -18,9 +18,6 @@
 
 // Library Includes
 #include <stdint.h>
-
-
-
 
 // External Constants
 constexpr uint8_t controlCommsPacketLength = 10; // Data Structures Padded to this size
@@ -112,4 +109,4 @@ typedef struct
   enum CHANNEL channel : 8;     // 8 Bits Byte 1
   uint8_t userModeNo;           // 8 Bits Byte 2
 } UserModeChange_t;
-#endif//COMMSSTRUCTURES_H
+#endif // COMMSSTRUCTURES_H

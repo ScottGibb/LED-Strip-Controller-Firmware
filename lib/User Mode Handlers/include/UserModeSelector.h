@@ -8,8 +8,6 @@
 // System Includes
 #include <stdint.h>
 
-
-
 /**
  * @brief MEMORY_MODE enum outlining the different ways the memory for user mode can be interpreted
  *
@@ -72,4 +70,4 @@ private:
     MEMORY_MODE mode;
 };
 
-#endif//USER_MODE_SELECTOR_H
+#endif // USER_MODE_SELECTOR_H

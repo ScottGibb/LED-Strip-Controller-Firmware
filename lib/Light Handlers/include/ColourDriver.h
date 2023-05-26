@@ -115,4 +115,4 @@ private:
   void setPWMSignals(uint8_t *colourPWMS, float brightness);
 };
 
-#endif//COLOUR_DRIVER_H
+#endif // COLOUR_DRIVER_H

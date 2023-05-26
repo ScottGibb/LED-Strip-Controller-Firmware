@@ -27,10 +27,9 @@ using namespace std;
  */
 #define MCU_CHOICE 0
 
-
 // External variables
 extern vector<LEDDriver *> leds;
 extern vector<RGBColourDriver *> stripDrivers;
 extern vector<FadeDriver *> fadeDrivers;
 extern vector<HueDriver *> hueDrivers;
-#endif//MAIN_H
+#endif // MAIN_H

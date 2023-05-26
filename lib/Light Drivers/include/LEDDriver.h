@@ -15,7 +15,6 @@
 #include <stdint.h>
 #include <array>
 
-
 // Constants
 const uint8_t NUM_LEDS = 3;
 /**
@@ -27,7 +26,7 @@ enum LED_COLOUR
   RED_ = 0,
   GREEN_ = 1,
   BLUE_ = 2,
-  LED_COLOUR_ENUM_LEN =3
+  LED_COLOUR_ENUM_LEN = 3
 };
 
 /**
@@ -78,7 +77,6 @@ public:
 private:
   std::array<uint8_t, LED_COLOUR::LED_COLOUR_ENUM_LEN> pwms;
   const std::array<uint8_t, LED_COLOUR::LED_COLOUR_ENUM_LEN> LED_PINS;
-
 };
 
-#endif//LED_DRIVER_H
+#endif // LED_DRIVER_H

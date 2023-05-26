@@ -11,8 +11,6 @@
 #ifndef COMMS_PARSER_H
 #define COMMS_PARSER_H
 
-
-
 // Project Includes
 #include "CommsStructures.h"
 #include "ICommunicator.h"
@@ -99,4 +97,4 @@ private:
     void loadMessages();
 };
 
-#endif//COMMS_PARSER_H
+#endif // COMMS_PARSER_H

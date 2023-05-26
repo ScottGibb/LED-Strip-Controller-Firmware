@@ -7,8 +7,6 @@
 // System Includes
 #include <stdint.h>
 
-
-
 /**
  * @brief StaticPeriodHandler is used to interpet the user mode sequence for a static period sequence in which all the data points are spread out equally
  *
@@ -39,4 +37,4 @@ public:
 private:
 };
 
-#endif//STATIC_PERIOD_HANDLER_H
+#endif // STATIC_PERIOD_HANDLER_H

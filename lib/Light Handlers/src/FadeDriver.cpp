@@ -15,8 +15,6 @@
 #include <Arduino.h>
 #include <math.h>
 
-
-
 FadeDriver::FadeDriver(RGBColourDriver *driver)
 {
   this->driver = driver;
@@ -37,7 +35,7 @@ void FadeDriver::startFade(enum FADE_TYPE fade, uint32_t period, uint8_t maxBrig
   stopFade();
   currentState.fade = fade;
   currentState.period = period;
-  currentState.halfPeriod = period / 2.0;
+  currentState.halfPeriod = static_cast<uint32_t>(period / 2.0F);
   currentState.maxBrightness = maxBrightness;
 }
 
@@ -123,14 +121,16 @@ void FadeDriver::squareWave()
 
 void FadeDriver::sawToothWave()
 {
-  driver->setBrightness(((1.0 * (currentStep) / currentState.period)) * currentState.maxBrightness);
+  uint8_t brightness = static_cast<uint8_t>((((currentStep)*1.0) / currentState.period) * currentState.maxBrightness);
+  driver->setBrightness(brightness);
 }
 
 void FadeDriver::triangleWave()
 {
   if (currentStep < currentState.halfPeriod)
   {
-    driver->setBrightness(((1.0 * (currentStep) / currentState.halfPeriod)) * currentState.maxBrightness);
+    uint8_t brightness = static_cast<uint8_t>((((currentStep)*1.0) / currentState.halfPeriod) * currentState.maxBrightness);
+    driver->setBrightness(brightness);
   }
   else
   {
@@ -143,6 +143,6 @@ void FadeDriver::sineWave()
 {
 
   float angle = (currentStep * 1.0 / currentState.halfPeriod);
-  uint8_t brightness = (currentState.maxBrightness / 2) * sin(angle * PI) + (currentState.maxBrightness / 2.0);
+  uint8_t brightness = static_cast<uint8_t>((currentState.maxBrightness / 2) * sin(angle * PI) + (currentState.maxBrightness / 2.0));
   driver->setBrightness(brightness);
 }

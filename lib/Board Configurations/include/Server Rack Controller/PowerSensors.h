@@ -25,4 +25,4 @@ float const CURRENT_SENSOR_SCALAR = (1000.0F / (CURRENT_SENSOR_RS * CURRENT_SENS
 #define CURRENT_SENSOR_PIN 10 // todo Change to actual pin
 
 #define POWER_SENSOR_UPDATE_PERIOD 200 // ms
-#endif//POWER_SENSORS_H
+#endif                                 // POWER_SENSORS_H

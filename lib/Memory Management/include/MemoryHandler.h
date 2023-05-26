@@ -118,4 +118,4 @@ private:
   MEMORY_ERR checkValidity(SEGMENT seg, uint16_t pos, uint16_t dataLen);
 };
 
-#endif//MEMORYHANDLER_H
+#endif // MEMORYHANDLER_H

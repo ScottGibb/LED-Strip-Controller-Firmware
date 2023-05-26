@@ -22,4 +22,4 @@
 #define BUTTON_3_PIN PB15
 #define BUTTON_4_PIN PA8
 
-#endif//BUTTONS_H
+#endif // BUTTONS_H

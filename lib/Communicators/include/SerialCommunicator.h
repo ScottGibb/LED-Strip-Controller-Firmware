@@ -8,8 +8,6 @@
 // Library Includes
 #include <stdint.h>
 
-
-
 /**
  * @brief SerialCommunicator Low level class concerned with interacting with the UART hardware and transmitting bytes
  *
@@ -35,4 +33,4 @@ public:
 private:
     const uint32_t BAUDRATE;
 };
-#endif//SERIALCOMMUNICATOR_H
+#endif // SERIALCOMMUNICATOR_H

@@ -45,4 +45,4 @@ extern void buttonThreeFunction(void);
  */
 extern void buttonFourFunction(void);
 
-#endif//BUTTON_FUNCTIONS_H
+#endif // BUTTON_FUNCTIONS_H

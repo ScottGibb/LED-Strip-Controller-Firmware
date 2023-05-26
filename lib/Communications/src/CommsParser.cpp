@@ -52,7 +52,6 @@ CommsParser::CommsParser(vector<ICommunicator *> comms, const uint32_t ledTxRate
 
 CommsParser::~CommsParser()
 {
-
 }
 
 /**

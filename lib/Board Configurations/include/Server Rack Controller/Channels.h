@@ -49,4 +49,4 @@ enum CHANNEL
 
 // Status LED Pin
 #define STATUS_LED_PIN PC13
-#endif//CHANNELS_H
+#endif // CHANNELS_H

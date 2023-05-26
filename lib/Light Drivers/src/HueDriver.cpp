@@ -39,7 +39,7 @@ void HueDriver::setHue(HSV_t hsv)
   float C = saturation * value;
   float X = C * (1 - abs(fmod(hsv.hue / 60.0, 2) - 1));
   float m = value - C;
-  float red, green, blue ={0};
+  float red, green, blue = {0};
   if (hsv.hue >= 0 && hsv.hue < 60)
   {
     red = C, green = X, blue = 0;
@@ -65,9 +65,9 @@ void HueDriver::setHue(HSV_t hsv)
     red = C, green = 0, blue = X;
   }
   uint8_t rgb[NUM_LEDS];
-  rgb[0] = (red + m) * 255;
-  rgb[1] = (green + m) * 255;
-  rgb[2] = (blue + m) * 255;
+  rgb[0] = static_cast<uint8_t>((red + m) * LEDDriver::MAX_PWM);
+  rgb[1] = static_cast<uint8_t>((green + m) * LEDDriver::MAX_PWM);
+  rgb[2] = static_cast<uint8_t>((blue + m) * LEDDriver::MAX_PWM);
   //------------------------------------------------------------
   ledDriver->setPWMS(rgb);
 }
