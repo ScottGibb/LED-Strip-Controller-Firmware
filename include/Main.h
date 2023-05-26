@@ -10,7 +10,6 @@
  */
 #ifndef __MAIN_H__
 #define __MAIN_H__
-adasdsds yui243_t;{}
 /**
  * @brief Select the MCU Used in the Design
  *
