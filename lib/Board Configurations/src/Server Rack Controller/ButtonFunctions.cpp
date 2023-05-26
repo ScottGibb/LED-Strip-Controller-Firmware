@@ -22,8 +22,8 @@
 #include <vector>
 
 // Internal Variables
-static uint8_t prevBrightness[NUM_LEDS];
-static FadeState_t prevStates[NUM_LEDS];
+static uint8_t prevBrightness[NUM_CHANNELS];
+static FadeState_t prevStates[NUM_CHANNELS];
 
 // External Variables
 const uint8_t NUM_BUTTONS = 4;

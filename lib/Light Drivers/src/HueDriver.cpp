@@ -64,7 +64,7 @@ void HueDriver::setHue(HSV_t hsv)
   {
     red = C, green = 0, blue = X;
   }
-  uint8_t rgb[NUM_LEDS];
+  uint8_t rgb[LEDDriver::NUM_LEDS];
   rgb[0] = static_cast<uint8_t>((red + m) * LEDDriver::MAX_PWM);
   rgb[1] = static_cast<uint8_t>((green + m) * LEDDriver::MAX_PWM);
   rgb[2] = static_cast<uint8_t>((blue + m) * LEDDriver::MAX_PWM);

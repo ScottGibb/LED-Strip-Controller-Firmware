@@ -136,7 +136,7 @@ void CommsParser::ledChangeCommand()
   {
 
   case RGB_CONTROL:
-    uint8_t rgbLeds[NUM_LEDS];
+    uint8_t rgbLeds[NUM_CHANNELS];
     rgbLeds[0] = rxBuff[3];
     rgbLeds[1] = rxBuff[4];
     rgbLeds[2] = rxBuff[5];

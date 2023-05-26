@@ -15,8 +15,6 @@
 #include <stdint.h>
 #include <array>
 
-// Constants
-const uint8_t NUM_LEDS = 3;
 /**
  * @brief LED Colour ENUM used to define the hardware RGB LED
  *
@@ -40,6 +38,7 @@ public:
   // LED PWM Constants
   static const uint8_t MAX_PWM = 255;
   static const uint8_t MIN_PWM = 0;
+  static const uint8_t NUM_LEDS = 3;
   /**
    * @brief Construct a new LEDDriver::LEDDriver object
    * LED Driver object is responsible for interfacing directly with the pwm hardware
