@@ -48,4 +48,4 @@ jobs:
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
       - name: PlatformIO Check
-        run: pio check --fail-on-defect medium --src-filters="lib/**/src"
+        run: pio check --fail-on-defect medium
