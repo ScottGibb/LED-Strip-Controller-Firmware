@@ -34,3 +34,18 @@ jobs:
         uses: actions/checkout@v2
       - name: Run markdownlint
         run: markdownlint '**/*.md'
+
+  PlatformIO_Check:
+    name: PlatformIO Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install PlatformIO Core
+        run: |
+          sudo apt install platformio -y
+          pip install --upgrade platformio
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install PlatformIO Core
+        run: pip install --upgrade platformio
+      - name: PlatformIO Check
+        run: pio check --fail-on-defect high
