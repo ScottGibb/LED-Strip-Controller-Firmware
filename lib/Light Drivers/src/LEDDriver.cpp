@@ -1,7 +1,9 @@
 /**
  * @file LEDDriver.cpp
  * @author Scott Gibb (smgibb@yahoo.com)
- * @brief This LED Driver source file is used to outline the LEDDriver class through a set of setter and getter methods. A Non blocking PWM implementation is used.
+ * @brief This LED Driver source file is used to outline the LEDDriver class
+ * through a set of setter and getter methods. A Non blocking PWM implementation
+ * is used.
  * @version 0.1
  * @date 2022-10-03
  *
@@ -15,42 +17,35 @@
 #include <array>
 #include <stdint.h>
 
-LEDDriver::LEDDriver(const uint8_t redPin, const uint8_t greenPin, const uint8_t bluePin) : LED_PINS{redPin, greenPin, bluePin}
-{
-  for (uint8_t index = 0; index < LED_COLOUR::LED_COLOUR_ENUM_LEN; index++)
-  {
+LEDDriver::LEDDriver(const uint8_t redPin, const uint8_t greenPin,
+                     const uint8_t bluePin)
+    : LED_PINS{redPin, greenPin, bluePin} {
+  for (uint8_t index = 0; index < LED_COLOUR::LED_COLOUR_ENUM_LEN; index++) {
     this->pwms[index] = 0;
     pinMode(LED_PINS[index], OUTPUT);
     analogWrite(LED_PINS[index], 0);
-
   }
 }
 
-LEDDriver::~LEDDriver()
-{
-  for (uint8_t index = 0; index < LED_COLOUR::LED_COLOUR_ENUM_LEN; index++)
-  {
+LEDDriver::~LEDDriver() {
+  for (uint8_t index = 0; index < LED_COLOUR::LED_COLOUR_ENUM_LEN; index++) {
     this->pwms[index] = 0;
     pinMode(LED_PINS[index], INPUT);
   }
 }
 
-void LEDDriver::setPWM(const enum LED_COLOUR colour, const uint8_t pwm)
-{
+void LEDDriver::setPWM(const enum LED_COLOUR colour, const uint8_t pwm) {
   this->pwms[colour] = pwm;
   analogWrite(LED_PINS[colour], pwm);
 }
 
-void LEDDriver::setPWMS(const uint8_t *pwms)
-{
-  for (uint8_t i = 0; i < LED_COLOUR_ENUM_LEN; i++)
-  {
+void LEDDriver::setPWMS(const uint8_t *pwms) {
+  for (uint8_t i = 0; i < LED_COLOUR_ENUM_LEN; i++) {
     this->pwms[i] = pwms[i];
     analogWrite(LED_PINS[i], pwms[i]);
   }
 }
 
-uint8_t LEDDriver::getPWM(const enum LED_COLOUR colour)
-{
+uint8_t LEDDriver::getPWM(const enum LED_COLOUR colour) {
   return LED_PINS[colour];
 }

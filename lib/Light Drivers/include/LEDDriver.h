@@ -12,28 +12,22 @@
 #define LED_DRIVER_H
 
 // Library Includes
-#include <stdint.h>
 #include <array>
+#include <stdint.h>
 
 /**
  * @brief LED Colour ENUM used to define the hardware RGB LED
  *
  */
-enum LED_COLOUR
-{
-  RED_ = 0,
-  GREEN_ = 1,
-  BLUE_ = 2,
-  LED_COLOUR_ENUM_LEN = 3
-};
+enum LED_COLOUR { RED_ = 0, GREEN_ = 1, BLUE_ = 2, LED_COLOUR_ENUM_LEN = 3 };
 
 /**
  * @brief LED Driver Class Declaration
- * Responsible for outlining the low level functionality of the RGB LED and providing an abstracted interface for control
+ * Responsible for outlining the low level functionality of the RGB LED and
+ * providing an abstracted interface for control
  *
  */
-class LEDDriver
-{
+class LEDDriver {
 public:
   // LED PWM Constants
   static const uint8_t MAX_PWM = 255;
@@ -41,12 +35,14 @@ public:
   static const uint8_t NUM_LEDS = 3;
   /**
    * @brief Construct a new LEDDriver::LEDDriver object
-   * LED Driver object is responsible for interfacing directly with the pwm hardware
+   * LED Driver object is responsible for interfacing directly with the pwm
+   * hardware
    * @param[in] redPin Red RGB PWM Pin
    * @param[in] greenPin Green RGB PWM Pin
    * @param[in] bluePin Blue RGB PWM Pin
    */
-  LEDDriver(const uint8_t redPin, const uint8_t greenPin, const uint8_t bluePin);
+  LEDDriver(const uint8_t redPin, const uint8_t greenPin,
+            const uint8_t bluePin);
   /**
    * @brief Destroy the LEDDriver::LEDDriver object
    * Resets the pin to INPUT mode to reduce power consumption
@@ -62,7 +58,8 @@ public:
   /**
    * @brief Setter for PWM of all RGB LEDS
    *
-   * @param[in] pwms an array containing the new pwm values to be applied to the RGB LED
+   * @param[in] pwms an array containing the new pwm values to be applied to the
+   * RGB LED
    */
   void setPWMS(const uint8_t *pwms);
   /**

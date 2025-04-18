@@ -14,17 +14,16 @@
 #include <stdint.h>
 
 // External Function Prototypes
-class StatusIndicator
-{
+class StatusIndicator {
 public:
-    explicit StatusIndicator(const uint32_t pin);
-    void loop(void);
+  explicit StatusIndicator(const uint32_t pin);
+  void loop(void);
 
 private:
-    const uint32_t LED_PIN;
-    const uint32_t REFRESH_PERIOD = 500;
-    uint32_t lastUpdateTime = {0};
-    bool pinState = {false};
+  const uint32_t LED_PIN;
+  const uint32_t REFRESH_PERIOD = 500;
+  uint32_t lastUpdateTime = {0};
+  bool pinState = {false};
 };
 
 #endif

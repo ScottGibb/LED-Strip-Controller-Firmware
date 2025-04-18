@@ -9,14 +9,13 @@
  * @brief IModeHandler Interface
  *
  */
-class IModeHandler
-{
+class IModeHandler {
 public:
-    /**
-     * @brief Loop Function
-     *
-     */
-    virtual void loop() = 0;
+  /**
+   * @brief Loop Function
+   *
+   */
+  virtual void loop() = 0;
 };
 
 #endif // I_MODE_HANDLER_H
