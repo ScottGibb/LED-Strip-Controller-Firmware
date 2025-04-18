@@ -53,8 +53,7 @@ MemoryHandler *memoryHandler;
  * @brief setup function for firmware intialisation
  *
  */
-void setup()
-{
+void setup() {
   setupMemory();
   statusIndicator = new StatusIndicator(STATUS_LED_PIN);
   // powerMonitor = new PowerMonitor(CURRENT_SENSOR_PIN, VOLTAGE_SENSOR_PIN, POWER_SENSOR_UPDATE_PERIOD);
@@ -71,11 +70,9 @@ void setup()
  * Consisting of soft timer application loops for LED Strip Drivers, comms and buttons
  *
  */
-void loop()
-{
+void loop() {
   statusIndicator->loop();
-  for (uint8_t i = 0; i < fadeDrivers.size(); i++)
-  {
+  for (uint8_t i = 0; i < fadeDrivers.size(); i++) {
     fadeDrivers[i]->fadeLoop();
   }
   commsParser->loop();
@@ -87,9 +84,7 @@ void loop()
  * @brief Main Setup function for fimrware, calling all driver initialisation functions and creating all objects
  *
  */
-void setupDrivers()
-{
-
+void setupDrivers() {
   // led One
   setupLED(CHANNEL_1_R_PIN, CHANNEL_1_G_PIN, CHANNEL_1_B_PIN);
 
@@ -110,8 +105,7 @@ void setupDrivers()
  * @param greenPin the pin number associated with the green pin of the RGB led
  * @param bluePin the pin number associated with the blue pin of the RGB led
  */
-void setupLED(uint32_t redPin, uint32_t greenPin, uint32_t bluePin)
-{
+void setupLED(uint32_t redPin, uint32_t greenPin, uint32_t bluePin) {
   LEDDriver *led = new LEDDriver(redPin, greenPin, bluePin);
   leds.push_back(led);
   RGBColourDriver *colDriver = new RGBColourDriver(led);
@@ -125,25 +119,19 @@ void setupLED(uint32_t redPin, uint32_t greenPin, uint32_t bluePin)
  * @brief Sets up the memory structs for each segment of EEPROM memory
  *
  */
-void setupMemory()
-{
-
+void setupMemory() {
   const MemoryMap_t systemInfoMap = {
       .MEMORY_START = SYSTEM_INFO_START,
       .MEMORY_END = SYSTEM_INFO_END,
       .MEMORY_SIZE = SYSTEM_INFO_MEM_SIZE,
       .SLOT_SIZE = SYSTEM_INFO_SLOT_SIZE,
-      .NUM_SLOTS = NUM_SYSTEM_INFO
-
-  };
-
+      .NUM_SLOTS = NUM_SYSTEM_INFO};
   const MemoryMap_t channelControlMap = {
       .MEMORY_START = CHANNEL_CONTROL_START,
       .MEMORY_END = CHANNEL_CONTROL_END,
       .MEMORY_SIZE = CHANNEL_CONTROL_MEM_SIZE,
       .SLOT_SIZE = CHANNEL_CONTROL_SLOT_SIZE,
       .NUM_SLOTS = NUM_CHANNEL_CONTROLS
-
   };
 
   const MemoryMap_t userModeMap = {
@@ -152,8 +140,9 @@ void setupMemory()
       .MEMORY_SIZE = USER_MODE_MEM_SIZE,
       .SLOT_SIZE = USER_MODE_SLOT_SIZE,
       .NUM_SLOTS = NUM_USER_MODES
-
   };
-  std::map<SEGMENT, MemoryMap_t> memMap{{SEGMENT::SYSTEM_INFO, systemInfoMap}, {SEGMENT::CHANNEL_CMDS, channelControlMap}, {SEGMENT::USER_MODES, userModeMap}};
+
+  std::map<SEGMENT, MemoryMap_t> memMap{{SEGMENT::SYSTEM_INFO, systemInfoMap},
+  {SEGMENT::CHANNEL_CMDS, channelControlMap}, {SEGMENT::USER_MODES, userModeMap}};
   memoryHandler = MemoryHandler::getInstance(memMap);
 }
