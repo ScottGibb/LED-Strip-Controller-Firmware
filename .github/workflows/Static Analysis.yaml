@@ -1,5 +1,4 @@
 ---
-
 name: Platform IO Analysis
 
 on:
@@ -14,7 +13,6 @@ on:
   workflow_call:
 
 jobs:
-
   PlatformIO_Check:
     name: PlatformIO Check
     runs-on: ubuntu-latest
