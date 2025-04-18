@@ -69,6 +69,14 @@ This project uses the PlatformIO Build system and as such can be built using the
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [PlatformIO Plugin for VSCode](https://marketplace.visualstudio.com/items?itemName=platformio.platformio-ide)
 
+## Linting the project
+
+You will need NodeJS and Docker installed. Once these are installed you can run the following command to lint the project:
+
+```bash
+npx mega-linter-runner
+```
+
 ## LED Strip Controller Repository Links
 
 - [Manifest](https://github.com/ScottGibb/LED-Strip-Controller-Manifest) This repository contains the manifest file for the LED Strip Controller project. Which allows the cloning of all the repositories in one go.
