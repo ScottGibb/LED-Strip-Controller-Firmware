@@ -34,7 +34,7 @@ public:
      * @brief the software timed loop used to make the sequence
      *
      */
-    virtual void loop() = 0;
+     void loop() override;
 
     AbstractUserModeHandler(const AbstractUserModeHandler &) = delete;
     AbstractUserModeHandler &operator=(const AbstractUserModeHandler &) = delete;

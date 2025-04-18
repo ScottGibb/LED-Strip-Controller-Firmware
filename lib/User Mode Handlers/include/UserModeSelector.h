@@ -32,7 +32,7 @@ public:
      *
      * @param driver the led channel for the user mode to be applied too
      */
-    UserModeSelector(LEDDriver *driver);
+    explicit UserModeSelector(LEDDriver *driver);
     /**
      * @brief Destroy the User Mode Selector object
      *
