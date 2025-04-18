@@ -21,17 +21,18 @@ typedef void (*func_type)(void);
  * @brief Buttons Driver Class
  * Class Declaration of Buttons Driver
  */
-class ButtonsDriver
-{
+class ButtonsDriver {
 public:
   /**
    * @brief Construct a new Buttons Driver:: Buttons Driver object
-   * Buttons Driver Constructor. Each Array should be ordered such that when buttonPins[i] is pressed funcs[i] is called
+   * Buttons Driver Constructor. Each Array should be ordered such that when
+   * buttonPins[i] is pressed funcs[i] is called
    * @param[in] buttonPins A Pointer to the pins used for the buttons
    * @param[in] numButtons The Number of Buttons
    * @param[in] funcs The function assigned to each button
    */
-  ButtonsDriver(const uint32_t *buttonPins, const uint8_t numButtons, const func_type *funcs);
+  ButtonsDriver(const uint32_t *buttonPins, const uint8_t numButtons,
+                const func_type *funcs);
   /**
    * @brief ButtonsDriver Deconstructor
    *

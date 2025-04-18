@@ -1,7 +1,9 @@
 /**
  * @file FadeDriver.h
  * @author Scott Gibb (smgibb@yahoo.com)
- * @brief Header file associated with the Fade Driver, an abstraction layer above ColourDriver, providing fading effects logic of the LEDs using a soft timer implementation.
+ * @brief Header file associated with the Fade Driver, an abstraction layer
+ * above ColourDriver, providing fading effects logic of the LEDs using a soft
+ * timer implementation.
  * @version 0.1
  * @date 2022-10-03
  *
@@ -20,11 +22,11 @@
 const uint32_t NUM_MODES = 8;
 
 /**
- * @brief Enum describing the different fade effects that the Fade Driver can do.
+ * @brief Enum describing the different fade effects that the Fade Driver can
+ * do.
  *
  */
-enum FADE_TYPE
-{
+enum FADE_TYPE {
   NONE = 0,          /**< No Fade Effect*/
   SINE = 1,          /**< Sinusoidal Effect*/
   SQUARE = 2,        /**< Pulsing Effect*/
@@ -36,10 +38,10 @@ enum FADE_TYPE
 };
 
 /**
- * @brief Struct for using the FadeDriver object, outlining key paramaters to run the fading software timer based logic
+ * @brief Struct for using the FadeDriver object, outlining key paramaters to
+ * run the fading software timer based logic
  */
-typedef struct
-{
+typedef struct {
   enum FADE_TYPE fade = SINE; /**< Type of Fade to be applied*/
   uint32_t period = 0;        /**< Period of the fade wave*/
   uint32_t halfPeriod = 0;    /**< Half ot the period*/
@@ -47,16 +49,18 @@ typedef struct
 } FadeState_t;
 
 /**
- * @brief FadeDriver object used to provide interesting fade patterns via a software timed solution. Instantiate the object, call the startFade() function and repeatably call FadeLoop().
+ * @brief FadeDriver object used to provide interesting fade patterns via a
+ * software timed solution. Instantiate the object, call the startFade()
+ * function and repeatably call FadeLoop().
  *
  */
-class FadeDriver
-{
+class FadeDriver {
 
 public:
   /**
    * @brief Construct a new Fade Driver:: Fade Driver object
-   * @param[in] driver The colour Driver object used for the specific led channel
+   * @param[in] driver The colour Driver object used for the specific led
+   * channel
    */
   explicit FadeDriver(RGBColourDriver *driver);
   /**
@@ -69,11 +73,13 @@ public:
    *
    * @param[in] fade the type of fade to be applied
    * @param[in] period the period of the fade signal
-   * @param[in] maxBrightness the maximum brightness to be achieved during the cycle
+   * @param[in] maxBrightness the maximum brightness to be achieved during the
+   * cycle
    */
   void startFade(enum FADE_TYPE fade, uint32_t period, uint8_t maxBrightness);
   /**
-   * @brief Changes the current fade and all of its settings to the new fade provided
+   * @brief Changes the current fade and all of its settings to the new fade
+   * provided
    *
    * @param[in] fadeState the fade to be changed to
    */
@@ -85,7 +91,8 @@ public:
   FadeState_t getFade();
   /**
    * @brief The Fad Driver application loop
-   * Call at frequency faster than 1/STEP_SIZE in order to maintain smooth fade transitions
+   * Call at frequency faster than 1/STEP_SIZE in order to maintain smooth fade
+   * transitions
    */
   void fadeLoop();
   /**

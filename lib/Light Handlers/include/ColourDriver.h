@@ -20,11 +20,11 @@
 const uint8_t NUM_COLOURS = 13;
 
 /**
- * @brief Colour Enum, representing all possible colours that the ColourDriver can do
+ * @brief Colour Enum, representing all possible colours that the ColourDriver
+ * can do
  *
  */
-enum COLOUR
-{
+enum COLOUR {
   RED = 0,
   GREEN = 1,
   BLUE = 2,
@@ -45,8 +45,7 @@ enum COLOUR
  * @brief
  *
  */
-typedef struct
-{
+typedef struct {
   uint8_t redPWM = 0;
   uint8_t greenPWM = 0;
   uint8_t bluePWM = 0;
@@ -56,10 +55,10 @@ typedef struct
 
 /**
  * @brief Colour Driver Class Interface
- * Responsible for controlling the RGB LED Driver, producing the colours in the enum COLOUR
+ * Responsible for controlling the RGB LED Driver, producing the colours in the
+ * enum COLOUR
  */
-class RGBColourDriver
-{
+class RGBColourDriver {
 public:
   /**
    * @brief Construct a new Colour Driver:: Colour Driver object

@@ -1,7 +1,8 @@
 /**
  * @file Firmware.ino
  * @author Scott Gibb (smgibb@yahoo.com)
- * @brief A modular LED Light Strip Controller firmware which is using the arduino framework.
+ * @brief A modular LED Light Strip Controller firmware which is using the
+ * arduino framework.
  * @version 0.1
  * @date 2022-10-03
  *
@@ -56,8 +57,8 @@ MemoryHandler *memoryHandler;
 void setup() {
   setupMemory();
   statusIndicator = new StatusIndicator(STATUS_LED_PIN);
-  // powerMonitor = new PowerMonitor(CURRENT_SENSOR_PIN, VOLTAGE_SENSOR_PIN, POWER_SENSOR_UPDATE_PERIOD);
-  // fanController = new FanController();
+  // powerMonitor = new PowerMonitor(CURRENT_SENSOR_PIN, VOLTAGE_SENSOR_PIN,
+  // POWER_SENSOR_UPDATE_PERIOD); fanController = new FanController();
   setupDrivers();
 
   // Setup Comms
@@ -67,7 +68,8 @@ void setup() {
 }
 /**
  * @brief Main Arduino Loop
- * Consisting of soft timer application loops for LED Strip Drivers, comms and buttons
+ * Consisting of soft timer application loops for LED Strip Drivers, comms and
+ * buttons
  *
  */
 void loop() {
@@ -81,7 +83,8 @@ void loop() {
 }
 
 /**
- * @brief Main Setup function for fimrware, calling all driver initialisation functions and creating all objects
+ * @brief Main Setup function for fimrware, calling all driver initialisation
+ * functions and creating all objects
  *
  */
 void setupDrivers() {
@@ -120,29 +123,27 @@ void setupLED(uint32_t redPin, uint32_t greenPin, uint32_t bluePin) {
  *
  */
 void setupMemory() {
-  const MemoryMap_t systemInfoMap = {
-      .MEMORY_START = SYSTEM_INFO_START,
-      .MEMORY_END = SYSTEM_INFO_END,
-      .MEMORY_SIZE = SYSTEM_INFO_MEM_SIZE,
-      .SLOT_SIZE = SYSTEM_INFO_SLOT_SIZE,
-      .NUM_SLOTS = NUM_SYSTEM_INFO};
-  const MemoryMap_t channelControlMap = {
-      .MEMORY_START = CHANNEL_CONTROL_START,
-      .MEMORY_END = CHANNEL_CONTROL_END,
-      .MEMORY_SIZE = CHANNEL_CONTROL_MEM_SIZE,
-      .SLOT_SIZE = CHANNEL_CONTROL_SLOT_SIZE,
-      .NUM_SLOTS = NUM_CHANNEL_CONTROLS
-  };
+  const MemoryMap_t systemInfoMap = {.MEMORY_START = SYSTEM_INFO_START,
+                                     .MEMORY_END = SYSTEM_INFO_END,
+                                     .MEMORY_SIZE = SYSTEM_INFO_MEM_SIZE,
+                                     .SLOT_SIZE = SYSTEM_INFO_SLOT_SIZE,
+                                     .NUM_SLOTS = NUM_SYSTEM_INFO};
+  const MemoryMap_t channelControlMap = {.MEMORY_START = CHANNEL_CONTROL_START,
+                                         .MEMORY_END = CHANNEL_CONTROL_END,
+                                         .MEMORY_SIZE =
+                                             CHANNEL_CONTROL_MEM_SIZE,
+                                         .SLOT_SIZE = CHANNEL_CONTROL_SLOT_SIZE,
+                                         .NUM_SLOTS = NUM_CHANNEL_CONTROLS};
 
-  const MemoryMap_t userModeMap = {
-      .MEMORY_START = USER_MODE_START,
-      .MEMORY_END = USER_MODE_END,
-      .MEMORY_SIZE = USER_MODE_MEM_SIZE,
-      .SLOT_SIZE = USER_MODE_SLOT_SIZE,
-      .NUM_SLOTS = NUM_USER_MODES
-  };
+  const MemoryMap_t userModeMap = {.MEMORY_START = USER_MODE_START,
+                                   .MEMORY_END = USER_MODE_END,
+                                   .MEMORY_SIZE = USER_MODE_MEM_SIZE,
+                                   .SLOT_SIZE = USER_MODE_SLOT_SIZE,
+                                   .NUM_SLOTS = NUM_USER_MODES};
 
-  std::map<SEGMENT, MemoryMap_t> memMap{{SEGMENT::SYSTEM_INFO, systemInfoMap},
-  {SEGMENT::CHANNEL_CMDS, channelControlMap}, {SEGMENT::USER_MODES, userModeMap}};
+  std::map<SEGMENT, MemoryMap_t> memMap{
+      {SEGMENT::SYSTEM_INFO, systemInfoMap},
+      {SEGMENT::CHANNEL_CMDS, channelControlMap},
+      {SEGMENT::USER_MODES, userModeMap}};
   memoryHandler = MemoryHandler::getInstance(memMap);
 }
