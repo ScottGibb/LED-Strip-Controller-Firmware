@@ -7,7 +7,7 @@
 #include <stdint.h>
 #include <string.h>
 
-AbstractUserModeHandler::AbstractUserModeHandler(LEDDriver *driverIn, uint8_t *bufferIn, uint32_t bufferLength) :length(bufferLength) driver(driverIn)
+AbstractUserModeHandler::AbstractUserModeHandler(LEDDriver *driverIn, uint8_t *bufferIn, uint32_t bufferLength) :length(bufferLength), driver(driverIn)
 {
     buffer = new uint8_t[bufferLength];
     memcpy(buffer, bufferIn, bufferLength);

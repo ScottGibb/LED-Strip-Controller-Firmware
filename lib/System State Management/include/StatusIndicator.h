@@ -17,7 +17,7 @@
 class StatusIndicator
 {
 public:
-    StatusIndicator(const uint32_t pin);
+    explicit StatusIndicator(const uint32_t pin);
     void loop(void);
 
 private:

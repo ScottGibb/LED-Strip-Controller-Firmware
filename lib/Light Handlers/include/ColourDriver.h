@@ -66,7 +66,7 @@ public:
    * Initialisation of the Colour Driver Object
    * @param driver
    */
-  RGBColourDriver(LEDDriver *driver);
+  explicit RGBColourDriver(LEDDriver *driver);
   /**
    * @brief Destroy the Colour Driver:: Colour Driver object
    *
@@ -112,7 +112,7 @@ private:
    * @param colourPWMS the PWM signals to be applied
    * @param brightness the brightness to be applied
    */
-  void setPWMSignals(uint8_t *colourPWMS, float brightness);
+  void setPWMSignals(const uint8_t *colourPWMS, float brightness);
 };
 
 #endif // COLOUR_DRIVER_H

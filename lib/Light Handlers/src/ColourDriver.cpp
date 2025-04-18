@@ -18,7 +18,7 @@
 RGBColourDriver::RGBColourDriver(LEDDriver *driver)
 {
   this->driver = driver;
-  uint8_t zeroPWM[LEDDriver::NUM_LEDS] = {0};
+  const uint8_t zeroPWM[LEDDriver::NUM_LEDS] = {0};
   this->driver->setPWMS(zeroPWM);
   colourState.bluePWM = 0;
   colourState.redPWM = 0;
@@ -102,7 +102,7 @@ enum COLOUR RGBColourDriver::getColour()
   return colourState.colour;
 }
 
-void RGBColourDriver::setPWMSignals(uint8_t *colourPWMS, float brightness)
+void RGBColourDriver::setPWMSignals(const uint8_t *colourPWMS, float brightness)
 {
   colourState.redPWM = colourPWMS[0];
   colourState.greenPWM = colourPWMS[1];

@@ -19,7 +19,10 @@ LEDDriver::LEDDriver(const uint8_t redPin, const uint8_t greenPin, const uint8_t
 {
   for (uint8_t index = 0; index < LED_COLOUR::LED_COLOUR_ENUM_LEN; index++)
   {
+    this->pwms[index] = 0;
     pinMode(LED_PINS[index], OUTPUT);
+    analogWrite(LED_PINS[index], 0);
+
   }
 }
 
@@ -27,12 +30,14 @@ LEDDriver::~LEDDriver()
 {
   for (uint8_t index = 0; index < LED_COLOUR::LED_COLOUR_ENUM_LEN; index++)
   {
+    this->pwms[index] = 0;
     pinMode(LED_PINS[index], INPUT);
   }
 }
 
 void LEDDriver::setPWM(const enum LED_COLOUR colour, const uint8_t pwm)
 {
+  this->pwms[colour] = pwm;
   analogWrite(LED_PINS[colour], pwm);
 }
 
@@ -40,6 +45,7 @@ void LEDDriver::setPWMS(const uint8_t *pwms)
 {
   for (uint8_t i = 0; i < LED_COLOUR_ENUM_LEN; i++)
   {
+    this->pwms[i] = pwms[i];
     analogWrite(LED_PINS[i], pwms[i]);
   }
 }

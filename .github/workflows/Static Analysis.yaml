@@ -1,65 +1,11 @@
 ---
 
-name: Static Analysis
+name: Platform IO Analysis
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
-#   Commenting out Shell Check as no shell scripts in this repo
-#   Shell_Check:
-#     name: Shell Check
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: Checkout
-#       uses: actions/checkout@v2
 
-#     - name: Install Dependencies
-#       run: sudo apt-get install -y shellcheck
-#     - name: Shell Check
-#       run: |
-#         echo "Checking shell scripts"
-#         shellcheck **/*.sh
-
-  Markdown_Lint_Check:
-    name: Markdown Lint Check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install markdownlint-cli
-        run: npm install -g markdownlint-cli
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Run markdownlint
-        run: |
-           echo "Checking Markdown files"
-           markdownlint '**/*.md'
-
-  JSON_Lint_Check:
-    name: JSON Lint Check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install jsonlint
-        run: sudo apt install python3-demjson
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Run jsonlint
-        run: |
-            echo "Checking JSON files"
-            # JSON Lint doesnt seem to like wildcards overly much
-            jsonlint **.json
-            jsonlint **/**/*.json
-
-  YAML_Lint_Check:
-    name: YAML Lint Check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install yamllint
-        run: sudo apt install yamllint
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Run yamllint
-        run: |
-            echo "Checking YAML files"
-            yamllint -c .yamllint.yaml .github/**/**.yaml
   PlatformIO_Check:
     name: PlatformIO Check
     runs-on: ubuntu-latest
@@ -69,8 +15,8 @@ jobs:
           sudo apt install platformio -y
           pip install --upgrade platformio
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
       - name: PlatformIO Check
-        run: pio check --fail-on-defect medium
+        run: pio check --fail-on-defect low

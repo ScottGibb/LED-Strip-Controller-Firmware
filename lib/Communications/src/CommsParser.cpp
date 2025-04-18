@@ -32,7 +32,7 @@ using namespace std;
  * @brief Sets up the Communication channel
  *
  */
-CommsParser::CommsParser(vector<ICommunicator *> comms, const uint32_t ledTxRate, const uint32_t pwrTxRate)
+CommsParser::CommsParser(const vector<ICommunicator *> comms, const uint32_t ledTxRate, const uint32_t pwrTxRate)
     : LED_TX_UPDATE_PERIOD(ledTxRate), PWR_TX_UPDATE_PERIOD(pwrTxRate), lastLedTxUpdate(0), lastPwrUpdate(0)
 {
 

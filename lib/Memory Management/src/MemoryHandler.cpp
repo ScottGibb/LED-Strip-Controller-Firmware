@@ -9,7 +9,7 @@
 // Declaring an instance of Memory Handler
 MemoryHandler *MemoryHandler::instance = nullptr;
 
-MemoryHandler::MemoryHandler(std::map<SEGMENT, MemoryMap_t> memory)
+MemoryHandler::MemoryHandler(const std::map<SEGMENT, MemoryMap_t> memory)
     : MEMORY_MAP(memory)
 {
 }
@@ -68,7 +68,7 @@ MEMORY_ERR MemoryHandler ::checkValidity(SEGMENT seg, uint16_t pos, uint16_t dat
   return MEMORY_ERR::OK;
 }
 
-MemoryHandler *MemoryHandler::getInstance(std::map<SEGMENT, MemoryMap_t> memory)
+MemoryHandler *MemoryHandler::getInstance(const std::map<SEGMENT, MemoryMap_t> memory)
 {
   if (MemoryHandler::instance == nullptr)
   {

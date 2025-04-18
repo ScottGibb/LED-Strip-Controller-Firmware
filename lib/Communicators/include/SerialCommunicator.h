@@ -20,7 +20,7 @@ public:
      *
      * @param BAUDRATE the selected baudrate
      */
-    SerialCommunicator(const uint32_t BAUDRATE);
+    explicit SerialCommunicator(const uint32_t BAUDRATE);
     /**
      * @brief Destroy the Serial Communicator object
      *

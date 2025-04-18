@@ -7,7 +7,7 @@
 #define CHOSEN_SERIAL Serial // USB Serial Selected
 
 // Project Includes
-SerialCommunicator::SerialCommunicator(uint32_t baudrate) : BAUDRATE(baudrate)
+explicit SerialCommunicator::SerialCommunicator(uint32_t baudrate) : BAUDRATE(baudrate)
 {
     CHOSEN_SERIAL.begin(BAUDRATE);
 }
@@ -19,7 +19,7 @@ bool SerialCommunicator::loop(uint8_t *buff, uint8_t len)
     if (CHOSEN_SERIAL.available())
     {
 
-        CHOSEN_SERIAL.readBytes((char *)buff, len);
+        CHOSEN_SERIAL.readBytes(reinterpret_cast<char *>(buff), len);
         return true;
     }
     else

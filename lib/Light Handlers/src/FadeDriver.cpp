@@ -15,7 +15,7 @@
 #include <Arduino.h>
 #include <math.h>
 
-FadeDriver::FadeDriver(RGBColourDriver *driver) : driver(driver),currentStep(0)
+explicit FadeDriver::FadeDriver(RGBColourDriver *driver) : driver(driver),currentStep(0)
 {
   lastFadeUpdateTime = millis();
   currentState.fade = NONE;

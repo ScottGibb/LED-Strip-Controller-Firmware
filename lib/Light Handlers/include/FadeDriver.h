@@ -58,7 +58,7 @@ public:
    * @brief Construct a new Fade Driver:: Fade Driver object
    * @param[in] driver The colour Driver object used for the specific led channel
    */
-  FadeDriver(RGBColourDriver *driver);
+  explicit FadeDriver(RGBColourDriver *driver);
   /**
    * @brief FadeDrivers deconstructor
    *

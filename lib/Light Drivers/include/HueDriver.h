@@ -37,7 +37,7 @@ public:
    * @brief Construct a new Hue Driver object
    * @param[in] ledDriver the chosen ledDriver object to be controlled using Hue Values
    */
-  HueDriver(LEDDriver *ledDriver);
+  explicit HueDriver(LEDDriver *ledDriver);
   /**
    * @brief Destroy the Hue Driver object
    *

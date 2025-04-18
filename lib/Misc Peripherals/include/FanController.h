@@ -25,7 +25,7 @@ public:
      *
      * @param fanPin
      */
-    FanController(const uint32_t fanPin);
+    explicit FanController(const uint32_t fanPin);
     /**
      * @brief Destroy the Fan Controller object
      *
