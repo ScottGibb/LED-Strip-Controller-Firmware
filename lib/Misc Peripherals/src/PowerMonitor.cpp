@@ -1,7 +1,8 @@
 /**
  * @file PowerMonitor.cpp
  * @author Scott Gibb (smgibb@yahoo.com)
- * @brief  This class is responsible for scanning the appropriate channel and then calculates the power
+ * @brief  This class is responsible for scanning the appropriate channel and
+ * then calculates the power
  * @version 0.1
  * @date 2022-12-10
  *
@@ -10,66 +11,51 @@
  */
 
 #include "PowerMonitor.h"
-
-// Library Includes
-#include <stdint.h>
-#include <Arduino.h>
 // Project Includes
 #include "PowerSensors.h"
-PowerMonitor::PowerMonitor(uint32_t currentPin, uint32_t voltagePin, uint32_t updatePeriod)
-{
-    powerStats.current = 0;
-    powerStats.voltage = 0;
-    powerStats.power = 0;
-    powerStats.lastUpdated = 0;
-    lastUpdateTime = 0;
-    this->updatePeriod = updatePeriod;
-    this->currentPin = currentPin;
-    this->voltagePin = voltagePin;
+// System Includes
+#include <Arduino.h>
+#include <stdint.h>
+
+PowerMonitor::PowerMonitor(uint32_t currentPin, uint32_t voltagePin,
+                           uint32_t updatePeriod)
+    : VOLTAGE_PIN(voltagePin), CURRENT_PIN(currentPin),
+      UPDATE_PERIOD(updatePeriod) {
+  powerStats.current = 0;
+  powerStats.voltage = 0;
+  powerStats.power = 0;
+  powerStats.lastUpdated = 0;
+  lastUpdateTime = 0;
 }
 
-PowerMonitor::~PowerMonitor()
-{
+PowerMonitor::~PowerMonitor() {}
+
+void PowerMonitor::loop() {
+  if (millis() - lastUpdateTime > UPDATE_PERIOD) {
+
+    // Scan ADC Channels
+    uint16_t voltSense = analogRead(VOLTAGE_PIN);
+    uint16_t currentSense = analogRead(CURRENT_PIN);
+    // Perform Scalars and update
+    float voltVoltage =
+        static_cast<float>((1.0 * voltSense / ADC_RANGE) * MAX_ADC_VOLTAGE);
+    float voltCurrent =
+        static_cast<float>((1.0 * currentSense / ADC_RANGE) * MAX_ADC_VOLTAGE);
+
+    powerStats.voltage = VOLTAGE_SCALAR * voltVoltage;
+    powerStats.current = CURRENT_SENSOR_SCALAR * voltCurrent;
+
+    powerStats.power = powerStats.current * powerStats.voltage;
+
+    powerStats.lastUpdated = millis();
+    lastUpdateTime = millis();
+  }
 }
 
-void PowerMonitor::loop(void)
-{
-    if (millis() - lastUpdateTime > updatePeriod)
-    {
+float PowerMonitor::getCurrent() { return powerStats.current; }
 
-        // Scan ADC Channels
-        uint16_t voltSense = analogRead(voltagePin);
-        uint16_t currentSense = analogRead(currentPin);
-        // Perform Scalars and update
-        float voltVoltage = (voltSense / ADC_RANGE) * MAX_ADC_VOLTAGE;
-        float voltCurrent = (currentSense / ADC_RANGE) * MAX_ADC_VOLTAGE;
+float PowerMonitor::getVoltage() { return powerStats.voltage; }
 
-        powerStats.voltage = VOLTAGE_SCALAR * voltVoltage;
-        powerStats.current = CURRENT_SENSOR_SCALAR * voltCurrent;
+float PowerMonitor::getPower() { return powerStats.power; }
 
-        powerStats.power = powerStats.current * powerStats.voltage;
-
-        powerStats.lastUpdated = millis();
-        lastUpdateTime = millis();
-    }
-}
-
-float PowerMonitor::getCurrent(void)
-{
-    return powerStats.current;
-}
-
-float PowerMonitor::getVoltage(void)
-{
-    return powerStats.voltage;
-}
-
-float PowerMonitor::getPower(void)
-{
-    return powerStats.power;
-}
-
-Power_t PowerMonitor::getStats(void)
-{
-    return powerStats;
-}
+Power_t PowerMonitor::getStats() { return powerStats; }

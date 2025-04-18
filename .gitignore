@@ -78,3 +78,5 @@ nbproject
 .vscode/launch.json
 .vscode/ipch
 .vscode
+
+megalinter-reports/

@@ -1,7 +1,8 @@
 /**
  * @file ButtonsDriver.cpp
  * @author Scott Gibb (smgibb@yahoo.com)
- * @brief Buttons Driver Class Implementation source file, currently using software timed logic.
+ * @brief Buttons Driver Class Implementation source file, currently using
+ * software timed logic.
  * @version 0.1
  * @date 2022-10-03
  *
@@ -14,55 +15,49 @@
 #include <Arduino.h>
 #include <stdint.h>
 
-ButtonsDriver::ButtonsDriver(uint32_t *buttonPins, uint8_t numButtons, func_type *funcs)
-{
-  this->buttonPins = buttonPins;
-  this->numButtons = numButtons;
-  this->functions = funcs;
-
-  for (uint8_t index = 0; index < numButtons; index++)
-  {
+ButtonsDriver::ButtonsDriver(const uint32_t *buttonPins,
+                             const uint8_t numButtons, const func_type *funcs)
+    : buttonPins(buttonPins), numButtons(numButtons), functions(funcs) {
+  for (uint8_t index = 0; index < numButtons; index++) {
     pinMode(buttonPins[index], INPUT);
   }
 
-  lastDebounceTimes = (uint32_t *)malloc(numButtons * sizeof(uint32_t));
-  buttonStates = (int *)malloc(numButtons * sizeof(int));
-  lastButtonStates = (int *)malloc(numButtons * sizeof(int));
+  lastDebounceTimes = new uint32_t[numButtons];
+  buttonStates = new int[numButtons];
+  lastButtonStates = new int[numButtons];
 
-  for (uint8_t index = 0; index < numButtons; index++)
-  {
+  for (uint8_t index = 0; index < numButtons; index++) {
     lastDebounceTimes[index] = 0;
     lastButtonStates[index] = 1;
   }
 }
 
-ButtonsDriver::~ButtonsDriver()
-{
+ButtonsDriver::~ButtonsDriver() {
+  delete[] lastDebounceTimes;
+  delete[] buttonStates;
+  delete[] lastButtonStates;
 }
 
-void ButtonsDriver::loop(void)
-{
+void ButtonsDriver::loop() {
 
-  for (uint8_t i = 0; i < numButtons; i++)
-  {
+  for (uint8_t i = 0; i < numButtons; i++) {
     int reading = digitalRead(buttonPins[i]);
-    // Serial.print("Reading: "); Serial.print(i); Serial.print(" Is "); Serial.println(reading);
+    // Serial.print("Reading: "); Serial.print(i); Serial.print(" Is ");
+    // Serial.println(reading);
 
-    if (reading != lastButtonStates[i])
-    {
+    if (reading != lastButtonStates[i]) {
       lastDebounceTimes[i] = millis();
     }
-    if ((millis() - lastDebounceTimes[i]) > MAX_DEBOUNCE_TIME)
-    {
-      // Serial.print("lastDebounceTime for "); Serial.print(i); Serial.print("Is ");Serial.println(lastDebounceTimes[i]);
-      if (reading != buttonStates[i])
-      {
+    if ((millis() - lastDebounceTimes[i]) > MAX_DEBOUNCE_TIME) {
+      // Serial.print("lastDebounceTime for "); Serial.print(i);
+      // Serial.print("Is ");Serial.println(lastDebounceTimes[i]);
+      if (reading != buttonStates[i]) {
         buttonStates[i] = reading;
-        // Serial.println("--------------------------Updated State-----------------");
+        // Serial.println("--------------------------Updated
+        // State-----------------");
 
         //   // only toggle the LED if the new button state is HIGH
-        if (buttonStates[i] == LOW)
-        {
+        if (buttonStates[i] == LOW) {
           // Serial.print("Button Pressed :"); Serial.println(i);
           functions[i]();
           //     //execute function call!

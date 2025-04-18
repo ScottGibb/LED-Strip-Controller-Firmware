@@ -8,8 +8,8 @@
  * @copyright Copyright (c) 2022
  *
  */
-#ifndef __CHANNELS_H__
-#define __CHANNELS_H__
+#ifndef CHANNELS_H
+#define CHANNELS_H
 
 // Library Includes
 #include <Arduino.h>
@@ -18,8 +18,7 @@
  * @brief Channel Selection Enum
  *
  */
-enum CHANNEL
-{
+enum CHANNEL {
   CHANNEL_NS = 0,
   CHANNEL_1 = 1,
   CHANNEL_2 = 2,
@@ -49,4 +48,4 @@ enum CHANNEL
 
 // Status LED Pin
 #define STATUS_LED_PIN PC13
-#endif
+#endif // CHANNELS_H

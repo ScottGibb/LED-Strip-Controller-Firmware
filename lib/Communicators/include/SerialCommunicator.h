@@ -2,36 +2,35 @@
 #ifndef SERIALCOMMUNICATOR_H
 #define SERIALCOMMUNICATOR_H
 
+// Project Includes
+#include "ICommunicator.h"
+
 // Library Includes
 #include <stdint.h>
 
-// Project Includes
-
-#include "ICommunicator.h"
-
 /**
- * @brief SerialCommunicator Low level class concerned with interacting with the UART hardware and transmitting bytes
+ * @brief SerialCommunicator Low level class concerned with interacting with the
+ * UART hardware and transmitting bytes
  *
  */
-class SerialCommunicator : public ICommunicator
-{
+class SerialCommunicator : public ICommunicator {
 public:
-    /**
-     * @brief Construct a new Serial Communicator object
-     *
-     * @param BAUDRATE the selected baudrate
-     */
-    SerialCommunicator(uint32_t BAUDRATE);
-    /**
-     * @brief Destroy the Serial Communicator object
-     *
-     */
-    ~SerialCommunicator();
+  /**
+   * @brief Construct a new Serial Communicator object
+   *
+   * @param BAUDRATE the selected baudrate
+   */
+  explicit SerialCommunicator(const uint32_t BAUDRATE);
+  /**
+   * @brief Destroy the Serial Communicator object
+   *
+   */
+  ~SerialCommunicator();
 
-    bool loop(uint8_t *buff, uint8_t len);
-    void transmit(uint8_t *buff, uint8_t len);
+  bool loop(uint8_t *buff, uint8_t len) final;
+  void transmit(uint8_t *buff, uint8_t len) final;
 
 private:
-    const uint32_t BAUDRATE;
+  const uint32_t BAUDRATE;
 };
-#endif
+#endif // SERIALCOMMUNICATOR_H

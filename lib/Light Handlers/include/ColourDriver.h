@@ -8,22 +8,23 @@
  * @copyright Copyright (c) 2022
  *
  */
-#ifndef __COLOUR_DRIVER__H__
-#define __COLOUR_DRIVER__H__
+#ifndef COLOUR_DRIVER_H
+#define COLOUR_DRIVER_H
 
-// Library Includes
-#include <stdint.h>
 // Project Includes
 #include "LEDDriver.h"
+// Library Includes
+#include <stdint.h>
+
 // External Constants
 const uint8_t NUM_COLOURS = 13;
 
 /**
- * @brief Colour Enum, representing all possible colours that the ColourDriver can do
+ * @brief Colour Enum, representing all possible colours that the ColourDriver
+ * can do
  *
  */
-enum COLOUR
-{
+enum COLOUR {
   RED = 0,
   GREEN = 1,
   BLUE = 2,
@@ -44,8 +45,7 @@ enum COLOUR
  * @brief
  *
  */
-typedef struct
-{
+typedef struct {
   uint8_t redPWM = 0;
   uint8_t greenPWM = 0;
   uint8_t bluePWM = 0;
@@ -55,17 +55,17 @@ typedef struct
 
 /**
  * @brief Colour Driver Class Interface
- * Responsible for controlling the RGB LED Driver, producing the colours in the enum COLOUR
+ * Responsible for controlling the RGB LED Driver, producing the colours in the
+ * enum COLOUR
  */
-class RGBColourDriver
-{
+class RGBColourDriver {
 public:
   /**
    * @brief Construct a new Colour Driver:: Colour Driver object
    * Initialisation of the Colour Driver Object
    * @param driver
    */
-  RGBColourDriver(LEDDriver *driver);
+  explicit RGBColourDriver(LEDDriver *driver);
   /**
    * @brief Destroy the Colour Driver:: Colour Driver object
    *
@@ -111,7 +111,7 @@ private:
    * @param colourPWMS the PWM signals to be applied
    * @param brightness the brightness to be applied
    */
-  void setPWMSignals(uint8_t *colourPWMS, float brightness);
+  void setPWMSignals(const uint8_t *colourPWMS, float brightness);
 };
 
-#endif
+#endif // COLOUR_DRIVER_H

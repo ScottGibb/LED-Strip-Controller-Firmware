@@ -1,23 +1,21 @@
-#ifndef __IMODEHANDLER__H
-#define __IMODEHANDLER__H
+#ifndef I_MODE_HANDLER_H
+#define I_MODE_HANDLER_H
 
-// Library Includes
-#include <stdint.h>
 // Project Includes
 #include "LEDDriver.h"
-
+// Library Includes
+#include <stdint.h>
 /**
  * @brief IModeHandler Interface
  *
  */
-class IModeHandler
-{
+class IModeHandler {
 public:
-    /**
-     * @brief Loop Function
-     *
-     */
-    virtual void loop() = 0;
+  /**
+   * @brief Loop Function
+   *
+   */
+  virtual void loop() = 0;
 };
 
-#endif
+#endif // I_MODE_HANDLER_H
