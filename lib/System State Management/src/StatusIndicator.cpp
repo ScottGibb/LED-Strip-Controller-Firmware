@@ -18,7 +18,7 @@
  * @brief Sets up Status Indicator LED Pin
  *
  */
-explicit StatusIndicator::StatusIndicator(const uint32_t pin) : LED_PIN(pin)
+StatusIndicator::StatusIndicator(const uint32_t pin) : LED_PIN(pin)
 {
   pinMode(LED_PIN, OUTPUT);
   digitalWrite(LED_PIN, pinState);

@@ -7,7 +7,7 @@
 #define CHOSEN_SERIAL Serial // USB Serial Selected
 
 // Project Includes
-explicit SerialCommunicator::SerialCommunicator(uint32_t baudrate) : BAUDRATE(baudrate)
+SerialCommunicator::SerialCommunicator(uint32_t baudrate) : BAUDRATE(baudrate)
 {
     CHOSEN_SERIAL.begin(BAUDRATE);
 }

@@ -14,7 +14,7 @@
 // System Includes
 #include <Arduino.h>
 
-explicit FanController::FanController(const uint32_t fanPin) : FAN_PIN(fanPin), pwm(0), duty(0)
+FanController::FanController(const uint32_t fanPin) : FAN_PIN(fanPin), pwm(0), duty(0)
 {
   pinMode(this->FAN_PIN, OUTPUT);
 }
